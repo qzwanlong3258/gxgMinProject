@@ -1,0 +1,332 @@
+.shop-swiper {
+  width: 100%;
+  height: 650upx;
+}
+
+.design-top {
+  width: 100%;
+  height: calc(100% - 260upx);
+  background: #d5d5d5;
+  overflow: hidden;
+}
+.pn-change {
+	position: fixed;
+	top: 22upx;
+	right: 22upx;
+	z-index: 99;
+	display: flex;
+	width: 114upx;
+	height: 60upx;
+	line-height: 60upx;
+	justify-content: center;
+	border-radius: 12upx;
+	background: #000000;
+}
+.pn-change .tip-font {
+	color: #fff;
+}
+.pn-change .iconxunhuan {
+	font-size: 36upx;
+	color: #fff;
+}
+.rate-slider {
+  position: absolute;
+  z-index: 99;
+  bottom: 350upx;
+  margin: 0 auto;
+  width: 650upx;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-between;
+}
+.iconicon_rotate {
+	position: absolute;
+	color: #fff;
+	top: 20upx;
+	left: -10upx;
+}
+.slider-box {
+	width: 560upx;
+	margin-left: 44upx;
+}
+.rotate-num {
+	position: absolute;
+	z-index: 33;
+	left: 620upx;
+	top: 10upx;
+	color: #fff;
+}
+.design-top .clothe-bg {
+  width: 120%;
+  z-index: 1;
+  margin: 0 auto;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin-left: -10%;
+}
+
+.design-top .move-area {
+  position: absolute;
+  z-index: 2;
+  border: 2upx dashed #666;
+  margin: 0 auto;
+  left: 0;
+  right: 10upx;
+}
+
+.show-swiper {
+  position: absolute;
+  z-index: 3;
+  width: 130upx;
+  height: 30upx;
+  margin: -40upx auto 0;
+  display: flex;
+  justify-content: space-between;
+  left: 0;
+  right: 0;
+}
+
+.swiper-dot {
+  width: 62upx;
+  height: 16upx;
+  border-radius: 20upx;
+  background: #fff;
+}
+
+.swiper-dot-active {
+  background: #000 !important;
+  color: #fff !important;
+}
+.nav-list {
+  width: 100%;
+  height: 70upx;
+  margin: -90upx 0;
+  display: flex;
+  justify-content: space-around;
+  z-index: 2;
+  position: absolute;
+}
+
+.nav-clonum {
+  width: 220upx;
+  height: 70upx;
+  text-align: center;
+  line-height: 70upx;
+  background: #f5f5f5;
+  border-radius: 10upx;
+  font-size: 30upx;
+}
+
+.type-list {
+  width: 76%;
+  height: 40upx;
+  margin-left: 12%;
+  display: flex;
+  margin-top: 34upx;
+  overflow-x: scroll;
+  white-space: nowrap;
+}
+
+.type-clonum {
+  min-width: 172upx;
+  height: 40upx;
+  line-height: 40upx;
+  text-align: center;
+  font-size: 24upx;
+  background: #f5f5f5;
+  border-radius: 18upx;
+}
+
+.type-clonum + .type-clonum {
+	margin-left: 15rpx;
+}
+
+.element-style {
+  width: 76%;
+  height: 125upx;
+  margin: 34upx 12% 10upx;
+}
+
+.element-style .element-list {
+  width: 100%;
+  height: 125upx;
+  display: flex;
+}
+
+.style-clonum {
+  width: 100upx;
+  height: 125upx;
+  margin-right: 30upx;
+}
+
+.choosed-image {
+ width: 100%;
+  height: 100%;
+}
+
+.move-view {
+  border: 3upx solid #226df7;
+}
+
+.add-icon {
+  width: 200upx;
+  margin: 76upx auto;
+  text-align: center;
+}
+
+.add-icon i {
+  font-size: 70upx;
+  line-height: 60upx;
+}
+.add-icon .add-font-tip {
+	display: flex;
+	width: 120upx;
+	border-top: 4upx solid #000;
+	font-size: 22upx;
+	justify-content: center;
+	margin: 0 auto;
+	padding-top: 8upx;
+}
+.icon-list {
+  color: #226df7;
+  height: 90upx;
+  width: 430upx;
+  display: flex;
+  justify-content: space-around;
+  position: absolute;
+  left: -82upx; 
+  margin-top: 34upx;
+  font-size: 22upx;
+}
+
+.icon-list .icon-clonum {
+  text-align: center;
+}
+
+/*图片四个角*/
+.image-border {
+  position: absolute;
+  width: 50upx;
+  height: 50upx;
+  border-radius: 50%;
+}
+.image-border i {
+	color:#fff;
+}
+.image-border image {
+	width: 100%;
+	height: 100%;
+}
+.image-border1 {
+  top: -20upx;
+  left: -20upx;
+}
+
+.image-border2 {
+  top: -20upx;
+  right: -20upx;
+}
+
+.image-border3 {
+  bottom: -20upx;
+  left: -20upx;
+}
+
+.image-border4 {
+  bottom: -20upx;
+  right: -20upx;
+  overflow: scroll;
+  -webkit-overflow-scrolling: touch;
+  display: flex;
+  -webkit-transform: translateZ(0px);  
+}
+
+/*字体*/
+
+.font-box {
+  border: 1upx solid #226df7;
+  width: 100%;
+  height: 100%;
+}
+
+.font-border {
+  position: absolute;
+  width: 30upx;
+  height: 30upx;
+  border-radius: 50%;
+  background: #226df7;
+}
+.font-border i {
+	color:#fff;
+}
+.font-border1 {
+  top: -16upx;
+  left: -16upx;
+}
+
+.font-border2 {
+  top: -16upx;
+  right: -16upx;
+}
+
+.font-border3 {
+  bottom: -16upx;
+  left: -16upx;
+}
+
+.font-border4 {
+  bottom: -16upx;
+  right: -16upx;
+}
+
+.input-font {
+  display: block;
+  text-align: center;
+  overflow: hidden;
+}
+
+.select-icon-list {
+  width: 400upx;
+  position: absolute;
+  left: 10upx;
+  top: 54upx;
+  z-index: 4;
+  display: flex;
+  flex-wrap: wrap;
+}
+.select-icon-list .select-icon-clonum{
+  padding: 0 12upx;
+  min-width: 50upx;
+  height: 50upx;
+  line-height: 50upx;
+  background: #226df7;
+  color: #fff;
+  font-size: 22upx;
+  border-radius: 10upx;
+  margin-left: 16upx;
+  margin-top: 16upx;
+}
+
+.h-line{
+	position: absolute;
+	z-index: 3;
+	width: 3rpx;
+	height: 36rpx;
+	background: #226df7;
+	margin: auto;
+	left: 0;
+	right: 0;
+}
+
+.tip-line-slider {
+	width: 1rpx;
+	height: 36rpx;
+	background: #fff;
+	position: absolute;
+	margin: auto;
+	left: 0;
+	right: 0;
+}

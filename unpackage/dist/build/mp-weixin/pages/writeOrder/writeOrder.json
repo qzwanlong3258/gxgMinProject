@@ -1,0 +1,9 @@
+{
+  "navigationBarTitleText": "填写订单",
+  "usingComponents": {
+    "order-infor": "/components/OrderInfor",
+    "gxg-address": "/components/GxgAddress",
+    "gxg-button": "/components/GxgButton",
+    "gxg-model": "/components/GxgModel"
+  }
+}

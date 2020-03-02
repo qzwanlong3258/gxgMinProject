@@ -1,0 +1,1 @@
+<view class="preview-bar" style="{{('width:'+width+'rpx;'+(height?'height:'+height+'rpx':''))}}"><image class="back-img" src="{{backUrl}}" mode="widthFix"></image><view class="pattern-img"><image style="{{('width:'+patternImgWidth+'rpx;height:'+patternImgHeight+'rpx;margin-top:'+(sex==3?'-12%':'-15%'))}}" src="{{patternUrl}}" mode="aspectFit"></image></view></view>

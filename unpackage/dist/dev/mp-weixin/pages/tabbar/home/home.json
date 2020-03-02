@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "首页",
+  "usingComponents": {
+    "list-module": "/pages/tabbar/home/components/HomeListModule",
+    "bottom-tip": "/pages/tabbar/home/components/BottomTip"
+  }
+}

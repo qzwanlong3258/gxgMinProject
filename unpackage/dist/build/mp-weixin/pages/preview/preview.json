@@ -1,0 +1,8 @@
+{
+  "navigationBarTitleText": "预览设计",
+  "usingComponents": {
+    "gxg-button": "/components/GxgButton",
+    "swiper-img": "/components/SwiperImg",
+    "preview-bar": "/components/PreviewBar"
+  }
+}

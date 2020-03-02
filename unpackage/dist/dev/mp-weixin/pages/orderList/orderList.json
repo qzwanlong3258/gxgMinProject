@@ -1,0 +1,10 @@
+{
+  "navigationBarTitleText": "订单列表",
+  "usingComponents": {
+    "order-nav": "/components/OrderNav",
+    "mine-infor": "/components/MineInfor",
+    "order-infor": "/components/OrderInfor",
+    "order-button": "/components/OrderButton",
+    "no-more-data": "/components/NoMoreData"
+  }
+}

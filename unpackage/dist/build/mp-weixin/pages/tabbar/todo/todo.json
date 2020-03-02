@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "个性定制",
+  "usingComponents": {
+    "gxg-button": "/components/GxgButton",
+    "left-tip": "/pages/tabbar/todo/components/LeftTip"
+  }
+}

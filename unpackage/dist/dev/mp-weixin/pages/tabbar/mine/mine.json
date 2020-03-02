@@ -1,0 +1,9 @@
+{
+  "navigationBarTitleText": "个人中心",
+  "usingComponents": {
+    "mine-infor": "/components/MineInfor",
+    "order-nav": "/components/OrderNav",
+    "mine-creation": "/components/MineCreation",
+    "no-more-data": "/components/NoMoreData"
+  }
+}

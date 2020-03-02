@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "选择属性",
+  "usingComponents": {
+    "swiper-img": "/components/SwiperImg",
+    "gxg-button": "/components/GxgButton"
+  }
+}

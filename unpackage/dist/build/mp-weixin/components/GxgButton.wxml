@@ -1,0 +1,1 @@
+<view><button data-event-opts="{{[['tap',[['clickEvent',['$event']]]]]}}" class="btn-box" capture-bind:tap="__e"><slot></slot></button></view>

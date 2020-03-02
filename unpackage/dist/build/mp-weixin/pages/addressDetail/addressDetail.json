@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "操作地址",
+  "usingComponents": {
+    "gxg-button": "/components/GxgButton"
+  }
+}

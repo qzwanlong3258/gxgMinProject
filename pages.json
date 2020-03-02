@@ -1,0 +1,122 @@
+{
+	"pages": [
+		//pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+		{
+			"path": "pages/tabbar/home/home",
+			"style": {
+				"navigationBarTitleText": "首页"
+			}
+		},
+		{
+			"path": "pages/auth/auth",
+			"style": {
+				"navigationBarTitleText": "授权"
+			}
+		},
+		{
+			"path": "pages/todoDetail/todoDetail",
+			"style": {
+				"navigationBarTitleText": "定制详情"
+			}
+		},
+		{
+			"path": "pages/writeOrder/writeOrder",
+			"style": {
+				"navigationBarTitleText": "填写订单"
+			}
+		},
+		{
+			"path": "pages/preview/preview",
+			"style": {
+				"navigationBarTitleText": "预览设计"
+			}
+		},
+		{
+			"path": "pages/tabbar/todo/todo",
+			"style": {
+				"navigationBarTitleText": "个性定制"
+			}
+		},
+
+		{
+			"path": "pages/addressDetail/addressDetail",
+			"style": {
+				"navigationBarTitleText": "操作地址"
+			}
+		},
+		{
+			"path": "pages/refundOrder/refundOrder",
+			"style": {
+				"navigationBarTitleText": "退款维权"
+			}
+		},
+		{
+			"path": "pages/orderList/orderList",
+			"style": {
+				"navigationBarTitleText": "订单列表"
+			}
+		},
+		{
+			"path": "pages/tabbar/mine/mine",
+			"style": {
+				"navigationBarTitleText": "个人中心"
+			}
+		},
+		{
+			"path": "pages/addressIndex/addressIndex",
+			"style": {
+				"navigationBarTitleText": "地址列表"
+			}
+		},
+
+		{
+			"path": "pages/orderStatus/orderStatus",
+			"style": {
+				"navigationBarTitleText": "订单状态"
+			}
+		},
+		{
+			"path": "pages/selectType/selectType",
+			"style": {
+				"navigationBarTitleText": "选择属性"
+			}
+		}
+	],
+	"globalStyle": {
+		"navigationBarTextStyle": "black",
+		"navigationBarTitleText": "GXG",
+		"navigationBarBackgroundColor": "#F8F8F8",
+		"backgroundColor": "#F8F8F8"
+	},
+	"tabBar": {
+		"borderStyle": "black",
+		"backgroundColor": "#000",
+		"color": "#fff",
+		"selectedColor": "#a28c5e",
+		"list": [{
+				"pagePath": "pages/tabbar/home/home",
+				"iconPath": "static/img/tabbar/33.png",
+				"selectedIconPath": "static/img/tabbar/3.png",
+				"text": "首页"
+			},
+
+			{
+				"pagePath": "pages/tabbar/todo/todo",
+				"iconPath": "static/img/tabbar/11.png",
+				"selectedIconPath": "static/img/tabbar/1.png",
+				"text": "个性定制"
+			},
+			{
+				"pagePath": "pages/tabbar/mine/mine",
+				"iconPath": "static/img/tabbar/22.png",
+				"selectedIconPath": "static/img/tabbar/2.png",
+				"text": "个人中心"
+			}
+		]
+	},
+	"permission": {
+		"scope.userLocation": {
+			"desc": "GXG将读取您的位置信息。"
+		}
+	}
+}

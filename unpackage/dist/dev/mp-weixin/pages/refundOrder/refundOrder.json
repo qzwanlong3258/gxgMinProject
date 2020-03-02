@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "退款维权",
+  "usingComponents": {
+    "order-infor": "/components/OrderInfor",
+    "gxg-button": "/components/GxgButton"
+  }
+}

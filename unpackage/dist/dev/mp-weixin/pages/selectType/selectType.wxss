@@ -1,0 +1,148 @@
+@charset "UTF-8";
+/**
+ * 这里是uni-app内置的常用样式变量
+ *
+ * uni-app 官方扩展插件及插件市场（https://ext.dcloud.net.cn）上很多三方插件均使用了这些样式变量
+ * 如果你是插件开发者，建议你使用scss预处理，并在插件代码中直接使用这些变量（无需 import 这个文件），方便用户通过搭积木的方式开发整体风格一致的App
+ *
+ */
+/**
+ * 如果你是App开发者（插件使用者），你可以通过修改这些变量来定制自己的插件主题，实现自定义主题功能
+ *
+ * 如果你的项目同样使用了scss预处理，你也可以直接在你的 scss 代码中使用如下变量，同时无需 import 这个文件
+ */
+/* 颜色变量 */
+/* 行为相关颜色 */
+/* 文字基本颜色 */
+/* 背景颜色 */
+/* 边框颜色 */
+/* 尺寸变量 */
+/* 文字尺寸 */
+/* 图片尺寸 */
+/* Border Radius */
+/* 水平间距 */
+/* 垂直间距 */
+/* 透明度 */
+/* 文章场景相关 */
+/*点击选中颜色*/
+.swiper-bg.data-v-29019aba {
+  background: #dcdcdc;
+}
+.color-click.data-v-29019aba {
+  border-radius: 50% !important;
+}
+.clothe-info.data-v-29019aba {
+  width: 92%;
+  margin-left: 3%;
+}
+.clothe-info .info-top.data-v-29019aba {
+    margin-top: 20rpx;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+}
+.clothe-info .info-top .top-colnum text.data-v-29019aba {
+      right: 10rpx;
+}
+.clothe-info .info-top .top-price.data-v-29019aba {
+      font-size: 26rpx;
+}
+.clothe-info .info-top .top-price text.data-v-29019aba {
+        font-size: 32rpx;
+}
+.clothe-info .info-bottom.data-v-29019aba {
+    margin-top: 8rpx;
+}
+.select-type.data-v-29019aba {
+  width: 92%;
+  margin-left: 3%;
+}
+.select-type .select-content.data-v-29019aba {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-pack: justify;
+    -webkit-justify-content: space-between;
+            justify-content: space-between;
+}
+.select-type .select-content .select-colunm-top.data-v-29019aba {
+      margin-top: 50rpx;
+}
+.select-type .select-content .select-colunm-top .colunm-title.data-v-29019aba {
+        font-size: 30rpx;
+}
+.select-type .select-content .select-colunm-top .column-box.data-v-29019aba {
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: flex;
+        margin-top: 22rpx;
+}
+.select-type .select-content .select-colunm-top .column-box .clounm-content.data-v-29019aba {
+          height: 50rpx;
+          line-height: 50rpx;
+          padding: 0 18rpx;
+          border-radius: 8rpx;
+          background: #f2f2f2;
+}
+.select-type .select-content .select-colunm-top .column-box .clounm-content.data-v-29019aba:not(:first-child) {
+          margin-left: 16rpx;
+}
+.select-type .select-content .select-colunm-top.data-v-29019aba:last-child {
+      margin-left: 80rpx;
+}
+.select-type .select-content .select-colunm.data-v-29019aba {
+      margin-top: 50rpx;
+}
+.select-type .select-content .select-colunm .colunm-title.data-v-29019aba {
+        font-size: 30rpx;
+}
+.select-type .select-content .select-colunm .column-box.data-v-29019aba {
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: flex;
+        margin-top: 22rpx;
+}
+.select-type .select-content .select-colunm .column-box .clounm-content.data-v-29019aba {
+          height: 50rpx;
+          line-height: 50rpx;
+          padding: 0 28rpx;
+          border-radius: 8rpx;
+          background: #f2f2f2;
+}
+.select-type .select-content .select-colunm .column-box .clounm-content.data-v-29019aba:not(:first-child) {
+          margin-left: 16rpx;
+}
+.select-type .select-content .select-colunm .column-box .color-box.data-v-29019aba {
+          width: 56rpx;
+          height: 56rpx;
+          border-radius: 8rpx;
+}
+.select-type .select-content .select-colunm .column-box .color-box.data-v-29019aba:not(:first-child) {
+          margin-left: 16rpx;
+}
+.size-img-box.data-v-29019aba {
+  width: 92%;
+  margin-left: 4%;
+  text-align: center;
+  margin-top: 50rpx;
+  border-top: 1rpx solid #eee;
+  margin-bottom: 120rpx;
+}
+.size-img-box .size-title.data-v-29019aba {
+    font-weight: bold;
+    line-height: 80rpx;
+}
+.size-img-box image.data-v-29019aba {
+    width: 100%;
+}
+.size-img-box .img-tip.data-v-29019aba {
+    font-size: 16rpx;
+}
+.start-todo.data-v-29019aba {
+  position: fixed;
+  margin: 50rpx auto;
+  left: 0;
+  right: 0;
+  bottom: -20rpx;
+}
+

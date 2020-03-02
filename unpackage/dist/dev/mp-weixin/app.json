@@ -1,0 +1,57 @@
+{
+  "pages": [
+    "pages/tabbar/home/home",
+    "pages/auth/auth",
+    "pages/todoDetail/todoDetail",
+    "pages/writeOrder/writeOrder",
+    "pages/preview/preview",
+    "pages/tabbar/todo/todo",
+    "pages/addressDetail/addressDetail",
+    "pages/refundOrder/refundOrder",
+    "pages/orderList/orderList",
+    "pages/tabbar/mine/mine",
+    "pages/addressIndex/addressIndex",
+    "pages/orderStatus/orderStatus",
+    "pages/selectType/selectType"
+  ],
+  "subPackages": [],
+  "window": {
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "GXG",
+    "navigationBarBackgroundColor": "#F8F8F8",
+    "backgroundColor": "#F8F8F8"
+  },
+  "tabBar": {
+    "borderStyle": "black",
+    "backgroundColor": "#000",
+    "color": "#fff",
+    "selectedColor": "#a28c5e",
+    "list": [
+      {
+        "pagePath": "pages/tabbar/home/home",
+        "iconPath": "static/img/tabbar/33.png",
+        "selectedIconPath": "static/img/tabbar/3.png",
+        "text": "首页"
+      },
+      {
+        "pagePath": "pages/tabbar/todo/todo",
+        "iconPath": "static/img/tabbar/11.png",
+        "selectedIconPath": "static/img/tabbar/1.png",
+        "text": "个性定制"
+      },
+      {
+        "pagePath": "pages/tabbar/mine/mine",
+        "iconPath": "static/img/tabbar/22.png",
+        "selectedIconPath": "static/img/tabbar/2.png",
+        "text": "个人中心"
+      }
+    ]
+  },
+  "permission": {
+    "scope.userLocation": {
+      "desc": "gxg将定位您的位置"
+    }
+  },
+  "resizable": true,
+  "usingComponents": {}
+}

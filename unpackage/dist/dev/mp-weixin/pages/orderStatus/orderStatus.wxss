@@ -24,13 +24,13 @@
 /* 垂直间距 */
 /* 透明度 */
 /* 文章场景相关 */
-.container.data-v-4773677c {
+.container.data-v-7337aa27 {
   background: #e5e7e7 !important;
 }
-.container .order-status.data-v-4773677c {
+.container .order-status.data-v-7337aa27 {
     height: 200rpx;
 }
-.container .order-status .status-tip.data-v-4773677c {
+.container .order-status .status-tip.data-v-7337aa27 {
       display: -webkit-box;
       display: -webkit-flex;
       display: flex;
@@ -42,15 +42,15 @@
               align-items: center;
       margin-top: 60rpx;
 }
-.container .order-status .status-tip ._i.data-v-4773677c {
+.container .order-status .status-tip ._i.data-v-7337aa27 {
         font-size: 40rpx;
 }
-.container .order-status .status-tip text.data-v-4773677c {
+.container .order-status .status-tip text.data-v-7337aa27 {
         font-weight: 600;
         font-size: 46rpx;
         margin-left: 20rpx;
 }
-.container .order-infor.data-v-4773677c {
+.container .order-infor.data-v-7337aa27 {
     width: 100%;
     background: #fff;
     height: calc(100% - 267rpx);
@@ -59,7 +59,7 @@
     border-top-right-radius: 150rpx;
     box-shadow: 0 0 1rpx 1rpx rgba(0, 0, 0, 0.1);
 }
-.container .order-infor .order-address.data-v-4773677c {
+.container .order-infor .order-address.data-v-7337aa27 {
       width: 82%;
       margin-left: 9%;
       height: 150rpx;
@@ -73,44 +73,44 @@
       margin-top: 22rpx;
       border-radius: 10rpx;
 }
-.container .order-infor .order-address .address-icon ._i.data-v-4773677c {
+.container .order-infor .order-address .address-icon ._i.data-v-7337aa27 {
         font-size: 55rpx;
         color: #666;
 }
-.container .order-infor .order-address .user-info.data-v-4773677c {
+.container .order-infor .order-address .user-info.data-v-7337aa27 {
         line-height: 42rpx;
         margin-left: 30rpx;
 }
-.container .order-infor .order-address .user-info .base-info.data-v-4773677c {
+.container .order-infor .order-address .user-info .base-info.data-v-7337aa27 {
           font-size: 30rpx;
 }
-.container .order-infor .order-address .user-info .base-info text.data-v-4773677c {
+.container .order-infor .order-address .user-info .base-info text.data-v-7337aa27 {
             margin-left: 22rpx;
 }
-.container .order-infor .order-clothe.data-v-4773677c {
+.container .order-infor .order-clothe.data-v-7337aa27 {
       height: 330rpx;
       border-top: 2rpx solid #e5e7e7;
       border-bottom: 2rpx solid #e5e7e7;
 }
-.container .order-infor .order-content.data-v-4773677c {
+.container .order-infor .order-content.data-v-7337aa27 {
       width: 82%;
       margin-left: 9%;
 }
-.container .order-infor .order-content .title-font.data-v-4773677c {
+.container .order-infor .order-content .title-font.data-v-7337aa27 {
         font-size: 30rpx;
         margin: 30rpx 0;
 }
-.container .order-infor .order-content .title-font ._span.data-v-4773677c {
+.container .order-infor .order-content .title-font ._span.data-v-7337aa27 {
           color: red;
           position: relative;
           top: -4rpx;
           margin-right: 10rpx;
 }
-.container .order-infor .order-content .tip-font.data-v-4773677c {
+.container .order-infor .order-content .tip-font.data-v-7337aa27 {
         font-size: 26rpx;
         line-height: 50rpx;
 }
-.container .order-infor .order-content .tip-font ._span.data-v-4773677c {
+.container .order-infor .order-content .tip-font ._span.data-v-7337aa27 {
           color: #333;
           margin-right: 10rpx;
 }

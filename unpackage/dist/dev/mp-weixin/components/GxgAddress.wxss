@@ -24,7 +24,7 @@
 /* 垂直间距 */
 /* 透明度 */
 /* 文章场景相关 */
-.order-address.data-v-cca39366 {
+.order-address.data-v-b3ad5810 {
   width: 100%;
   height: 150rpx;
   background: #fff;
@@ -40,26 +40,26 @@
   border: 1rpx solid #dcdcdc;
   border-radius: 10rpx;
 }
-.order-address .address-icon ._i.data-v-cca39366 {
+.order-address .address-icon ._i.data-v-b3ad5810 {
   font-size: 55rpx;
   color: #666;
 }
-.order-address .user-info.data-v-cca39366 {
+.order-address .user-info.data-v-b3ad5810 {
   line-height: 42rpx;
   width: 390rpx;
 }
-.order-address .user-info .base-info.data-v-cca39366 {
+.order-address .user-info .base-info.data-v-b3ad5810 {
     font-size: 30rpx;
 }
-.order-address .user-info .base-info text.data-v-cca39366 {
+.order-address .user-info .base-info text.data-v-b3ad5810 {
       margin-left: 22rpx;
 }
-.order-address .right-icon ._i.data-v-cca39366 {
+.order-address .right-icon ._i.data-v-b3ad5810 {
   font-size: 53rpx;
   color: #666;
   position: relative;
 }
-.user-address.data-v-cca39366 {
+.user-address.data-v-b3ad5810 {
   overflow: hidden;
   display: -webkit-box;
   -webkit-box-orient: vertical;

@@ -24,11 +24,11 @@
 /* 垂直间距 */
 /* 透明度 */
 /* 文章场景相关 */
-.user-box.data-v-7fa9fa1c {
+.user-box.data-v-8f5ff832 {
   width: 100%;
   height: 490rpx;
 }
-.user-box .user-avatar.data-v-7fa9fa1c {
+.user-box .user-avatar.data-v-8f5ff832 {
     position: relative;
     z-index: 2;
     width: 176rpx;
@@ -36,12 +36,12 @@
     border-radius: 50%;
     margin: 64rpx auto;
 }
-.user-box .user-avatar image.data-v-7fa9fa1c {
+.user-box .user-avatar image.data-v-8f5ff832 {
       width: 100%;
       height: 100%;
       border-radius: 50%;
 }
-.user-box .show-btn.data-v-7fa9fa1c {
+.user-box .show-btn.data-v-8f5ff832 {
     position: absolute;
     z-index: 1;
     width: 620rpx;
@@ -54,35 +54,35 @@
     line-height: 70rpx;
     margin-left: 65rpx;
 }
-.user-box .login-bg.data-v-7fa9fa1c {
+.user-box .login-bg.data-v-8f5ff832 {
     height: 500rpx;
     width: 100%;
     position: absolute;
     top: 50rpx;
 }
-.user-box .login-bg image.data-v-7fa9fa1c {
+.user-box .login-bg image.data-v-8f5ff832 {
       width: 100%;
       height: 100%;
 }
-.fixed-document.data-v-7fa9fa1c {
+.fixed-document.data-v-8f5ff832 {
   position: fixed;
   z-index: 3;
 }
-.model-box view.data-v-7fa9fa1c {
+.model-box view.data-v-8f5ff832 {
   font-size: 30rpx;
 }
-.user-phone.data-v-7fa9fa1c {
+.user-phone.data-v-8f5ff832 {
   display: block;
   font-size: 30rpx;
 }
-.flash-pay.data-v-7fa9fa1c {
+.flash-pay.data-v-8f5ff832 {
   width: 614rpx;
   height: 800rpx;
   margin: 156rpx 68rpx;
   background: #fff;
   border-radius: 20rpx;
 }
-.content-top.data-v-7fa9fa1c {
+.content-top.data-v-8f5ff832 {
   width: 574rpx;
   margin-left: 20rpx;
   padding-top: 15px;
@@ -94,26 +94,26 @@
           justify-content: space-between;
   font-size: 30rpx;
 }
-.content-bottom.data-v-7fa9fa1c {
+.content-bottom.data-v-8f5ff832 {
   margin-left: 20rpx;
   margin-top: 16rpx;
   font-size: 28rpx;
 }
-.content-bottom text.data-v-7fa9fa1c {
+.content-bottom text.data-v-8f5ff832 {
   font-size: 38rpx;
   margin-left: 10rpx;
 }
-.content-wxacode.data-v-7fa9fa1c {
+.content-wxacode.data-v-8f5ff832 {
   width: 452rpx;
   height: 452rpx;
   margin-top: 54rpx;
   margin-left: 80rpx;
 }
-.content-wxacode image.data-v-7fa9fa1c {
+.content-wxacode image.data-v-8f5ff832 {
   width: 100%;
   height: 100%;
 }
-.falsh-pay.data-v-7fa9fa1c {
+.falsh-pay.data-v-8f5ff832 {
   width: 690rpx;
   margin-left: 30rpx;
   margin-top: 30rpx;
@@ -121,17 +121,17 @@
   border-radius: 14rpx;
   background: #fff;
 }
-.content-tip.data-v-7fa9fa1c {
+.content-tip.data-v-8f5ff832 {
   width: 100%;
   text-align: center;
   font-size: 28rpx;
   margin-top: 30rpx;
 }
-.form-list.data-v-7fa9fa1c {
+.form-list.data-v-8f5ff832 {
   background: #fff;
   margin-top: 22rpx;
 }
-.list-column.data-v-7fa9fa1c {
+.list-column.data-v-8f5ff832 {
   display: -webkit-box;
   display: flex;
   display: -webkit-flex;
@@ -141,28 +141,28 @@
   font-size: 30rpx;
   padding: 0 20rpx;
 }
-.column-input input.data-v-7fa9fa1c {
+.column-input input.data-v-8f5ff832 {
   margin-top: 24rpx;
   font-size: 30rpx;
   margin-left: 20rpx;
   width: 500rpx;
 }
-.column-input text.data-v-7fa9fa1c {
+.column-input text.data-v-8f5ff832 {
   font-size: 30rpx;
   margin-left: 20rpx;
   width: 400rpx;
 }
-.list-column .adress-icon.data-v-7fa9fa1c {
+.list-column .adress-icon.data-v-8f5ff832 {
   position: absolute;
   right: 30rpx;
 }
-.adress-icon ._i.data-v-7fa9fa1c {
+.adress-icon ._i.data-v-8f5ff832 {
   font-size: 40rpx;
 }
-.do-reservation.data-v-7fa9fa1c {
+.do-reservation.data-v-8f5ff832 {
   margin-left: 105rpx;
 }
-.model-box.data-v-7fa9fa1c {
+.model-box.data-v-8f5ff832 {
   width: 84%;
   height: 426rpx;
   background: #fff;
@@ -170,7 +170,7 @@
   margin-left: 7%;
   margin-top: 40%;
 }
-.column-box.data-v-7fa9fa1c {
+.column-box.data-v-8f5ff832 {
   width: 100%;
   height: 100rpx;
   border-bottom: 1rpx solid #eee;
@@ -178,29 +178,29 @@
   line-height: 100rpx;
   font-size: 32rpx;
 }
-.column-box text.data-v-7fa9fa1c {
+.column-box text.data-v-8f5ff832 {
   font-weight: bold;
   font-size: 32rpx;
 }
-.bottom-btn.data-v-7fa9fa1c {
+.bottom-btn.data-v-8f5ff832 {
   display: -webkit-box;
   display: flex;
   display: -webkit-flex;
 }
-.input-phone.data-v-7fa9fa1c {
+.input-phone.data-v-8f5ff832 {
   border-bottom: none;
   border-top: 1rpx solid #eee;
   padding-top: 24rpx;
 }
-.bottom-btn view.data-v-7fa9fa1c {
+.bottom-btn view.data-v-8f5ff832 {
   width: 50%;
   text-align: center;
 }
-.column-box ._i.data-v-7fa9fa1c {
+.column-box ._i.data-v-8f5ff832 {
   position: absolute;
   margin-left: 20rpx;
 }
-.column-box input.data-v-7fa9fa1c {
+.column-box input.data-v-8f5ff832 {
   width: 84%;
   margin-left: 5%;
   height: 70rpx;
@@ -209,7 +209,7 @@
   text-align: left;
   padding-left: 22rpx;
 }
-.column-box .get-code.data-v-7fa9fa1c {
+.column-box .get-code.data-v-8f5ff832 {
   width: 30%;
   height: 56rpx;
   line-height: 56rpx;

@@ -7520,9 +7520,9 @@ module.exports = g;
 
 /***/ }),
 /* 4 */
-/*!***********************************************!*\
-  !*** E:/Desktop/gxg/gxgMinProject/pages.json ***!
-  \***********************************************/
+/*!**********************************************************!*\
+  !*** D:/laragon/www/wl_project/gxgMinProject/pages.json ***!
+  \**********************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -8427,9 +8427,9 @@ module.exports = {"_from":"@dcloudio/uni-stat@^2.0.0-alpha-24420191128001","_id"
 
 /***/ }),
 /* 7 */
-/*!****************************************************************!*\
-  !*** E:/Desktop/gxg/gxgMinProject/pages.json?{"type":"style"} ***!
-  \****************************************************************/
+/*!***************************************************************************!*\
+  !*** D:/laragon/www/wl_project/gxgMinProject/pages.json?{"type":"style"} ***!
+  \***************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -8438,9 +8438,9 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 /***/ }),
 /* 8 */
-/*!***************************************************************!*\
-  !*** E:/Desktop/gxg/gxgMinProject/pages.json?{"type":"stat"} ***!
-  \***************************************************************/
+/*!**************************************************************************!*\
+  !*** D:/laragon/www/wl_project/gxgMinProject/pages.json?{"type":"stat"} ***!
+  \**************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -9241,9 +9241,9 @@ if (hadRuntime) {
 
 /***/ }),
 /* 15 */
-/*!*************************************************************************!*\
-  !*** E:/Desktop/gxg/gxgMinProject/utils/regenerator-runtime/runtime.js ***!
-  \*************************************************************************/
+/*!************************************************************************************!*\
+  !*** D:/laragon/www/wl_project/gxgMinProject/utils/regenerator-runtime/runtime.js ***!
+  \************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -9971,9 +9971,9 @@ function () {
 
 /***/ }),
 /* 16 */
-/*!*****************************************************!*\
-  !*** E:/Desktop/gxg/gxgMinProject/utils/storage.js ***!
-  \*****************************************************/
+/*!****************************************************************!*\
+  !*** D:/laragon/www/wl_project/gxgMinProject/utils/storage.js ***!
+  \****************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -10108,9 +10108,9 @@ module.exports = {
 
 /***/ }),
 /* 17 */
-/*!*****************************************************!*\
-  !*** E:/Desktop/gxg/gxgMinProject/config/router.js ***!
-  \*****************************************************/
+/*!****************************************************************!*\
+  !*** D:/laragon/www/wl_project/gxgMinProject/config/router.js ***!
+  \****************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -10152,9 +10152,9 @@ module.exports = {
 
 /***/ }),
 /* 18 */
-/*!***************************************************!*\
-  !*** E:/Desktop/gxg/gxgMinProject/config/http.js ***!
-  \***************************************************/
+/*!**************************************************************!*\
+  !*** D:/laragon/www/wl_project/gxgMinProject/config/http.js ***!
+  \**************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -10230,6 +10230,9 @@ function request()
       var token = getStorage('tempToken');
       url = url + (url.indexOf('?') === -1 ? '?token=' : '&token=') + token;
     }
+    if (!getStorage('tempToken')) {
+
+    }
     requestTask = uni.request({
       method: method,
       url: url,
@@ -10237,7 +10240,7 @@ function request()
       dataType: dataType,
       responseType: responseType,
       header: header,
-      success: function () {var _success = _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee(res) {var statusCode, header, msg, _data, code, _msg, _msg2;return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:
+      success: function () {var _success = _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee(res) {var statusCode, header, msg, _data, code, pages, _data2, _code, _msg, _msg2;return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:
                   //判断是否隐藏请求的loading
                   hideLoading && loading.hideLoading();
 
@@ -10245,14 +10248,33 @@ function request()
 
 
                   res.statusCode, header = res.header, msg = res.msg;if (!(
-                  statusCode === 200)) {_context.next = 8;break;}
+                  statusCode === 401)) {_context.next = 10;break;}
 
                   _data =
                   res.data;
 
                   code =
-                  _data.code;
-                  if (code === 0) {
+                  _data.code;if (!(
+                  code === "1020" || code === "1050")) {_context.next = 10;break;}
+                  pages = getCurrentPages();if (!(
+                  pages.length > 1 && pages[pages.length - 1].route === AUTH)) {_context.next = 9;break;}return _context.abrupt("return");case 9:
+
+
+                  (pages.length === 0 || pages[pages.length - 1].route !== AUTH) && uni.reLaunch({ url: AUTH });case 10:if (!(
+
+
+                  statusCode === 200)) {_context.next = 16;break;}
+
+                  _data2 =
+                  res.data;
+
+                  _code =
+                  _data2.code;
+                  // if(code === 1020||code === 1050) {
+                  // 	let pages = getCurrentPages();
+                  // 	(pages.length === 0 || pages[pages.length - 1].route !== AUTH) && uni.reLaunch({ url: AUTH });
+                  // }
+                  if (_code === 0) {
                     //判断是否显示请求成功的Toast
                     if (showSucessToast) {
                       uni.showToast({
@@ -10262,13 +10284,13 @@ function request()
                     if (returnHeader) {
                       resolve({
                         header: header,
-                        data: _data.data });
+                        data: _data2.data });
 
                     } else {
-                      resolve(_data.data);
+                      resolve(_data2.data);
                     }
                   } else {
-                    _msg = "".concat(errorText, ": ").concat(statusCode, " - ").concat(_data.message || _data.msg);
+                    _msg = "".concat(errorText, ": ").concat(statusCode, " - ").concat(_data2.message || _data2.msg);
                     //判断是否显示请求成功的Modal
                     if (showErrorModal) {
                       uni.showModal({
@@ -10278,20 +10300,20 @@ function request()
                     }
                     if (returnErrorCode) {
                       reject({
-                        code: code,
+                        code: _code,
                         msg: _msg });
 
                     } else {
                       reject(_msg);
                     }
-                  }_context.next = 19;break;case 8:
+                  }_context.next = 27;break;case 16:
 
                   _msg2 = "".concat(errorText, ": ").concat(statusCode, "-").concat(res.errMsg);
                   // 判断是否显示请求失败的Modal
-                  if (!(statusCode === 401)) {_context.next = 18;break;}_context.next = 12;return (
-                    refreshToken());case 12:if (!(
-                  level > 5)) {_context.next = 15;break;}
-                  console.error("刷新token请求超过五次");return _context.abrupt("return");case 15:
+                  if (!(statusCode === 401)) {_context.next = 26;break;}_context.next = 20;return (
+                    refreshToken());case 20:if (!(
+                  level > 5)) {_context.next = 23;break;}
+                  console.error("刷新token请求超过五次");return _context.abrupt("return");case 23:
 
 
                   request({
@@ -10311,7 +10333,7 @@ function request()
                     errorText: errorText,
                     returnHeader: returnHeader,
                     returnErrorCode: returnErrorCode,
-                    level: level + 1 });_context.next = 19;break;case 18:
+                    level: level + 1 });_context.next = 27;break;case 26:
 
                   if (showErrorModal) {
                     uni.showModal({
@@ -10319,7 +10341,7 @@ function request()
                       showCancel: false });
 
                     reject(_msg2);
-                  }case 19:case "end":return _context.stop();}}}, _callee, this);}));function success(_x) {return _success.apply(this, arguments);}return success;}(),
+                  }case 27:case "end":return _context.stop();}}}, _callee, this);}));function success(_x) {return _success.apply(this, arguments);}return success;}(),
 
 
       fail: function fail(res) {
@@ -10373,15 +10395,15 @@ module.exports = {
 
 /***/ }),
 /* 19 */
-/*!**************************************************!*\
-  !*** E:/Desktop/gxg/gxgMinProject/config/api.js ***!
-  \**************************************************/
+/*!*************************************************************!*\
+  !*** D:/laragon/www/wl_project/gxgMinProject/config/api.js ***!
+  \*************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-var baseUrl = 'https://gxgbasic.gxggroup.cn:8081';
-// const baseUrl = 'https://192.168.3.25:8081';
+ // const baseUrl = 'https://gxgbasic.gxggroup.cn:8081';
+var baseUrl = 'https://192.168.3.25:8081';
 
 var auth = "".concat(baseUrl, "/wx/user");
 
@@ -10610,9 +10632,9 @@ function normalizeComponent (
 
 /***/ }),
 /* 23 */
-/*!***************************************************!*\
-  !*** E:/Desktop/gxg/gxgMinProject/store/index.js ***!
-  \***************************************************/
+/*!**************************************************************!*\
+  !*** D:/laragon/www/wl_project/gxgMinProject/store/index.js ***!
+  \**************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -11592,9 +11614,9 @@ var index_esm = {
 
 /***/ }),
 /* 25 */
-/*!*****************************************************!*\
-  !*** E:/Desktop/gxg/gxgMinProject/store/getters.js ***!
-  \*****************************************************/
+/*!****************************************************************!*\
+  !*** D:/laragon/www/wl_project/gxgMinProject/store/getters.js ***!
+  \****************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -11609,9 +11631,9 @@ getters;exports.default = _default;
 
 /***/ }),
 /* 26 */
-/*!**********************************************************!*\
-  !*** E:/Desktop/gxg/gxgMinProject/store/modules/user.js ***!
-  \**********************************************************/
+/*!*********************************************************************!*\
+  !*** D:/laragon/www/wl_project/gxgMinProject/store/modules/user.js ***!
+  \*********************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -11663,9 +11685,9 @@ user;exports.default = _default;
 
 /***/ }),
 /* 27 */
-/*!***********************************************************!*\
-  !*** E:/Desktop/gxg/gxgMinProject/store/mutationTypes.js ***!
-  \***********************************************************/
+/*!**********************************************************************!*\
+  !*** D:/laragon/www/wl_project/gxgMinProject/store/mutationTypes.js ***!
+  \**********************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -11686,9 +11708,9 @@ types;exports.default = _default;
 
 /***/ }),
 /* 28 */
-/*!**************************************************************!*\
-  !*** E:/Desktop/gxg/gxgMinProject/store/modules/category.js ***!
-  \**************************************************************/
+/*!*************************************************************************!*\
+  !*** D:/laragon/www/wl_project/gxgMinProject/store/modules/category.js ***!
+  \*************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -11739,9 +11761,9 @@ var _api = __webpack_require__(/*! ../../config/api.js */ 19);function _interopR
 
 /***/ }),
 /* 29 */
-/*!***********************************************************!*\
-  !*** E:/Desktop/gxg/gxgMinProject/store/modules/order.js ***!
-  \***********************************************************/
+/*!**********************************************************************!*\
+  !*** D:/laragon/www/wl_project/gxgMinProject/store/modules/order.js ***!
+  \**********************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -11815,9 +11837,9 @@ var _filter = __webpack_require__(/*! @/config/filter.js */ 31);var _mutations;f
 
 /***/ }),
 /* 30 */
-/*!*******************************************************!*\
-  !*** E:/Desktop/gxg/gxgMinProject/api/orderStatus.js ***!
-  \*******************************************************/
+/*!******************************************************************!*\
+  !*** D:/laragon/www/wl_project/gxgMinProject/api/orderStatus.js ***!
+  \******************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -11904,9 +11926,9 @@ function orderDelivery(id) {
 
 /***/ }),
 /* 31 */
-/*!*****************************************************!*\
-  !*** E:/Desktop/gxg/gxgMinProject/config/filter.js ***!
-  \*****************************************************/
+/*!****************************************************************!*\
+  !*** D:/laragon/www/wl_project/gxgMinProject/config/filter.js ***!
+  \****************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -12010,9 +12032,9 @@ function formatOrderButtonState(state) {
 
 /***/ }),
 /* 32 */
-/*!**************************************************!*\
-  !*** E:/Desktop/gxg/gxgMinProject/utils/util.js ***!
-  \**************************************************/
+/*!*************************************************************!*\
+  !*** D:/laragon/www/wl_project/gxgMinProject/utils/util.js ***!
+  \*************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -12201,9 +12223,9 @@ module.exports = {
 /* 37 */,
 /* 38 */,
 /* 39 */
-/*!************************************************!*\
-  !*** E:/Desktop/gxg/gxgMinProject/api/home.js ***!
-  \************************************************/
+/*!***********************************************************!*\
+  !*** D:/laragon/www/wl_project/gxgMinProject/api/home.js ***!
+  \***********************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -12271,9 +12293,9 @@ function getList(data) {
 
 /***/ }),
 /* 40 */
-/*!******************************************************!*\
-  !*** E:/Desktop/gxg/gxgMinProject/config/package.js ***!
-  \******************************************************/
+/*!*****************************************************************!*\
+  !*** D:/laragon/www/wl_project/gxgMinProject/config/package.js ***!
+  \*****************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -12600,9 +12622,9 @@ module.exports = {
 
 /***/ }),
 /* 41 */
-/*!*****************************************************!*\
-  !*** E:/Desktop/gxg/gxgMinProject/config/common.js ***!
-  \*****************************************************/
+/*!****************************************************************!*\
+  !*** D:/laragon/www/wl_project/gxgMinProject/config/common.js ***!
+  \****************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -12630,9 +12652,9 @@ module.exports = {
 /* 48 */,
 /* 49 */,
 /* 50 */
-/*!*********************************************************!*\
-  !*** E:/Desktop/gxg/gxgMinProject/pages/auth/wxAuth.js ***!
-  \*********************************************************/
+/*!********************************************************************!*\
+  !*** D:/laragon/www/wl_project/gxgMinProject/pages/auth/wxAuth.js ***!
+  \********************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -12723,11 +12745,18 @@ var wxAuth = {
                 (0, _storage.setStorage)('tempToken', data.token);
                 (0, _storage.setStorage)('refreshToken', header.Authorization);
                 (0, _storage.setStorage)('userInfo', data.UserInfo);
-                (0, _storage.setStorage)('isLogin', true);_context.next = 21;return (
-                  uni.switchTab({
-                    url: getApp().globalData.fm }));case 21:case "end":return _context.stop();}}}, _callee, this);}));function getUserInfo(_x) {return _getUserInfo.apply(this, arguments);}return getUserInfo;}() },
+                (0, _storage.setStorage)('isLogin', true);
+                uni.navigateBack({
+                  delta: 1 });
 
-
+                // let pages = getCurrentPages();
+                // (pages.length > 1 || pages[pages.length - 1].route === AUTH) && await uni.navigateBack({
+                // 	delta: 1
+                // });
+                // await uni.switchTab({
+                // 	url: getApp().globalData.fm,
+                // });
+              case 20:case "end":return _context.stop();}}}, _callee, this);}));function getUserInfo(_x) {return _getUserInfo.apply(this, arguments);}return getUserInfo;}() },
 
   onLoad: function () {var _onLoad = _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee2(options) {var code, _ref3, session_key;return _regenerator.default.wrap(function _callee2$(_context2) {while (1) {switch (_context2.prev = _context2.next) {case 0:_context2.next = 2;return (
 
@@ -12758,9 +12787,9 @@ wxAuth;exports.default = _default;
 
 /***/ }),
 /* 51 */
-/*!*******************************************************!*\
-  !*** E:/Desktop/gxg/gxgMinProject/utils/openLogin.js ***!
-  \*******************************************************/
+/*!******************************************************************!*\
+  !*** D:/laragon/www/wl_project/gxgMinProject/utils/openLogin.js ***!
+  \******************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -12789,9 +12818,9 @@ module.exports = {
 
 /***/ }),
 /* 52 */
-/*!****************************************************!*\
-  !*** E:/Desktop/gxg/gxgMinProject/config/image.js ***!
-  \****************************************************/
+/*!***************************************************************!*\
+  !*** D:/laragon/www/wl_project/gxgMinProject/config/image.js ***!
+  \***************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -12802,6 +12831,8 @@ module.exports = {
 //const baseUrl = '/static/img';
 var baseUrl = 'http://gxgbasic.gxggroup.cn';
 var authUrl = 'https://gxgbasic.gxggroup.cn/images';
+// const baseUrl = 'https://192.168.3.25:8081'
+// const authUrl = 'https://192.168.3.25:8081/images'
 var staticUrl = '/static/img';
 module.exports = {
   /**
@@ -12830,9 +12861,9 @@ module.exports = {
 /* 59 */,
 /* 60 */,
 /* 61 */
-/*!*******************************************************************!*\
-  !*** E:/Desktop/gxg/gxgMinProject/pages/todoDetail/todoDetail.js ***!
-  \*******************************************************************/
+/*!******************************************************************************!*\
+  !*** D:/laragon/www/wl_project/gxgMinProject/pages/todoDetail/todoDetail.js ***!
+  \******************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -13919,9 +13950,9 @@ detail;exports.default = _default;
 
 /***/ }),
 /* 62 */
-/*!******************************************************!*\
-  !*** E:/Desktop/gxg/gxgMinProject/api/todoDetail.js ***!
-  \******************************************************/
+/*!*****************************************************************!*\
+  !*** D:/laragon/www/wl_project/gxgMinProject/api/todoDetail.js ***!
+  \*****************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -14281,9 +14312,9 @@ function saveDesign(data) {
 /* 69 */,
 /* 70 */,
 /* 71 */
-/*!******************************************************!*\
-  !*** E:/Desktop/gxg/gxgMinProject/api/writeOrder.js ***!
-  \******************************************************/
+/*!*****************************************************************!*\
+  !*** D:/laragon/www/wl_project/gxgMinProject/api/writeOrder.js ***!
+  \*****************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -14376,9 +14407,9 @@ function unifiedOrder(data) {
 /* 78 */,
 /* 79 */,
 /* 80 */
-/*!***************************************************!*\
-  !*** E:/Desktop/gxg/gxgMinProject/api/preview.js ***!
-  \***************************************************/
+/*!**************************************************************!*\
+  !*** D:/laragon/www/wl_project/gxgMinProject/api/preview.js ***!
+  \**************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -14408,9 +14439,9 @@ function createOrder(data) {
 /* 87 */,
 /* 88 */,
 /* 89 */
-/*!************************************************!*\
-  !*** E:/Desktop/gxg/gxgMinProject/api/todo.js ***!
-  \************************************************/
+/*!***********************************************************!*\
+  !*** D:/laragon/www/wl_project/gxgMinProject/api/todo.js ***!
+  \***********************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -14455,9 +14486,9 @@ function getColtheInfo(id) {
 /* 96 */,
 /* 97 */,
 /* 98 */
-/*!*********************************************************!*\
-  !*** E:/Desktop/gxg/gxgMinProject/api/addressDetail.js ***!
-  \*********************************************************/
+/*!********************************************************************!*\
+  !*** D:/laragon/www/wl_project/gxgMinProject/api/addressDetail.js ***!
+  \********************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -14516,9 +14547,9 @@ function updateReceiveAddress(data) {
 /* 105 */,
 /* 106 */,
 /* 107 */
-/*!*******************************************************!*\
-  !*** E:/Desktop/gxg/gxgMinProject/api/refundOrder.js ***!
-  \*******************************************************/
+/*!******************************************************************!*\
+  !*** D:/laragon/www/wl_project/gxgMinProject/api/refundOrder.js ***!
+  \******************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -14548,9 +14579,9 @@ function getAlterSale(data) {
 /* 114 */,
 /* 115 */,
 /* 116 */
-/*!*****************************************************!*\
-  !*** E:/Desktop/gxg/gxgMinProject/api/orderList.js ***!
-  \*****************************************************/
+/*!****************************************************************!*\
+  !*** D:/laragon/www/wl_project/gxgMinProject/api/orderList.js ***!
+  \****************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -14635,9 +14666,9 @@ function getOrderList(data, showLoading) {
 /* 123 */,
 /* 124 */,
 /* 125 */
-/*!************************************************!*\
-  !*** E:/Desktop/gxg/gxgMinProject/api/mine.js ***!
-  \************************************************/
+/*!***********************************************************!*\
+  !*** D:/laragon/www/wl_project/gxgMinProject/api/mine.js ***!
+  \***********************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -14722,9 +14753,9 @@ function bindPhone(data) {
 /* 132 */,
 /* 133 */,
 /* 134 */
-/*!********************************************************!*\
-  !*** E:/Desktop/gxg/gxgMinProject/api/addressIndex.js ***!
-  \********************************************************/
+/*!*******************************************************************!*\
+  !*** D:/laragon/www/wl_project/gxgMinProject/api/addressIndex.js ***!
+  \*******************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -14780,9 +14811,9 @@ function updateOrderAddress(data) {
 /* 149 */,
 /* 150 */,
 /* 151 */
-/*!******************************************************!*\
-  !*** E:/Desktop/gxg/gxgMinProject/api/selectType.js ***!
-  \******************************************************/
+/*!*****************************************************************!*\
+  !*** D:/laragon/www/wl_project/gxgMinProject/api/selectType.js ***!
+  \*****************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 

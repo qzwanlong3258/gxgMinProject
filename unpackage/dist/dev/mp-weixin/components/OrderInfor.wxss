@@ -24,7 +24,7 @@
 /* 垂直间距 */
 /* 透明度 */
 /* 文章场景相关 */
-.clothe-box.data-v-31eb17a5 {
+.clothe-box.data-v-3e663550 {
   width: 82%;
   height: 330rpx;
   margin-left: 9%;
@@ -35,7 +35,7 @@
   -webkit-align-items: center;
           align-items: center;
 }
-.clothe-box .box-left.data-v-31eb17a5 {
+.clothe-box .box-left.data-v-3e663550 {
     width: 170rpx;
     height: 210rpx;
     border-radius: 10rpx;
@@ -47,21 +47,21 @@
     -webkit-justify-content: center;
             justify-content: center;
 }
-.clothe-box .box-left image.data-v-31eb17a5 {
+.clothe-box .box-left image.data-v-3e663550 {
       width: 130rpx;
       height: 156rpx;
 }
-.clothe-box .box-right.data-v-31eb17a5 {
+.clothe-box .box-right.data-v-3e663550 {
     margin-left: 34rpx;
     width: 66%;
 }
-.clothe-box .box-right .clothe-size.data-v-31eb17a5 {
+.clothe-box .box-right .clothe-size.data-v-3e663550 {
       margin-top: 24rpx;
 }
-.clothe-box .box-right .tip-font.data-v-31eb17a5 {
+.clothe-box .box-right .tip-font.data-v-3e663550 {
       line-height: 36rpx;
 }
-.clothe-box .box-right .right-bottom.data-v-31eb17a5 {
+.clothe-box .box-right .right-bottom.data-v-3e663550 {
       display: -webkit-box;
       display: -webkit-flex;
       display: flex;

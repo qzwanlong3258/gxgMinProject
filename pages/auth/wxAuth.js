@@ -85,9 +85,16 @@ const wxAuth = {
 			setStorage('refreshToken', header.Authorization)
 			setStorage('userInfo', data.UserInfo)
 			setStorage('isLogin', true)
-			await uni.switchTab({
-				url: getApp().globalData.fm,
+			uni.navigateBack({
+				delta: 1
 			});
+			// let pages = getCurrentPages();
+			// (pages.length > 1 || pages[pages.length - 1].route === AUTH) && await uni.navigateBack({
+			// 	delta: 1
+			// });
+			// await uni.switchTab({
+			// 	url: getApp().globalData.fm,
+			// });
 		}
 	},
 	onLoad: async function(options) {

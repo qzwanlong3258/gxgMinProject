@@ -1,9 +1,18 @@
 <script>
 const regeneratorRuntime = require('./utils/regenerator-runtime/runtime.js');
 const { setStorage, getStorage } = require('./utils/storage.js');
-const { AUTH } = require('./config/router.js');
+const { AUTH, HOME_INDEX } = require('./config/router.js');
 const { request } = require('./config/http.js');
 const { LOGIN_TOKEN_REFRESH, LOGIN_OPENID_REFRESH } = require('./config/api.js');
+const { login } = require('./utils/openLogin.js');
+const {
+	LOGIN_WECHAT_LOGIN,
+	
+} =require('./config/api.js'); 
+import {
+	APP_ID
+} from '@/config/common.js'
+
 
 export default {
 	globalData: {
@@ -48,9 +57,13 @@ export default {
 			this.$options.globalData.fm = `/${path}`;
 		},
 		handleLogin: async function() {
+			
+			console.log(123)
 			//先要确保跳转的页面不请求接口
 			this.hasRefresh = false;
-			const isLogin = getStorage('isLogin');
+			const isLogin = await getStorage('isLogin');
+			
+			console.log(111)
 			if (isLogin) {
 				let tempToken = '';
 
@@ -94,13 +107,10 @@ export default {
 						});
 					}
 				});
-			} else {
-			   let pages = getCurrentPages();
-			   (pages.length === 0 || pages[pages.length - 1].route !== AUTH) && uni.reLaunch({ url: AUTH });
-			}
+			} 
 		}
 	},
-	onLaunch: function(options) {
+	onLaunch : async function(options)  {
 		let globalData = this.$options.data;
 		if (!getStorage('sysInfo', true)) {
 			const sysInfo = wx.getSystemInfoSync();
@@ -115,10 +125,43 @@ export default {
 		//获得启动项目的路径
 		const { path, query } = options;
 		this.getFrom(path, query);
-		
+		// console.log(123)
 		//处理token
-		this.handleLogin();
+		// this.handleLogin();
 	},
+	// onLoad: async function(options) {
+	// 	console.log(777)
+	// 	const code = await new Promise((resolve,reject) => {
+	// 	  uni.login({
+	// 	   provider: 'weixin',
+	// 	    success: function(res) {
+	// 	      if (res.code){
+	// 	        resolve(res.code)
+	// 	      } else {
+	// 	        reject(res.msg)
+	// 	      }
+	// 	    },
+	// 	    fail: function(res) {
+	// 	      reject(res)
+	// 	    }
+	// 	  })
+	// 	})
+	// 	const {
+	// 		session_key
+	// 	} = await request({
+	// 		method: 'POST',
+	// 		url: `${LOGIN_WECHAT_LOGIN}?appId=${APP_ID}&code=${code}`,
+	// 		needToken: false,
+	// 		showLoading: false,
+	// 		showErrorModal: false
+	// 	}).catch(() => {
+	// 		console.log('调用wx.login失败')
+	// 	})
+	// 	 console.log(session_key);
+	// 	this.session_key = session_key;
+	// 	setStorage('sessionKey', this.session_key);
+	// 	await uni.reLaunch({ url: HOME_INDEX })
+	// },
 	onShow: function() {},
 	onHide: function() {}
 };

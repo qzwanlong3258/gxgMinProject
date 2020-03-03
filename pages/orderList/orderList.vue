@@ -15,6 +15,7 @@
 				</view>
 				<view class="infor-tip">共{{item.counts}}件,商品合计￥ <span style='font-size: 28rpx'>{{item.allPrice}}</span>(含配送费: ￥{{item.deliveryPrice}})</view>
 				<view class="btn-list">
+					
 					<order-button @updateList='loadData(4)' :btnList='item.showBtn' :item='item' :orderid='item.id' @deleteSuccess='deleteOrderSuccess'></order-button>
 				</view>
 			</view>

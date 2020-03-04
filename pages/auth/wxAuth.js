@@ -20,6 +20,9 @@ import {
 	AUTH_ENTER_IMG,
 	AUTH_BTN_IMG
 } from '@/config/image.js'
+import {
+		AUTH
+	} from '@/config/router.js';
 const regeneratorRuntime = require('@/utils/regenerator-runtime/runtime.js')
 const wxAuth = {
 	data() {
@@ -31,6 +34,23 @@ const wxAuth = {
 		}
 	},
 	methods: {
+		init :async function() {
+			//请求微信接口wx.login,获取code
+			const code = await login();
+			const {
+				session_key
+			} = await request({
+				method: 'POST',
+				url: `${LOGIN_WECHAT_LOGIN}?appId=${APP_ID}&code=${code}`,
+				needToken: false,
+				showLoading: false,
+				showErrorModal: false
+			}).catch(() => {
+				console.log('调用wx.login失败')
+			})
+			this.session_key = session_key;
+			this.getUserInfo()
+		},
 		getUserInfo: async function(e) {
 			if (!this.session_key) {
 				return wx.showToast({
@@ -85,19 +105,15 @@ const wxAuth = {
 			setStorage('refreshToken', header.Authorization)
 			setStorage('userInfo', data.UserInfo)
 			setStorage('isLogin', true)
-			uni.navigateBack({
-				delta: 1
-			});
+			let pages = getCurrentPages();
+			let page = pages[pages.length - 1];
+			page.onShow()
 			// let pages = getCurrentPages();
-			// (pages.length > 1 || pages[pages.length - 1].route === AUTH) && await uni.navigateBack({
-			// 	delta: 1
-			// });
-			// await uni.switchTab({
-			// 	url: getApp().globalData.fm,
-			// });
+			// (pages.length === 0 || pages[pages.length - 1].route !== AUTH) && uni.reLaunch({ url: pages[pages.length - 1].route});
 		}
 	},
-	onLoad: async function(options) {
+	// 组件生命周期
+	created: async function(options) {
 		//请求微信接口wx.login,获取code
 		const code = await login();
 		const {
@@ -113,6 +129,22 @@ const wxAuth = {
 		})
 		this.session_key = session_key;
 	},
+	// onLoad: async function(options) {
+	// 	//请求微信接口wx.login,获取code
+	// 	const code = await login();
+	// 	const {
+	// 		session_key
+	// 	} = await request({
+	// 		method: 'POST',
+	// 		url: `${LOGIN_WECHAT_LOGIN}?appId=${APP_ID}&code=${code}`,
+	// 		needToken: false,
+	// 		showLoading: false,
+	// 		showErrorModal: false
+	// 	}).catch(() => {
+	// 		console.log('调用wx.login失败')
+	// 	})
+	// 	this.session_key = session_key;
+	// },
 	/**
 	 * 用户点击右上角分享
 	 */

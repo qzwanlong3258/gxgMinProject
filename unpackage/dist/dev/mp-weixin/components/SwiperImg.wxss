@@ -24,15 +24,15 @@
 /* 垂直间距 */
 /* 透明度 */
 /* 文章场景相关 */
-.swiper.data-v-26b10221 {
+.swiper.data-v-27c103da {
   width: 100%;
 }
-.swiper .swiper-item.data-v-26b10221 {
+.swiper .swiper-item.data-v-27c103da {
     width: 100%;
     height: 92%;
     position: relative;
 }
-.swiper .swiper-item .show-clothe.data-v-26b10221 {
+.swiper .swiper-item .show-clothe.data-v-27c103da {
       display: -webkit-box;
       display: -webkit-flex;
       display: flex;
@@ -46,11 +46,11 @@
       margin-left: 130rpx;
       height: 100%;
 }
-.swiper .swiper-item .show-clothe image.data-v-26b10221 {
+.swiper .swiper-item .show-clothe image.data-v-27c103da {
         width: 100%;
         height: 100%;
 }
-.show-swiper.data-v-26b10221 {
+.show-swiper.data-v-27c103da {
   position: absolute;
   z-index: 3;
   width: 100%;
@@ -63,17 +63,17 @@
   -webkit-justify-content: center;
           justify-content: center;
 }
-.show-swiper .swiper-dot.data-v-26b10221 {
+.show-swiper .swiper-dot.data-v-27c103da {
     width: 70rpx;
     height: 14rpx;
     border-radius: 20rpx;
     background: #eee;
     border: 1rpx solid #eee;
 }
-.show-swiper .swiper-dot.swiper-dot.data-v-26b10221:not(:first-child) {
+.show-swiper .swiper-dot.swiper-dot.data-v-27c103da:not(:first-child) {
       margin-left: 8rpx;
 }
-.show-swiper .swiper-dot-active.data-v-26b10221 {
+.show-swiper .swiper-dot-active.data-v-27c103da {
     background: #000;
     color: #fff;
 }

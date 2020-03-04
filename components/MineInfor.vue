@@ -3,7 +3,10 @@
 		<view class="user-avatar">
 			<image :src='avatar'></image>
 		</view>
-		<view class="show-btn" @click="!userInfo.phone&&showLoginModel()">{{value}}</view>
+		<view :hidden='!getStorageData' class="show-btn" @click="!userInfo.phone&&showLoginModel()">{{value}}</view>
+		<button style="display: block;" :hidden='getStorageData' class="show-btn" open-type="getUserInfo" @getuserinfo="getUserInfo" >
+			{{value}}<image :src="gxgBtn"></image>
+		</button>
 		<view class="login-bg">
 			<image :src="loginbg"></image>
 		</view>
@@ -23,15 +26,48 @@
 				</view>
 			</view>
 		</view>
+		
 	</view>
 </template>
 
 <script>
 	import {
-		LOGIN_BG
+		LOGIN_BG,AVATAR
 	} from '@/config/image.js';
 	import {sendVerificationCode,bindPhone} from '@/api/mine.js';
 	import {toast} from '@/config/package.js';
+	import {
+		AUTH
+	} from '@/config/router.js';
+	import {
+		getStorage
+	} from '@/utils/storage.js';
+	import Login from '../pages/auth/auth';
+	import MineCreation from '@/components/MineCreation';
+	// 微信登录
+	import {
+		APP_ID
+	} from '@/config/common.js'
+	import {
+		request
+	} from '@/config/http.js'
+	import {
+		login
+	} from '@/utils/openLogin.js'
+	import {
+		setStorage
+	} from '@/utils/storage.js'
+	import {
+		LOGIN_WECHAT_LOGIN,
+		LOGIN_WECHAT_GET_USERINFO,
+		LOGIN_APP_REGISTER_LOGIN
+	} from '@/config/api.js'
+	import {
+		AUTH_GXG_LOGO,
+		AUTH_ENTER_IMG,
+		AUTH_BTN_IMG
+	} from '@/config/image.js'
+	const regeneratorRuntime = require('@/utils/regenerator-runtime/runtime.js')
 
 	export default {
 		props: {
@@ -44,17 +80,36 @@
 				default: () => {
 					return {};
 				}
+			},
+			session_key: {
+				type: String,
+				default: ''
+			},
+			getStorageData: {
+				type: Boolean,
+				default: false
 			}
 		},
+		components: {
+		      Login,
+			  // RegisteredPhone
+		    },
 		data() {
 			return {
 				loginbg: LOGIN_BG,
 				isShowModel: false,
 				codeValue: '获取验证码',
-				avatar: '',
+				avatar: AVATAR,
 				phoneNum: '',
-				value: '',
-				codeNum: ''
+				value: '注册会员',
+				codeNum: '',
+				logonVisible:true,
+				// 微信登录
+				gxgLogo: AUTH_GXG_LOGO,
+				gxgEnter: AUTH_ENTER_IMG,
+				gxgBtn: AUTH_BTN_IMG
+				
+				
 			};
 		},
 		watch: {
@@ -62,6 +117,7 @@
 				this.avatar = userInfo.avatarUrl;
 				this.phoneNum = userInfo.phone;
 				this.value = userInfo.phone ? userInfo.nickName : '注册会员';
+				this.logonVisible == false
 			}
 		},
 		methods: {
@@ -114,7 +170,70 @@
 					this.value = this.userInfo.nickName;
 					this.showLoginModel();
 				})
-			}
+			},
+			// 微信登录
+			getUserInfo: async function(e) {
+					if (!this.session_key) {
+						return wx.showToast({
+							title: '登录失败，重新授权试试',
+							icon: 'none'
+						})
+					}
+					const {
+						encryptedData,
+						iv
+					} = e.detail
+			
+					//获取用户的微信信息
+					const {
+						openId,
+						avatarUrl,
+						nickName
+					} = await request({
+						method: 'POST',
+						url: LOGIN_WECHAT_GET_USERINFO,
+						data: {
+							encryptedData,
+							iv,
+							"appId": APP_ID,
+							"session_key": this.session_key
+						},
+						needToken: false,
+						showLoadind: false,
+						hideLoading: false,
+						errorText: '登录失败'
+					});
+					//进行用户注册或登录，将返回的信息储存在本地缓存 
+					const {
+						header,
+						data
+					} = await request({
+						method: 'POST',
+						url: LOGIN_APP_REGISTER_LOGIN,
+						data: {
+							nickName,
+							appId: APP_ID,
+							openid: openId,
+							headImg: avatarUrl
+						},
+						needToken: false,
+						loadingText: '正在登录',
+						returnHeader: true,
+						errorText: '登录失败'
+					});
+					setStorage('sessionKey', this.session_key)
+					setStorage('tempToken', data.token)
+					setStorage('refreshToken', header.Authorization)
+					setStorage('userInfo', data.UserInfo)
+					setStorage('isLogin', true)
+					let pages = getCurrentPages();
+					let page = pages[pages.length - 1];
+					page.onLoad()
+					page.onShow()
+					// let pages = getCurrentPages();
+					// (pages.length === 0 || pages[pages.length - 1].route !== AUTH) && uni.reLaunch({ url: pages[pages.length - 1].route});
+				}
+			
 		}
 	}
 </script>
@@ -152,6 +271,7 @@
 			line-height: 70upx;
 			margin-left: 65upx;
 		}
+		
 
 		.login-bg {
 			height: 500upx;
@@ -345,3 +465,4 @@
 		margin-top: 6upx;
 	}
 </style>
+

@@ -7520,9 +7520,9 @@ module.exports = g;
 
 /***/ }),
 /* 4 */
-/*!**********************************************************!*\
-  !*** D:/laragon/www/wl_project/gxgMinProject/pages.json ***!
-  \**********************************************************/
+/*!*******************************************!*\
+  !*** E:/Desktop/gxgMinProject/pages.json ***!
+  \*******************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -8427,9 +8427,9 @@ module.exports = {"_from":"@dcloudio/uni-stat@^2.0.0-alpha-24420191128001","_id"
 
 /***/ }),
 /* 7 */
-/*!***************************************************************************!*\
-  !*** D:/laragon/www/wl_project/gxgMinProject/pages.json?{"type":"style"} ***!
-  \***************************************************************************/
+/*!************************************************************!*\
+  !*** E:/Desktop/gxgMinProject/pages.json?{"type":"style"} ***!
+  \************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -8438,9 +8438,9 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 /***/ }),
 /* 8 */
-/*!**************************************************************************!*\
-  !*** D:/laragon/www/wl_project/gxgMinProject/pages.json?{"type":"stat"} ***!
-  \**************************************************************************/
+/*!***********************************************************!*\
+  !*** E:/Desktop/gxgMinProject/pages.json?{"type":"stat"} ***!
+  \***********************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -9241,9 +9241,9 @@ if (hadRuntime) {
 
 /***/ }),
 /* 15 */
-/*!************************************************************************************!*\
-  !*** D:/laragon/www/wl_project/gxgMinProject/utils/regenerator-runtime/runtime.js ***!
-  \************************************************************************************/
+/*!*********************************************************************!*\
+  !*** E:/Desktop/gxgMinProject/utils/regenerator-runtime/runtime.js ***!
+  \*********************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -9971,9 +9971,9 @@ function () {
 
 /***/ }),
 /* 16 */
-/*!****************************************************************!*\
-  !*** D:/laragon/www/wl_project/gxgMinProject/utils/storage.js ***!
-  \****************************************************************/
+/*!*************************************************!*\
+  !*** E:/Desktop/gxgMinProject/utils/storage.js ***!
+  \*************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -10108,9 +10108,9 @@ module.exports = {
 
 /***/ }),
 /* 17 */
-/*!****************************************************************!*\
-  !*** D:/laragon/www/wl_project/gxgMinProject/config/router.js ***!
-  \****************************************************************/
+/*!*************************************************!*\
+  !*** E:/Desktop/gxgMinProject/config/router.js ***!
+  \*************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -10152,9 +10152,9 @@ module.exports = {
 
 /***/ }),
 /* 18 */
-/*!**************************************************************!*\
-  !*** D:/laragon/www/wl_project/gxgMinProject/config/http.js ***!
-  \**************************************************************/
+/*!***********************************************!*\
+  !*** E:/Desktop/gxgMinProject/config/http.js ***!
+  \***********************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -10230,9 +10230,6 @@ function request()
       var token = getStorage('tempToken');
       url = url + (url.indexOf('?') === -1 ? '?token=' : '&token=') + token;
     }
-    if (!getStorage('tempToken')) {
-
-    }
     requestTask = uni.request({
       method: method,
       url: url,
@@ -10240,41 +10237,36 @@ function request()
       dataType: dataType,
       responseType: responseType,
       header: header,
-      success: function () {var _success = _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee(res) {var statusCode, header, msg, _data, code, pages, _data2, _code, _msg, _msg2;return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:
+      success: function () {var _success = _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee(res) {var statusCode, header, msg, _data, code, _msg, _msg2;return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:
                   //判断是否隐藏请求的loading
                   hideLoading && loading.hideLoading();
 
                   statusCode =
 
 
-                  res.statusCode, header = res.header, msg = res.msg;if (!(
-                  statusCode === 401)) {_context.next = 10;break;}
+                  res.statusCode, header = res.header, msg = res.msg;
+                  // if (statusCode === 401) {
+                  // 	const {
+                  // 		data
+                  // 	} = res
+                  // 	const {
+                  // 		code
+                  // 	} = data
+                  // 	if(code === "1050"||code ==="1020"){
+                  // 		let pages = getCurrentPages();
+                  // 		(pages.length === 0 || pages[pages.length - 1].route !== AUTH) && uni.navigateTo({ url: AUTH});
+                  // 		return;
+                  // 	}
+
+                  // }
+                  if (!(statusCode === 200)) {_context.next = 8;break;}
 
                   _data =
                   res.data;
 
                   code =
-                  _data.code;if (!(
-                  code === "1020" || code === "1050")) {_context.next = 10;break;}
-                  pages = getCurrentPages();if (!(
-                  pages.length > 1 && pages[pages.length - 1].route === AUTH)) {_context.next = 9;break;}return _context.abrupt("return");case 9:
-
-
-                  (pages.length === 0 || pages[pages.length - 1].route !== AUTH) && uni.reLaunch({ url: AUTH });case 10:if (!(
-
-
-                  statusCode === 200)) {_context.next = 16;break;}
-
-                  _data2 =
-                  res.data;
-
-                  _code =
-                  _data2.code;
-                  // if(code === 1020||code === 1050) {
-                  // 	let pages = getCurrentPages();
-                  // 	(pages.length === 0 || pages[pages.length - 1].route !== AUTH) && uni.reLaunch({ url: AUTH });
-                  // }
-                  if (_code === 0) {
+                  _data.code;
+                  if (code === 0) {
                     //判断是否显示请求成功的Toast
                     if (showSucessToast) {
                       uni.showToast({
@@ -10284,13 +10276,13 @@ function request()
                     if (returnHeader) {
                       resolve({
                         header: header,
-                        data: _data2.data });
+                        data: _data.data });
 
                     } else {
-                      resolve(_data2.data);
+                      resolve(_data.data);
                     }
                   } else {
-                    _msg = "".concat(errorText, ": ").concat(statusCode, " - ").concat(_data2.message || _data2.msg);
+                    _msg = "".concat(errorText, ": ").concat(statusCode, " - ").concat(_data.message || _data.msg);
                     //判断是否显示请求成功的Modal
                     if (showErrorModal) {
                       uni.showModal({
@@ -10300,20 +10292,20 @@ function request()
                     }
                     if (returnErrorCode) {
                       reject({
-                        code: _code,
+                        code: code,
                         msg: _msg });
 
                     } else {
                       reject(_msg);
                     }
-                  }_context.next = 27;break;case 16:
+                  }_context.next = 19;break;case 8:
 
                   _msg2 = "".concat(errorText, ": ").concat(statusCode, "-").concat(res.errMsg);
                   // 判断是否显示请求失败的Modal
-                  if (!(statusCode === 401)) {_context.next = 26;break;}_context.next = 20;return (
-                    refreshToken());case 20:if (!(
-                  level > 5)) {_context.next = 23;break;}
-                  console.error("刷新token请求超过五次");return _context.abrupt("return");case 23:
+                  if (!(statusCode === 401)) {_context.next = 18;break;}_context.next = 12;return (
+                    refreshToken());case 12:if (!(
+                  level > 5)) {_context.next = 15;break;}
+                  console.error("刷新token请求超过五次");return _context.abrupt("return");case 15:
 
 
                   request({
@@ -10333,7 +10325,7 @@ function request()
                     errorText: errorText,
                     returnHeader: returnHeader,
                     returnErrorCode: returnErrorCode,
-                    level: level + 1 });_context.next = 27;break;case 26:
+                    level: level + 1 });_context.next = 19;break;case 18:
 
                   if (showErrorModal) {
                     uni.showModal({
@@ -10341,7 +10333,7 @@ function request()
                       showCancel: false });
 
                     reject(_msg2);
-                  }case 27:case "end":return _context.stop();}}}, _callee, this);}));function success(_x) {return _success.apply(this, arguments);}return success;}(),
+                  }case 19:case "end":return _context.stop();}}}, _callee, this);}));function success(_x) {return _success.apply(this, arguments);}return success;}(),
 
 
       fail: function fail(res) {
@@ -10395,9 +10387,9 @@ module.exports = {
 
 /***/ }),
 /* 19 */
-/*!*************************************************************!*\
-  !*** D:/laragon/www/wl_project/gxgMinProject/config/api.js ***!
-  \*************************************************************/
+/*!**********************************************!*\
+  !*** E:/Desktop/gxgMinProject/config/api.js ***!
+  \**********************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -10632,9 +10624,9 @@ function normalizeComponent (
 
 /***/ }),
 /* 23 */
-/*!**************************************************************!*\
-  !*** D:/laragon/www/wl_project/gxgMinProject/store/index.js ***!
-  \**************************************************************/
+/*!***********************************************!*\
+  !*** E:/Desktop/gxgMinProject/store/index.js ***!
+  \***********************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -11614,9 +11606,9 @@ var index_esm = {
 
 /***/ }),
 /* 25 */
-/*!****************************************************************!*\
-  !*** D:/laragon/www/wl_project/gxgMinProject/store/getters.js ***!
-  \****************************************************************/
+/*!*************************************************!*\
+  !*** E:/Desktop/gxgMinProject/store/getters.js ***!
+  \*************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -11631,9 +11623,9 @@ getters;exports.default = _default;
 
 /***/ }),
 /* 26 */
-/*!*********************************************************************!*\
-  !*** D:/laragon/www/wl_project/gxgMinProject/store/modules/user.js ***!
-  \*********************************************************************/
+/*!******************************************************!*\
+  !*** E:/Desktop/gxgMinProject/store/modules/user.js ***!
+  \******************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -11685,9 +11677,9 @@ user;exports.default = _default;
 
 /***/ }),
 /* 27 */
-/*!**********************************************************************!*\
-  !*** D:/laragon/www/wl_project/gxgMinProject/store/mutationTypes.js ***!
-  \**********************************************************************/
+/*!*******************************************************!*\
+  !*** E:/Desktop/gxgMinProject/store/mutationTypes.js ***!
+  \*******************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -11708,9 +11700,9 @@ types;exports.default = _default;
 
 /***/ }),
 /* 28 */
-/*!*************************************************************************!*\
-  !*** D:/laragon/www/wl_project/gxgMinProject/store/modules/category.js ***!
-  \*************************************************************************/
+/*!**********************************************************!*\
+  !*** E:/Desktop/gxgMinProject/store/modules/category.js ***!
+  \**********************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -11761,9 +11753,9 @@ var _api = __webpack_require__(/*! ../../config/api.js */ 19);function _interopR
 
 /***/ }),
 /* 29 */
-/*!**********************************************************************!*\
-  !*** D:/laragon/www/wl_project/gxgMinProject/store/modules/order.js ***!
-  \**********************************************************************/
+/*!*******************************************************!*\
+  !*** E:/Desktop/gxgMinProject/store/modules/order.js ***!
+  \*******************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -11837,9 +11829,9 @@ var _filter = __webpack_require__(/*! @/config/filter.js */ 31);var _mutations;f
 
 /***/ }),
 /* 30 */
-/*!******************************************************************!*\
-  !*** D:/laragon/www/wl_project/gxgMinProject/api/orderStatus.js ***!
-  \******************************************************************/
+/*!***************************************************!*\
+  !*** E:/Desktop/gxgMinProject/api/orderStatus.js ***!
+  \***************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -11926,9 +11918,9 @@ function orderDelivery(id) {
 
 /***/ }),
 /* 31 */
-/*!****************************************************************!*\
-  !*** D:/laragon/www/wl_project/gxgMinProject/config/filter.js ***!
-  \****************************************************************/
+/*!*************************************************!*\
+  !*** E:/Desktop/gxgMinProject/config/filter.js ***!
+  \*************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -12032,9 +12024,9 @@ function formatOrderButtonState(state) {
 
 /***/ }),
 /* 32 */
-/*!*************************************************************!*\
-  !*** D:/laragon/www/wl_project/gxgMinProject/utils/util.js ***!
-  \*************************************************************/
+/*!**********************************************!*\
+  !*** E:/Desktop/gxgMinProject/utils/util.js ***!
+  \**********************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -12223,9 +12215,9 @@ module.exports = {
 /* 37 */,
 /* 38 */,
 /* 39 */
-/*!***********************************************************!*\
-  !*** D:/laragon/www/wl_project/gxgMinProject/api/home.js ***!
-  \***********************************************************/
+/*!********************************************!*\
+  !*** E:/Desktop/gxgMinProject/api/home.js ***!
+  \********************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -12293,9 +12285,9 @@ function getList(data) {
 
 /***/ }),
 /* 40 */
-/*!*****************************************************************!*\
-  !*** D:/laragon/www/wl_project/gxgMinProject/config/package.js ***!
-  \*****************************************************************/
+/*!**************************************************!*\
+  !*** E:/Desktop/gxgMinProject/config/package.js ***!
+  \**************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -12622,9 +12614,9 @@ module.exports = {
 
 /***/ }),
 /* 41 */
-/*!****************************************************************!*\
-  !*** D:/laragon/www/wl_project/gxgMinProject/config/common.js ***!
-  \****************************************************************/
+/*!*************************************************!*\
+  !*** E:/Desktop/gxgMinProject/config/common.js ***!
+  \*************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -12652,14 +12644,14 @@ module.exports = {
 /* 48 */,
 /* 49 */,
 /* 50 */
-/*!********************************************************************!*\
-  !*** D:/laragon/www/wl_project/gxgMinProject/pages/auth/wxAuth.js ***!
-  \********************************************************************/
+/*!*****************************************************!*\
+  !*** E:/Desktop/gxgMinProject/pages/auth/wxAuth.js ***!
+  \*****************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _regenerator = _interopRequireDefault(__webpack_require__(/*! ./node_modules/@babel/runtime/regenerator */ 12));var _common = __webpack_require__(/*! @/config/common.js */ 41);
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _regenerator = _interopRequireDefault(__webpack_require__(/*! ./node_modules/@babel/runtime/regenerator */ 12));var _common = __webpack_require__(/*! @/config/common.js */ 41);
 
 
 var _http = __webpack_require__(/*! @/config/http.js */ 18);
@@ -12676,9 +12668,12 @@ var _api = __webpack_require__(/*! @/config/api.js */ 19);
 
 
 
-var _image = __webpack_require__(/*! @/config/image.js */ 52);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};}
+var _image = __webpack_require__(/*! @/config/image.js */ 52);
 
 
+
+
+var _router = __webpack_require__(/*! @/config/router.js */ 17);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};}
 
 
 var regeneratorRuntime = __webpack_require__(/*! @/utils/regenerator-runtime/runtime.js */ 15);
@@ -12692,8 +12687,25 @@ var wxAuth = {
 
   },
   methods: {
-    getUserInfo: function () {var _getUserInfo = _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee(e) {var _e$detail, encryptedData, iv, _ref, openId, avatarUrl, nickName, _ref2, header, data;return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:if (
-                this.session_key) {_context.next = 2;break;}return _context.abrupt("return",
+    init: function () {var _init = _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee() {var code, _ref, session_key;return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:_context.next = 2;return (
+
+                  (0, _openLogin.login)());case 2:code = _context.sent;_context.next = 5;return (
+
+
+                  (0, _http.request)({
+                    method: 'POST',
+                    url: "".concat(_api.LOGIN_WECHAT_LOGIN, "?appId=").concat(_common.APP_ID, "&code=").concat(code),
+                    needToken: false,
+                    showLoading: false,
+                    showErrorModal: false }).
+                  catch(function () {
+                    console.log('调用wx.login失败');
+                  }));case 5:_ref = _context.sent;session_key = _ref.session_key;
+                this.session_key = session_key;
+                this.getUserInfo();case 9:case "end":return _context.stop();}}}, _callee, this);}));function init() {return _init.apply(this, arguments);}return init;}(),
+
+    getUserInfo: function () {var _getUserInfo = _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee2(e) {var _e$detail, encryptedData, iv, _ref2, openId, avatarUrl, nickName, _ref3, header, data, pages, page;return _regenerator.default.wrap(function _callee2$(_context2) {while (1) {switch (_context2.prev = _context2.next) {case 0:if (
+                this.session_key) {_context2.next = 2;break;}return _context2.abrupt("return",
                 wx.showToast({
                   title: '登录失败，重新授权试试',
                   icon: 'none' }));case 2:_e$detail =
@@ -12705,7 +12717,7 @@ var wxAuth = {
                 e.detail, encryptedData = _e$detail.encryptedData, iv = _e$detail.iv;
 
                 //获取用户的微信信息
-                _context.next = 5;return (
+                _context2.next = 5;return (
 
 
 
@@ -12721,7 +12733,7 @@ var wxAuth = {
                     needToken: false,
                     showLoadind: false,
                     hideLoading: false,
-                    errorText: '登录失败' }));case 5:_ref = _context.sent;openId = _ref.openId;avatarUrl = _ref.avatarUrl;nickName = _ref.nickName;_context.next = 11;return (
+                    errorText: '登录失败' }));case 5:_ref2 = _context2.sent;openId = _ref2.openId;avatarUrl = _ref2.avatarUrl;nickName = _ref2.nickName;_context2.next = 11;return (
 
 
 
@@ -12739,28 +12751,24 @@ var wxAuth = {
                     needToken: false,
                     loadingText: '正在登录',
                     returnHeader: true,
-                    errorText: '登录失败' }));case 11:_ref2 = _context.sent;header = _ref2.header;data = _ref2.data;
+                    errorText: '登录失败' }));case 11:_ref3 = _context2.sent;header = _ref3.header;data = _ref3.data;
 
                 (0, _storage.setStorage)('sessionKey', this.session_key);
                 (0, _storage.setStorage)('tempToken', data.token);
                 (0, _storage.setStorage)('refreshToken', header.Authorization);
                 (0, _storage.setStorage)('userInfo', data.UserInfo);
                 (0, _storage.setStorage)('isLogin', true);
-                uni.navigateBack({
-                  delta: 1 });
-
+                pages = getCurrentPages();
+                page = pages[pages.length - 1];
+                page.onShow();
                 // let pages = getCurrentPages();
-                // (pages.length > 1 || pages[pages.length - 1].route === AUTH) && await uni.navigateBack({
-                // 	delta: 1
-                // });
-                // await uni.switchTab({
-                // 	url: getApp().globalData.fm,
-                // });
-              case 20:case "end":return _context.stop();}}}, _callee, this);}));function getUserInfo(_x) {return _getUserInfo.apply(this, arguments);}return getUserInfo;}() },
+                // (pages.length === 0 || pages[pages.length - 1].route !== AUTH) && uni.reLaunch({ url: pages[pages.length - 1].route});
+              case 22:case "end":return _context2.stop();}}}, _callee2, this);}));function getUserInfo(_x) {return _getUserInfo.apply(this, arguments);}return getUserInfo;}() },
 
-  onLoad: function () {var _onLoad = _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee2(options) {var code, _ref3, session_key;return _regenerator.default.wrap(function _callee2$(_context2) {while (1) {switch (_context2.prev = _context2.next) {case 0:_context2.next = 2;return (
+  // 组件生命周期
+  created: function () {var _created = _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee3(options) {var code, _ref4, session_key;return _regenerator.default.wrap(function _callee3$(_context3) {while (1) {switch (_context3.prev = _context3.next) {case 0:_context3.next = 2;return (
 
-                (0, _openLogin.login)());case 2:code = _context2.sent;_context2.next = 5;return (
+                (0, _openLogin.login)());case 2:code = _context3.sent;_context3.next = 5;return (
 
 
                 (0, _http.request)({
@@ -12771,25 +12779,40 @@ var wxAuth = {
                   showErrorModal: false }).
                 catch(function () {
                   console.log('调用wx.login失败');
-                }));case 5:_ref3 = _context2.sent;session_key = _ref3.session_key;
-              this.session_key = session_key;case 8:case "end":return _context2.stop();}}}, _callee2, this);}));function onLoad(_x2) {return _onLoad.apply(this, arguments);}return onLoad;}(),
+                }));case 5:_ref4 = _context3.sent;session_key = _ref4.session_key;
+              this.session_key = session_key;case 8:case "end":return _context3.stop();}}}, _callee3, this);}));function created(_x2) {return _created.apply(this, arguments);}return created;}(),
 
+  // onLoad: async function(options) {
+  // 	//请求微信接口wx.login,获取code
+  // 	const code = await login();
+  // 	const {
+  // 		session_key
+  // 	} = await request({
+  // 		method: 'POST',
+  // 		url: `${LOGIN_WECHAT_LOGIN}?appId=${APP_ID}&code=${code}`,
+  // 		needToken: false,
+  // 		showLoading: false,
+  // 		showErrorModal: false
+  // 	}).catch(() => {
+  // 		console.log('调用wx.login失败')
+  // 	})
+  // 	this.session_key = session_key;
+  // },
   /**
-                                                                                                                                                                                                 * 用户点击右上角分享
-                                                                                                                                                                                                 */
+   * 用户点击右上角分享
+   */
   onShareAppMessage: function onShareAppMessage() {
 
   } };var _default =
 
 
 wxAuth;exports.default = _default;
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
 /* 51 */
-/*!******************************************************************!*\
-  !*** D:/laragon/www/wl_project/gxgMinProject/utils/openLogin.js ***!
-  \******************************************************************/
+/*!***************************************************!*\
+  !*** E:/Desktop/gxgMinProject/utils/openLogin.js ***!
+  \***************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -12818,9 +12841,9 @@ module.exports = {
 
 /***/ }),
 /* 52 */
-/*!***************************************************************!*\
-  !*** D:/laragon/www/wl_project/gxgMinProject/config/image.js ***!
-  \***************************************************************/
+/*!************************************************!*\
+  !*** E:/Desktop/gxgMinProject/config/image.js ***!
+  \************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -12831,8 +12854,6 @@ module.exports = {
 //const baseUrl = '/static/img';
 var baseUrl = 'http://gxgbasic.gxggroup.cn';
 var authUrl = 'https://gxgbasic.gxggroup.cn/images';
-// const baseUrl = 'https://192.168.3.25:8081'
-// const authUrl = 'https://192.168.3.25:8081/images'
 var staticUrl = '/static/img';
 module.exports = {
   /**
@@ -12848,7 +12869,8 @@ module.exports = {
   TODO_SHANCHU: "".concat(staticUrl, "/todo/shanchu.png"),
   /*我的*/
   LOGIN_BG: "".concat(baseUrl, "/loginbg.png"), //注册背景图
-  NULL_DATA: "".concat(baseUrl, "/nullData.png") //空数据
+  NULL_DATA: "".concat(baseUrl, "/nullData.png"), //空数据
+  AVATAR: "".concat(authUrl, "/gxgicon.jpg") //头像
 };
 
 /***/ }),
@@ -12861,9 +12883,9 @@ module.exports = {
 /* 59 */,
 /* 60 */,
 /* 61 */
-/*!******************************************************************************!*\
-  !*** D:/laragon/www/wl_project/gxgMinProject/pages/todoDetail/todoDetail.js ***!
-  \******************************************************************************/
+/*!***************************************************************!*\
+  !*** E:/Desktop/gxgMinProject/pages/todoDetail/todoDetail.js ***!
+  \***************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -12903,14 +12925,36 @@ var _todoDetail = __webpack_require__(/*! @/api/todoDetail.js */ 62);
 var _vuex = __webpack_require__(/*! vuex */ 24);
 
 
-var _mutationTypes = _interopRequireDefault(__webpack_require__(/*! @/store/mutationTypes.js */ 27));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};var ownKeys = Object.keys(source);if (typeof Object.getOwnPropertySymbols === 'function') {ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) {return Object.getOwnPropertyDescriptor(source, sym).enumerable;}));}ownKeys.forEach(function (key) {_defineProperty(target, key, source[key]);});}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};}
+var _mutationTypes = _interopRequireDefault(__webpack_require__(/*! @/store/mutationTypes.js */ 27));
 
 
 
 
-var app = getApp();
-var moveViewWidth = app.globalData.moveViewWidth;
-var moveViewHeight = app.globalData.moveViewHeight;
+
+
+
+
+var _common = __webpack_require__(/*! @/config/common.js */ 41);
+
+
+var _openLogin = __webpack_require__(/*! @/utils/openLogin.js */ 51);
+
+
+var _api = __webpack_require__(/*! @/config/api.js */ 19);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};var ownKeys = Object.keys(source);if (typeof Object.getOwnPropertySymbols === 'function') {ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) {return Object.getOwnPropertyDescriptor(source, sym).enumerable;}));}ownKeys.forEach(function (key) {_defineProperty(target, key, source[key]);});}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};}var app = getApp();var moveViewWidth = app.globalData.moveViewWidth;var moveViewHeight = app.globalData.moveViewHeight; // 微信登录
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // 初始化设计结果
 var resultList = [{
@@ -13078,37 +13122,68 @@ var detail = {
       moveViewTop: 110, //画布下移
       options: {}, //链接携带参数
       inPreviewDesign: false, // 在预览设计事件中
-      scalingRatio: 1 //印花进行缩放时印花宽高的比例，确保缩放后不会变形
-    };
+      scalingRatio: 1, //印花进行缩放时印花宽高的比例，确保缩放后不会变形
+      // 微信登录
+      session_key: '',
+      getStorageData: false,
+      gxgLogo: _image.AUTH_GXG_LOGO,
+      gxgEnter: _image.AUTH_ENTER_IMG,
+      gxgBtn: _image.AUTH_BTN_IMG };
+
   },
-  onLoad: function onLoad(options) {
-    this.options = options;
-    var phoneHeight = (0, _storage.getStorage)('sysInfo').windowHeight - 624;
-    if ((0, _storage.getStorage)('sysInfo').windowWidth <= 700) {
-      if (phoneHeight < 0) {
-        if ((0, _storage.getStorage)('sysInfo').model == "iPhone 5") {
-          this.clotheMariginTop = -26;
-        } else {
-          this.clotheMariginTop = phoneHeight / 2;
-        }
-      } else {
-        this.moveViewTop = 150;
-      }
-    } else if ((0, _storage.getStorage)('sysInfo').windowWidth > 700 && (0, _storage.getStorage)('sysInfo').windowWidth <= 800) {
-      this.clotheMariginTop = -260;
-      this.moveViewTop = 100;
-    } else {
-      this.clotheMariginTop = -260;
-      this.moveViewTop = 90;
-    }
-  },
-  onShow: function () {var _onShow = _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee() {return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:
+  onLoad: function () {var _onLoad = _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee(options) {var phoneHeight, code, _ref, session_key;return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:
+              this.options = options;
+              phoneHeight = (0, _storage.getStorage)('sysInfo').windowHeight - 624;
+              if ((0, _storage.getStorage)('sysInfo').windowWidth <= 700) {
+                if (phoneHeight < 0) {
+                  if ((0, _storage.getStorage)('sysInfo').model == "iPhone 5") {
+                    this.clotheMariginTop = -26;
+                  } else {
+                    this.clotheMariginTop = phoneHeight / 2;
+                  }
+                } else {
+                  this.moveViewTop = 150;
+                }
+              } else if ((0, _storage.getStorage)('sysInfo').windowWidth > 700 && (0, _storage.getStorage)('sysInfo').windowWidth <= 800) {
+                this.clotheMariginTop = -260;
+                this.moveViewTop = 100;
+              } else {
+                this.clotheMariginTop = -260;
+                this.moveViewTop = 90;
+              }
+              // 微信登录
+              if ((0, _storage.getStorage)('tempToken')) {_context.next = 12;break;}_context.next = 6;return (
+
+                (0, _openLogin.login)());case 6:code = _context.sent;_context.next = 9;return (
+
+
+                (0, _http.request)({
+                  method: 'POST',
+                  url: "".concat(_api.LOGIN_WECHAT_LOGIN, "?appId=").concat(_common.APP_ID, "&code=").concat(code),
+                  needToken: false,
+                  showLoading: false,
+                  showErrorModal: false }).
+                catch(function () {
+                  console.log('调用wx.login失败');
+                }));case 9:_ref = _context.sent;session_key = _ref.session_key;
+              this.session_key = session_key;case 12:case "end":return _context.stop();}}}, _callee, this);}));function onLoad(_x) {return _onLoad.apply(this, arguments);}return onLoad;}(),
+
+
+  onShow: function () {var _onShow = _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee2() {return _regenerator.default.wrap(function _callee2$(_context2) {while (1) {switch (_context2.prev = _context2.next) {case 0:
               // if (getApp().globalData.backToDoOption.hasOwnProperty('id') && getApp().globalData.backToDoOption.id) {
               // 	this.options = getApp().globalData.backToDoOption
               // }
+              // 微信登录
+              if (!(0, _storage.getStorage)('tempToken')) {
+                this.getStorageData = false;
+              } else {
+                this.getStorageData = true;
+
+              }
               this.judgeLocation(this.options.localIndex);
               this.loadData();
-              this.initLoad();case 3:case "end":return _context.stop();}}}, _callee, this);}));function onShow() {return _onShow.apply(this, arguments);}return onShow;}(),
+              this.initLoad();case 4:case "end":return _context2.stop();}}}, _callee2, this);}));function onShow() {return _onShow.apply(this, arguments);}return onShow;}(),
+
 
   onHide: function onHide() {
     // 清除来源类型
@@ -13172,22 +13247,22 @@ var detail = {
     /**
         * 初始化加载
         */
-    initLoad: function () {var _initLoad = _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee2() {var type;return _regenerator.default.wrap(function _callee2$(_context2) {while (1) {switch (_context2.prev = _context2.next) {case 0:
+    initLoad: function () {var _initLoad = _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee3() {var type;return _regenerator.default.wrap(function _callee3$(_context3) {while (1) {switch (_context3.prev = _context3.next) {case 0:
                 type = this.options.type;if (!(
-                type == 0 || type == 2)) {_context2.next = 5;break;}_context2.next = 4;return (
+                type == 0 || type == 2)) {_context3.next = 5;break;}_context3.next = 4;return (
                   (0, _todoDetail.loadElement)({
                     id: type == 0 ? getApp().globalData.choosedProduceId : this.options.id,
                     type: this.options.type },
-                  this.moveViewWidth, this.moveViewHeight));case 4:this.resultList = _context2.sent;case 5:
+                  this.moveViewWidth, this.moveViewHeight));case 4:this.resultList = _context3.sent;case 5:
 
-                this.choosedDesign = this.resultList[this.pnIndex].choosedDesign;_context2.next = 8;return (
-                  this.loadFontType());case 8:case "end":return _context2.stop();}}}, _callee2, this);}));function initLoad() {return _initLoad.apply(this, arguments);}return initLoad;}(),
+                this.choosedDesign = this.resultList[this.pnIndex].choosedDesign;_context3.next = 8;return (
+                  this.loadFontType());case 8:case "end":return _context3.stop();}}}, _callee3, this);}));function initLoad() {return _initLoad.apply(this, arguments);}return initLoad;}(),
 
 
     /**
                                                                                                                                                                                               * 加载时的数据若有特殊字体则显示特殊字体
                                                                                                                                                                                               * */
-    loadFontType: function () {var _loadFontType = _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee3() {var tempFont;return _regenerator.default.wrap(function _callee3$(_context3) {while (1) {switch (_context3.prev = _context3.next) {case 0:
+    loadFontType: function () {var _loadFontType = _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee4() {var tempFont;return _regenerator.default.wrap(function _callee4$(_context4) {while (1) {switch (_context4.prev = _context4.next) {case 0:
                 tempFont = this.choosedDesign.font;
                 tempFont.length && tempFont.map(function (item) {
                   if (item.familyUrl) {
@@ -13210,26 +13285,26 @@ var detail = {
                       } });
 
                   }
-                });case 2:case "end":return _context3.stop();}}}, _callee3, this);}));function loadFontType() {return _loadFontType.apply(this, arguments);}return loadFontType;}(),
+                });case 2:case "end":return _context4.stop();}}}, _callee4, this);}));function loadFontType() {return _loadFontType.apply(this, arguments);}return loadFontType;}(),
 
 
     /**
                                                                                                                                                                                       * 加载数据，可作为刷新方法
                                                                                                                                                                                       */
-    loadData: function () {var _loadData = _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee4() {return _regenerator.default.wrap(function _callee4$(_context4) {while (1) {switch (_context4.prev = _context4.next) {case 0:
+    loadData: function () {var _loadData = _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee5() {return _regenerator.default.wrap(function _callee5$(_context5) {while (1) {switch (_context5.prev = _context5.next) {case 0:
                 this.getProductImgs();
-                this.getFont();_context4.next = 4;return (
-                  (0, _todoDetail.getSeries)());case 4:this.typeList = _context4.sent;_context4.next = 7;return (
-                  (0, _todoDetail.getPattern)(this.typeList[this.typeIndex].id));case 7:this.elementList = _context4.sent;case 8:case "end":return _context4.stop();}}}, _callee4, this);}));function loadData() {return _loadData.apply(this, arguments);}return loadData;}(),
+                this.getFont();_context5.next = 4;return (
+                  (0, _todoDetail.getSeries)());case 4:this.typeList = _context5.sent;_context5.next = 7;return (
+                  (0, _todoDetail.getPattern)(this.typeList[this.typeIndex].id));case 7:this.elementList = _context5.sent;case 8:case "end":return _context5.stop();}}}, _callee5, this);}));function loadData() {return _loadData.apply(this, arguments);}return loadData;}(),
 
 
     /**
                                                                                                                                                                                                                                                                                  * 获取商品图片
                                                                                                                                                                                                                                                                                  */
     getProductImgs: function getProductImgs() {var _this = this;
-      (0, _todoDetail.getProductImgs)(this.options).then( /*#__PURE__*/function () {var _ref = _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee5(res) {return _regenerator.default.wrap(function _callee5$(_context5) {while (1) {switch (_context5.prev = _context5.next) {case 0:if (!(
+      (0, _todoDetail.getProductImgs)(this.options).then( /*#__PURE__*/function () {var _ref2 = _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee6(res) {return _regenerator.default.wrap(function _callee6$(_context6) {while (1) {switch (_context6.prev = _context6.next) {case 0:if (!(
 
-                  !res && _this.clotheList.find(function (item) {return !item.clotheImg;}))) {_context5.next = 4;break;}_context5.next = 3;return (
+                  !res && _this.clotheList.find(function (item) {return !item.clotheImg;}))) {_context6.next = 4;break;}_context6.next = 3;return (
                     (0, _package.model)({
                       content: "数据未缓存，请返回上一页重新操作" }));case 3:
 
@@ -13242,7 +13317,7 @@ var detail = {
                     clotheImg: res.zimg },
                   {
                     localtion: 'negative',
-                    clotheImg: res.fimg }];case 5:case "end":return _context5.stop();}}}, _callee5, this);}));return function (_x) {return _ref.apply(this, arguments);};}());
+                    clotheImg: res.fimg }];case 5:case "end":return _context6.stop();}}}, _callee6, this);}));return function (_x2) {return _ref2.apply(this, arguments);};}());
 
 
     },
@@ -13324,36 +13399,46 @@ var detail = {
     changeType: function changeType(e) {
       this.clotheIndex = e.detail.current;
     },
-    changeNav: function changeNav(e) {
-      this.navIndex = e.currentTarget.dataset.index;
-      if (this.navIndex == 1) {
-        this.todoIndex = -1;
-      } else if (this.navIndex == 0) {
-        this.fontIndex = -1;
-      } else if (this.navIndex == 2) {
-        this.preview();
-      }
+    changeNavPhoto: function changeNavPhoto() {
+      this.navIndex = 0;
     },
+    changeNavText: function changeNavText() {
+      this.navIndex = 1;
+    },
+    changeNavDesign: function changeNavDesign() {
+      this.navIndex = 2;
+      this.preview();
+    },
+    // changeNav: function(e) {
+    // 	this.navIndex = e.currentTarget.dataset.index
+    // 	if (this.navIndex == 1) {
+    // 		this.todoIndex = -1;
+    // 	} else if (this.navIndex == 0) {
+    // 		this.fontIndex = -1;
+    // 	} else if (this.navIndex == 2) {
+    // 		this.preview();
+    // 	}
+    // },
 
     /**
-        * 预览设计
-        */
-    preview: function () {var _preview = _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee6() {var _this2 = this;return _regenerator.default.wrap(function _callee6$(_context6) {while (1) {switch (_context6.prev = _context6.next) {case 0:if (!
-                this.inPreviewDesign) {_context6.next = 2;break;}return _context6.abrupt("return");case 2:
+     * 预览设计
+     */
+    preview: function () {var _preview = _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee7() {var _this2 = this;return _regenerator.default.wrap(function _callee7$(_context7) {while (1) {switch (_context7.prev = _context7.next) {case 0:if (!
+                this.inPreviewDesign) {_context7.next = 2;break;}return _context7.abrupt("return");case 2:
                 this.inPreviewDesign = true;
                 this.resultList[this.pnIndex].choosedDesign = this.choosedDesign;
                 this.resultList.find(function (item) {return item.localtion == 'positive';}) == this.clotheList.find(function (item) {return item.localtion ==
                   'positive';});
                 this.resultList.find(function (item) {return item.localtion == 'negative';}) == this.clotheList.find(function (item) {return item.localtion ==
                   'negative';});if (!(
-                !this.options.id || !this.options.type)) {_context6.next = 11;break;}_context6.next = 9;return (
+                !this.options.id || !this.options.type)) {_context7.next = 11;break;}_context7.next = 9;return (
                   (0, _package.toast)({
                     title: '该设计没有ID,请返回首页',
                     mask: true,
                     icon: 'none',
                     duration: 1000 }));case 9:
 
-                this.inPreviewDesign = false;return _context6.abrupt("return");case 11:
+                this.inPreviewDesign = false;return _context7.abrupt("return");case 11:
 
 
                 (0, _todoDetail.saveDesign)(_objectSpread({},
@@ -13377,15 +13462,15 @@ var detail = {
 
                 }).catch(function (res) {
                   _this2.inPreviewDesign = false;
-                });case 12:case "end":return _context6.stop();}}}, _callee6, this);}));function preview() {return _preview.apply(this, arguments);}return preview;}(),
+                });case 12:case "end":return _context7.stop();}}}, _callee7, this);}));function preview() {return _preview.apply(this, arguments);}return preview;}(),
 
 
     /**
                                                                                                                                                                         * 切换系列
                                                                                                                                                                         */
-    changeNavType: function () {var _changeNavType = _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee7(e) {return _regenerator.default.wrap(function _callee7$(_context7) {while (1) {switch (_context7.prev = _context7.next) {case 0:
-                this.typeIndex = e.currentTarget.dataset.index;_context7.next = 3;return (
-                  (0, _todoDetail.getPattern)(this.typeList[this.typeIndex].id, true));case 3:this.elementList = _context7.sent;case 4:case "end":return _context7.stop();}}}, _callee7, this);}));function changeNavType(_x2) {return _changeNavType.apply(this, arguments);}return changeNavType;}(),
+    changeNavType: function () {var _changeNavType = _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee8(e) {return _regenerator.default.wrap(function _callee8$(_context8) {while (1) {switch (_context8.prev = _context8.next) {case 0:
+                this.typeIndex = e.currentTarget.dataset.index;_context8.next = 3;return (
+                  (0, _todoDetail.getPattern)(this.typeList[this.typeIndex].id, true));case 3:this.elementList = _context8.sent;case 4:case "end":return _context8.stop();}}}, _callee8, this);}));function changeNavType(_x3) {return _changeNavType.apply(this, arguments);}return changeNavType;}(),
 
 
     /**
@@ -13615,6 +13700,8 @@ var detail = {
           this.isOverflow();
         }
       }
+
+
       // if (Math.abs(tx) > Math.abs(ty)) {
       // 	//左右方向滑动
       // 	if (tx < 0) {
@@ -13750,6 +13837,71 @@ var detail = {
       this.lastX = currentX;
       this.lastY = currentY;
     },
+    getUserInfo: function () {var _getUserInfo = _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee9(e) {var _e$detail, encryptedData, iv, _ref3, openId, avatarUrl, nickName, _ref4, header, data, pages, page;return _regenerator.default.wrap(function _callee9$(_context9) {while (1) {switch (_context9.prev = _context9.next) {case 0:if (
+                this.session_key) {_context9.next = 2;break;}return _context9.abrupt("return",
+                wx.showToast({
+                  title: '登录失败，重新授权试试',
+                  icon: 'none' }));case 2:_e$detail =
+
+
+
+
+
+                e.detail, encryptedData = _e$detail.encryptedData, iv = _e$detail.iv;
+
+                //获取用户的微信信息
+                _context9.next = 5;return (
+
+
+
+                  (0, _http.request)({
+                    method: 'POST',
+                    url: _api.LOGIN_WECHAT_GET_USERINFO,
+                    data: {
+                      encryptedData: encryptedData,
+                      iv: iv,
+                      "appId": _common.APP_ID,
+                      "session_key": this.session_key },
+
+                    needToken: false,
+                    showLoadind: false,
+                    hideLoading: false,
+                    errorText: '登录失败' }));case 5:_ref3 = _context9.sent;openId = _ref3.openId;avatarUrl = _ref3.avatarUrl;nickName = _ref3.nickName;_context9.next = 11;return (
+
+
+
+
+
+                  (0, _http.request)({
+                    method: 'POST',
+                    url: _api.LOGIN_APP_REGISTER_LOGIN,
+                    data: {
+                      nickName: nickName,
+                      appId: _common.APP_ID,
+                      openid: openId,
+                      headImg: avatarUrl },
+
+                    needToken: false,
+                    loadingText: '正在登录',
+                    returnHeader: true,
+                    errorText: '登录失败' }));case 11:_ref4 = _context9.sent;header = _ref4.header;data = _ref4.data;
+
+                (0, _storage.setStorage)('sessionKey', this.session_key);
+                (0, _storage.setStorage)('tempToken', data.token);
+                (0, _storage.setStorage)('refreshToken', header.Authorization);
+                (0, _storage.setStorage)('userInfo', data.UserInfo);
+                (0, _storage.setStorage)('isLogin', true);
+                pages = getCurrentPages();
+                page = pages[pages.length - 1];
+                page.onLoad(this.options);
+                page.onShow();
+                // let pages = getCurrentPages();
+                // (pages.length === 0 || pages[pages.length - 1].route !== AUTH) && uni.reLaunch({ url: pages[pages.length - 1].route});
+              case 23:case "end":return _context9.stop();}}}, _callee9, this);}));function getUserInfo(_x4) {return _getUserInfo.apply(this, arguments);}return getUserInfo;}(),
+
+
+
+
     touchEnd: function touchEnd(e) {
       e.stopPropagation();
       this.isTouch = true;
@@ -13950,9 +14102,9 @@ detail;exports.default = _default;
 
 /***/ }),
 /* 62 */
-/*!*****************************************************************!*\
-  !*** D:/laragon/www/wl_project/gxgMinProject/api/todoDetail.js ***!
-  \*****************************************************************/
+/*!**************************************************!*\
+  !*** E:/Desktop/gxgMinProject/api/todoDetail.js ***!
+  \**************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -14312,9 +14464,9 @@ function saveDesign(data) {
 /* 69 */,
 /* 70 */,
 /* 71 */
-/*!*****************************************************************!*\
-  !*** D:/laragon/www/wl_project/gxgMinProject/api/writeOrder.js ***!
-  \*****************************************************************/
+/*!**************************************************!*\
+  !*** E:/Desktop/gxgMinProject/api/writeOrder.js ***!
+  \**************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -14407,9 +14559,9 @@ function unifiedOrder(data) {
 /* 78 */,
 /* 79 */,
 /* 80 */
-/*!**************************************************************!*\
-  !*** D:/laragon/www/wl_project/gxgMinProject/api/preview.js ***!
-  \**************************************************************/
+/*!***********************************************!*\
+  !*** E:/Desktop/gxgMinProject/api/preview.js ***!
+  \***********************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -14439,9 +14591,9 @@ function createOrder(data) {
 /* 87 */,
 /* 88 */,
 /* 89 */
-/*!***********************************************************!*\
-  !*** D:/laragon/www/wl_project/gxgMinProject/api/todo.js ***!
-  \***********************************************************/
+/*!********************************************!*\
+  !*** E:/Desktop/gxgMinProject/api/todo.js ***!
+  \********************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -14486,9 +14638,9 @@ function getColtheInfo(id) {
 /* 96 */,
 /* 97 */,
 /* 98 */
-/*!********************************************************************!*\
-  !*** D:/laragon/www/wl_project/gxgMinProject/api/addressDetail.js ***!
-  \********************************************************************/
+/*!*****************************************************!*\
+  !*** E:/Desktop/gxgMinProject/api/addressDetail.js ***!
+  \*****************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -14547,9 +14699,9 @@ function updateReceiveAddress(data) {
 /* 105 */,
 /* 106 */,
 /* 107 */
-/*!******************************************************************!*\
-  !*** D:/laragon/www/wl_project/gxgMinProject/api/refundOrder.js ***!
-  \******************************************************************/
+/*!***************************************************!*\
+  !*** E:/Desktop/gxgMinProject/api/refundOrder.js ***!
+  \***************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -14579,9 +14731,9 @@ function getAlterSale(data) {
 /* 114 */,
 /* 115 */,
 /* 116 */
-/*!****************************************************************!*\
-  !*** D:/laragon/www/wl_project/gxgMinProject/api/orderList.js ***!
-  \****************************************************************/
+/*!*************************************************!*\
+  !*** E:/Desktop/gxgMinProject/api/orderList.js ***!
+  \*************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -14666,9 +14818,9 @@ function getOrderList(data, showLoading) {
 /* 123 */,
 /* 124 */,
 /* 125 */
-/*!***********************************************************!*\
-  !*** D:/laragon/www/wl_project/gxgMinProject/api/mine.js ***!
-  \***********************************************************/
+/*!********************************************!*\
+  !*** E:/Desktop/gxgMinProject/api/mine.js ***!
+  \********************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -14753,9 +14905,9 @@ function bindPhone(data) {
 /* 132 */,
 /* 133 */,
 /* 134 */
-/*!*******************************************************************!*\
-  !*** D:/laragon/www/wl_project/gxgMinProject/api/addressIndex.js ***!
-  \*******************************************************************/
+/*!****************************************************!*\
+  !*** E:/Desktop/gxgMinProject/api/addressIndex.js ***!
+  \****************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -14811,9 +14963,9 @@ function updateOrderAddress(data) {
 /* 149 */,
 /* 150 */,
 /* 151 */
-/*!*****************************************************************!*\
-  !*** D:/laragon/www/wl_project/gxgMinProject/api/selectType.js ***!
-  \*****************************************************************/
+/*!**************************************************!*\
+  !*** E:/Desktop/gxgMinProject/api/selectType.js ***!
+  \**************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 

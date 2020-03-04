@@ -76,8 +76,20 @@
 				</movable-area>
 			</view>
 			<view class='nav-list'>
-				<view @click='changeNav' :class='["nav-clonum", navIndex === index ? "swiper-dot-active" : ""]' v-for="(item,index) in navList"
-				 :key="index" :data-index='index'>{{item.name}}</view>
+			<view @click='changeNavPhoto' :class='["nav-clonum", navIndex === 0 ? "swiper-dot-active" : ""]'>
+				添加图案
+			</view>
+			<view @click='changeNavText' :class='["nav-clonum", navIndex === 1 ? "swiper-dot-active" : ""]'>
+				添加字体
+			</view>
+			<view @click='changeNavDesign' v-if='getStorageData' :class='["nav-clonum", navIndex === 2 ? "swiper-dot-active" : ""]'>
+				预览设计
+			</view>
+			<button  v-if='!getStorageData' style="padding: 0;margin: 0;" :class='["nav-clonum", navIndex === 2 ? "swiper-dot-active" : ""]' open-type="getUserInfo" @getuserinfo="getUserInfo" >
+				预览设计
+			</button>
+				<!-- <view @click='changeNav' :class='["nav-clonum", navIndex === index ? "swiper-dot-active" : ""]' v-for="(item,index) in navList"
+				 :key="index" :data-index='index'>{{item.name}}</view> -->
 			</view>
 			<view v-if="navIndex === 0">
 				<view class='type-list'>

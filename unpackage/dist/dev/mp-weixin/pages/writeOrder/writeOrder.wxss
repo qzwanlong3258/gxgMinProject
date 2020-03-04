@@ -24,12 +24,12 @@
 /* 垂直间距 */
 /* 透明度 */
 /* 文章场景相关 */
-.iconcha.data-v-124dda85 {
+.iconcha.data-v-588b6a53 {
   position: absolute;
   right: 64rpx;
   top: 64rpx;
 }
-.order-infor.data-v-124dda85 {
+.order-infor.data-v-588b6a53 {
   width: 100%;
   height: calc(100% - 4rpx);
   border-top: 4rpx solid #dcdcdc;
@@ -37,21 +37,21 @@
   border-top-right-radius: 150rpx;
   box-shadow: 0 0 1rpx 1rpx rgba(0, 0, 0, 0.1);
 }
-.order-infor .address-infor.data-v-124dda85 {
+.order-infor .address-infor.data-v-588b6a53 {
     width: 82%;
     margin-left: 9%;
     margin-top: 80rpx;
     padding-bottom: 46rpx;
     border-bottom: 1rpx solid #dcdcdc;
 }
-.order-infor .delivery-infor.data-v-124dda85 {
+.order-infor .delivery-infor.data-v-588b6a53 {
     width: 82%;
     margin-left: 9%;
     margin-top: 46rpx;
     padding-bottom: 46rpx;
     border-bottom: 1rpx solid #dcdcdc;
 }
-.order-infor .delivery-infor .infor-content.data-v-124dda85 {
+.order-infor .delivery-infor .infor-content.data-v-588b6a53 {
       margin-top: 23rpx;
       display: -webkit-box;
       display: -webkit-flex;
@@ -63,31 +63,31 @@
       -webkit-align-items: center;
               align-items: center;
 }
-.order-infor .delivery-infor .infor-content .delivery-name.data-v-124dda85 {
+.order-infor .delivery-infor .infor-content .delivery-name.data-v-588b6a53 {
         margin-right: 380rpx;
 }
-.order-infor .delivery-infor .infor-content .tip-font.data-v-124dda85 {
+.order-infor .delivery-infor .infor-content .tip-font.data-v-588b6a53 {
         color: #333;
 }
-.order-infor .pay-infor.data-v-124dda85 {
+.order-infor .pay-infor.data-v-588b6a53 {
     width: 82%;
     margin-left: 9%;
     margin-top: 46rpx;
     padding-bottom: 46rpx;
     border-bottom: 1rpx solid #dcdcdc;
 }
-.order-infor .pay-infor .tip-font.data-v-124dda85 {
+.order-infor .pay-infor .tip-font.data-v-588b6a53 {
       color: #333;
       margin-top: 22rpx;
 }
-.order-infor .money-infor.data-v-124dda85 {
+.order-infor .money-infor.data-v-588b6a53 {
     width: 82%;
     margin-left: 9%;
     margin-top: 46rpx;
     padding-bottom: 46rpx;
     border-bottom: 1rpx solid #dcdcdc;
 }
-.order-infor .money-infor .infor-con.data-v-124dda85 {
+.order-infor .money-infor .infor-con.data-v-588b6a53 {
       display: -webkit-box;
       display: -webkit-flex;
       display: flex;
@@ -95,11 +95,11 @@
       -webkit-justify-content: space-between;
               justify-content: space-between;
 }
-.order-infor .money-infor .tip-font.data-v-124dda85 {
+.order-infor .money-infor .tip-font.data-v-588b6a53 {
       color: #333;
       margin-top: 22rpx;
 }
-.order-infor .money-infor .title-font.data-v-124dda85 {
+.order-infor .money-infor .title-font.data-v-588b6a53 {
       margin-top: 53rpx;
 }
 

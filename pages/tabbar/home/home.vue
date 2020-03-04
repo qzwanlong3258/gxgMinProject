@@ -38,58 +38,19 @@
 		mapState,
 		mapActions
 	} from 'vuex';
-	import {
-		login
-	} from '@/utils/openLogin.js';
-	import {
-		LOGIN_WECHAT_LOGIN,
-	} from '@/config/api.js';
-	import {
-		APP_ID
-	} from '@/config/common.js';
-	import {
-		request
-	} from '@/config/http.js';
-	const regeneratorRuntime = require('@/utils/regenerator-runtime/runtime.js')
 
 	export default {
 		data() {
 			return {
 				topBoxImg: {},
-				styleList: [],
-				session_key:'',
-				appid:APP_ID
+				styleList: []
 			};
 		},
 		components: {
 			ListModule,
 			BottomTip,
 		},
-		onLoad : async function(options) {
-			//请求微信接口wx.login,获取code
-			// console.log(122 )
-			// const code = await login();
-			
-			// console.log(code);
-			// console.log(APP_ID);
-			// console.log(this.appid);
-			
-			
-			
-			
-			// const {
-			// 	session_key
-			// } = await request({
-			// 	method: 'POST',
-			// 	url: `${LOGIN_WECHAT_LOGIN}?appId=${APP_ID}&code=${code}`,
-			// 	needToken: false,
-			// 	showLoading: false,
-			// 	showErrorModal: false
-			// }).catch(() => {
-			// 	console.log('调用wx.login失败')
-			// })
-			// this.session_key = session_key;
-			// setStorage('sessionKey', this.session_key);
+		onLoad() {
 			this.loadData();
 		},
 		computed: {

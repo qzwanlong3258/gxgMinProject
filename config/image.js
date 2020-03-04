@@ -4,8 +4,6 @@
 //const baseUrl = '/static/img';
 const baseUrl = 'http://gxgbasic.gxggroup.cn'
 const authUrl = 'https://gxgbasic.gxggroup.cn/images'
-// const baseUrl = 'https://192.168.3.25:8081'
-// const authUrl = 'https://192.168.3.25:8081/images'
 const staticUrl = '/static/img'
 module.exports = {
 	/**
@@ -22,4 +20,5 @@ module.exports = {
 	/*我的*/
     LOGIN_BG: `${baseUrl}/loginbg.png`, //注册背景图
 	NULL_DATA: `${baseUrl}/nullData.png`, //空数据
+	AVATAR: `${authUrl}/gxgicon.jpg`,//头像
 }

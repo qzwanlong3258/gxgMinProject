@@ -24,21 +24,21 @@
 /* 垂直间距 */
 /* 透明度 */
 /* 文章场景相关 */
-.order-nav.data-v-0355fb22 {
+.order-nav.data-v-700e403d {
   width: 100%;
   border-top: 4rpx solid #dcdcdc;
   border-top-left-radius: 120rpx;
   border-top-right-radius: 120rpx;
   background: #fff;
 }
-.order-nav .nav-box.data-v-0355fb22 {
+.order-nav .nav-box.data-v-700e403d {
     width: 82%;
     margin: 70rpx 9%;
 }
-.order-nav .nav-box .order-tip.data-v-0355fb22 {
+.order-nav .nav-box .order-tip.data-v-700e403d {
       color: #000;
 }
-.order-nav .nav-box .order-list.data-v-0355fb22 {
+.order-nav .nav-box .order-list.data-v-700e403d {
       width: 100%;
       height: 194rpx;
       display: -webkit-box;
@@ -53,10 +53,10 @@
       border-radius: 10rpx;
       margin-top: 20rpx;
 }
-.order-nav .nav-box .order-list .order-clonum ._i.data-v-0355fb22 {
+.order-nav .nav-box .order-list .order-clonum ._i.data-v-700e403d {
         font-size: 64rpx;
 }
-.order-nav .nav-box .order-list .order-clonum .order-counts.data-v-0355fb22 {
+.order-nav .nav-box .order-list .order-clonum .order-counts.data-v-700e403d {
         width: 40rpx;
         height: 40rpx;
         background: #baa16d;
@@ -68,7 +68,7 @@
         margin-top: -76rpx;
         margin-left: 40rpx;
 }
-.order-nav .nav-box .order-list .order-clonum .tip-font.data-v-0355fb22 {
+.order-nav .nav-box .order-list .order-clonum .tip-font.data-v-700e403d {
         color: #333;
         position: relative;
         top: -10rpx;

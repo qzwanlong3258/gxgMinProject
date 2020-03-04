@@ -25,7 +25,7 @@
 		NULL_DATA
 	} from '@/config/image.js';
 	import {
-		ADDRESS_DETAIL
+		ADDRESS_DETAIL,AUTH
 	} from '@/config/router.js';
 	import GxgButton from '@/components/GxgButton.vue';
 	import {getReceiveAddress,updateOrderAddress} from '@/api/addressIndex.js';
@@ -33,6 +33,9 @@
 	import {
 		mapMutations
 	} from 'vuex';
+	import {
+		getStorage
+	} from '@/utils/storage.js';
 	
 	export default {
 		data() {
@@ -59,6 +62,13 @@
 			}
 		},
 		onShow() {
+			if (!getStorage('tempToken')){
+				let pages = getCurrentPages();
+				(pages.length === 0 || pages[pages.length - 1].route !== AUTH) && uni.navigateTo({
+					url: AUTH
+				});
+				return;
+			}
 			this.loadData();
 		},
 		methods: {

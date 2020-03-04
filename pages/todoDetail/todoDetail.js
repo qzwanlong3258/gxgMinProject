@@ -10,7 +10,7 @@ import {
 	gxgConfirm
 } from '@/config/package.js';
 import {
-	PERVIEW_DETAIL
+	PERVIEW_DETAIL,AUTH
 } from '@/config/router.js';
 import {
 	anglePoint,
@@ -41,6 +41,28 @@ import {
 const app = getApp();
 const moveViewWidth = app.globalData.moveViewWidth
 const moveViewHeight = app.globalData.moveViewHeight
+// 微信登录
+	import {
+		APP_ID
+	} from '@/config/common.js';
+	import {
+		login
+	} from '@/utils/openLogin.js';
+	import {
+		LOGIN_WECHAT_LOGIN,
+		LOGIN_WECHAT_GET_USERINFO,
+		LOGIN_APP_REGISTER_LOGIN
+	} from '@/config/api.js';
+	import {
+		setStorage
+	} from '@/utils/storage.js'
+	
+	import {
+		AUTH_GXG_LOGO,
+		AUTH_ENTER_IMG,
+		AUTH_BTN_IMG
+	} from '@/config/image.js'
+	
 
 // 初始化设计结果
 const resultList = [{
@@ -209,9 +231,15 @@ const detail = {
 			options: {}, //链接携带参数
 			inPreviewDesign: false, // 在预览设计事件中
 			scalingRatio: 1, //印花进行缩放时印花宽高的比例，确保缩放后不会变形
+			// 微信登录
+			session_key:'',
+			getStorageData:false,
+			gxgLogo: AUTH_GXG_LOGO,
+			gxgEnter: AUTH_ENTER_IMG,
+			gxgBtn: AUTH_BTN_IMG,
 		}
 	},
-	onLoad(options) {
+	async onLoad(options) {
 		this.options = options;
 		const phoneHeight = getStorage('sysInfo').windowHeight - 624
 		if (getStorage('sysInfo').windowWidth <= 700) {
@@ -231,14 +259,39 @@ const detail = {
 			this.clotheMariginTop = -260
 			this.moveViewTop = 90
 		}
+		// 微信登录
+		if (!getStorage('tempToken')){
+			
+			const code = await login();
+			const {
+				session_key
+			} = await request({
+				method: 'POST',
+				url: `${LOGIN_WECHAT_LOGIN}?appId=${APP_ID}&code=${code}`,
+				needToken: false,
+				showLoading: false,
+				showErrorModal: false
+			}).catch(() => {
+				console.log('调用wx.login失败')
+			})
+			this.session_key = session_key;
+		}
 	},
 	async onShow() {
 		// if (getApp().globalData.backToDoOption.hasOwnProperty('id') && getApp().globalData.backToDoOption.id) {
 		// 	this.options = getApp().globalData.backToDoOption
 		// }
+		// 微信登录
+		if (!getStorage('tempToken')){
+			this.getStorageData = false
+		} else {
+			this.getStorageData = true
+			
+		}
 		this.judgeLocation(this.options.localIndex);
 		this.loadData();
 		this.initLoad();
+		
 	},
 	onHide() {
 		// 清除来源类型
@@ -454,16 +507,26 @@ const detail = {
 		changeType: function(e) {
 			this.clotheIndex = e.detail.current;
 		},
-		changeNav: function(e) {
-			this.navIndex = e.currentTarget.dataset.index
-			if (this.navIndex == 1) {
-				this.todoIndex = -1;
-			} else if (this.navIndex == 0) {
-				this.fontIndex = -1;
-			} else if (this.navIndex == 2) {
-				this.preview();
-			}
+		changeNavPhoto() {
+			this.navIndex =0
 		},
+		changeNavText() {
+			this.navIndex =1
+		},
+		changeNavDesign() {
+			this.navIndex =2
+			this.preview();
+		},
+		// changeNav: function(e) {
+		// 	this.navIndex = e.currentTarget.dataset.index
+		// 	if (this.navIndex == 1) {
+		// 		this.todoIndex = -1;
+		// 	} else if (this.navIndex == 0) {
+		// 		this.fontIndex = -1;
+		// 	} else if (this.navIndex == 2) {
+		// 		this.preview();
+		// 	}
+		// },
 
 		/**
 		 * 预览设计
@@ -745,6 +808,8 @@ const detail = {
 					this.isOverflow()
 				}
 			}
+				
+			
 			// if (Math.abs(tx) > Math.abs(ty)) {
 			// 	//左右方向滑动
 			// 	if (tx < 0) {
@@ -880,6 +945,71 @@ const detail = {
 			this.lastX = currentX
 			this.lastY = currentY
 		},
+		getUserInfo: async function(e) {
+						if (!this.session_key) {
+							return wx.showToast({
+								title: '登录失败，重新授权试试',
+								icon: 'none'
+							})
+						}
+						const {
+							encryptedData,
+							iv
+						} = e.detail
+				
+						//获取用户的微信信息
+						const {
+							openId,
+							avatarUrl,
+							nickName
+						} = await request({
+							method: 'POST',
+							url: LOGIN_WECHAT_GET_USERINFO,
+							data: {
+								encryptedData,
+								iv,
+								"appId": APP_ID,
+								"session_key": this.session_key
+							},
+							needToken: false,
+							showLoadind: false,
+							hideLoading: false,
+							errorText: '登录失败'
+						});
+						//进行用户注册或登录，将返回的信息储存在本地缓存 
+						const {
+							header,
+							data
+						} = await request({
+							method: 'POST',
+							url: LOGIN_APP_REGISTER_LOGIN,
+							data: {
+								nickName,
+								appId: APP_ID,
+								openid: openId,
+								headImg: avatarUrl
+							},
+							needToken: false,
+							loadingText: '正在登录',
+							returnHeader: true,
+							errorText: '登录失败'
+						});
+						setStorage('sessionKey', this.session_key)
+						setStorage('tempToken', data.token)
+						setStorage('refreshToken', header.Authorization)
+						setStorage('userInfo', data.UserInfo)
+						setStorage('isLogin', true)
+						let pages = getCurrentPages();
+						let page = pages[pages.length - 1];
+						page.onLoad(this.options)
+						page.onShow()
+						// let pages = getCurrentPages();
+						// (pages.length === 0 || pages[pages.length - 1].route !== AUTH) && uni.reLaunch({ url: pages[pages.length - 1].route});
+					
+				
+			},
+				
+		
 		touchEnd: function(e) {
 			e.stopPropagation()
 			this.isTouch = true

@@ -69,9 +69,6 @@ function request({
 			const token = getStorage('tempToken')
 			url = url + (url.indexOf('?') === -1 ? '?token=' : '&token=') + token
 		}
-		if (!getStorage('tempToken')){
-			
-		}
 		requestTask = uni.request({
 			method,
 			url,
@@ -87,21 +84,20 @@ function request({
 					header,
 					msg
 				} = res
-				if (statusCode ===401 ) {
-					const {
-						data
-					} = res
-					const {
-						code
-					} = data
-					if(code === "1020"||code === "1050") {
-						let pages = getCurrentPages();
-						if(pages.length >1&&pages[pages.length - 1].route === AUTH){
-							return;
-						}
-						(pages.length === 0 || pages[pages.length - 1].route !== AUTH) && uni.reLaunch({ url: AUTH });
-					}
-				}
+				// if (statusCode === 401) {
+				// 	const {
+				// 		data
+				// 	} = res
+				// 	const {
+				// 		code
+				// 	} = data
+				// 	if(code === "1050"||code ==="1020"){
+				// 		let pages = getCurrentPages();
+				// 		(pages.length === 0 || pages[pages.length - 1].route !== AUTH) && uni.navigateTo({ url: AUTH});
+				// 		return;
+				// 	}
+					
+				// }
 				if (statusCode === 200) {
 					const {
 						data
@@ -109,10 +105,6 @@ function request({
 					const {
 						code
 					} = data
-					// if(code === 1020||code === 1050) {
-					// 	let pages = getCurrentPages();
-					// 	(pages.length === 0 || pages[pages.length - 1].route !== AUTH) && uni.reLaunch({ url: AUTH });
-					// }
 					if (code === 0) {
 						//判断是否显示请求成功的Toast
 						if (showSucessToast) {

@@ -1,5 +1,5 @@
-// const baseUrl = 'https://gxgbasic.gxggroup.cn:8081';
-const baseUrl = 'https://192.168.3.25:8081';
+const baseUrl = 'https://gxgbasic.gxggroup.cn:8081';
+// const baseUrl = 'https://192.168.3.25:8081';
 
 const auth = `${baseUrl}/wx/user`;
 

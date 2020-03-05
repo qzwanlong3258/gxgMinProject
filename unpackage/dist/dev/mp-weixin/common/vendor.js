@@ -10394,8 +10394,8 @@ module.exports = {
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
- // const baseUrl = 'https://gxgbasic.gxggroup.cn:8081';
-var baseUrl = 'https://192.168.3.25:8081';
+var baseUrl = 'https://gxgbasic.gxggroup.cn:8081';
+// const baseUrl = 'https://192.168.3.25:8081';
 
 var auth = "".concat(baseUrl, "/wx/user");
 
@@ -13152,9 +13152,15 @@ var detail = {
                 this.moveViewTop = 90;
               }
               // 微信登录
-              if ((0, _storage.getStorage)('tempToken')) {_context.next = 12;break;}_context.next = 6;return (
+              if (!(0, _storage.getStorage)('tempToken')) {
+                this.getStorageData = false;
+              } else {
+                this.getStorageData = true;
 
-                (0, _openLogin.login)());case 6:code = _context.sent;_context.next = 9;return (
+              }if (
+              (0, _storage.getStorage)('tempToken')) {_context.next = 13;break;}_context.next = 7;return (
+
+                (0, _openLogin.login)());case 7:code = _context.sent;_context.next = 10;return (
 
 
                 (0, _http.request)({
@@ -13165,24 +13171,17 @@ var detail = {
                   showErrorModal: false }).
                 catch(function () {
                   console.log('调用wx.login失败');
-                }));case 9:_ref = _context.sent;session_key = _ref.session_key;
-              this.session_key = session_key;case 12:case "end":return _context.stop();}}}, _callee, this);}));function onLoad(_x) {return _onLoad.apply(this, arguments);}return onLoad;}(),
+                }));case 10:_ref = _context.sent;session_key = _ref.session_key;
+              this.session_key = session_key;case 13:case "end":return _context.stop();}}}, _callee, this);}));function onLoad(_x) {return _onLoad.apply(this, arguments);}return onLoad;}(),
 
 
   onShow: function () {var _onShow = _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee2() {return _regenerator.default.wrap(function _callee2$(_context2) {while (1) {switch (_context2.prev = _context2.next) {case 0:
               // if (getApp().globalData.backToDoOption.hasOwnProperty('id') && getApp().globalData.backToDoOption.id) {
               // 	this.options = getApp().globalData.backToDoOption
               // }
-              // 微信登录
-              if (!(0, _storage.getStorage)('tempToken')) {
-                this.getStorageData = false;
-              } else {
-                this.getStorageData = true;
-
-              }
               this.judgeLocation(this.options.localIndex);
               this.loadData();
-              this.initLoad();case 4:case "end":return _context2.stop();}}}, _callee2, this);}));function onShow() {return _onShow.apply(this, arguments);}return onShow;}(),
+              this.initLoad();case 3:case "end":return _context2.stop();}}}, _callee2, this);}));function onShow() {return _onShow.apply(this, arguments);}return onShow;}(),
 
 
   onHide: function onHide() {
@@ -13837,20 +13836,26 @@ var detail = {
       this.lastX = currentX;
       this.lastY = currentY;
     },
-    getUserInfo: function () {var _getUserInfo = _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee9(e) {var _e$detail, encryptedData, iv, _ref3, openId, avatarUrl, nickName, _ref4, header, data, pages, page;return _regenerator.default.wrap(function _callee9$(_context9) {while (1) {switch (_context9.prev = _context9.next) {case 0:if (
+    getUserInfo: function () {var _getUserInfo = _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee9(e) {var _e$detail, encryptedData, iv, _ref3, openId, avatarUrl, nickName, _ref4, header, data;return _regenerator.default.wrap(function _callee9$(_context9) {while (1) {switch (_context9.prev = _context9.next) {case 0:if (
                 this.session_key) {_context9.next = 2;break;}return _context9.abrupt("return",
                 wx.showToast({
                   title: '登录失败，重新授权试试',
-                  icon: 'none' }));case 2:_e$detail =
+                  icon: 'none' }));case 2:if (
 
+
+                e.detail.iv) {_context9.next = 5;break;}
+                uni.showToast({
+                  title: "您取消了授权,登录失败",
+                  icon: "none" });return _context9.abrupt("return",
+
+                false);case 5:_e$detail =
 
 
 
 
                 e.detail, encryptedData = _e$detail.encryptedData, iv = _e$detail.iv;
-
                 //获取用户的微信信息
-                _context9.next = 5;return (
+                _context9.next = 8;return (
 
 
 
@@ -13864,9 +13869,8 @@ var detail = {
                       "session_key": this.session_key },
 
                     needToken: false,
-                    showLoadind: false,
-                    hideLoading: false,
-                    errorText: '登录失败' }));case 5:_ref3 = _context9.sent;openId = _ref3.openId;avatarUrl = _ref3.avatarUrl;nickName = _ref3.nickName;_context9.next = 11;return (
+                    errorText: '登录失败',
+                    hideLoading: false }));case 8:_ref3 = _context9.sent;openId = _ref3.openId;avatarUrl = _ref3.avatarUrl;nickName = _ref3.nickName;_context9.next = 14;return (
 
 
 
@@ -13884,17 +13888,27 @@ var detail = {
                     needToken: false,
                     loadingText: '正在登录',
                     returnHeader: true,
-                    errorText: '登录失败' }));case 11:_ref4 = _context9.sent;header = _ref4.header;data = _ref4.data;
+                    showLoadind: false,
+                    hideLoading: false,
+                    errorText: '登录失败' }));case 14:_ref4 = _context9.sent;header = _ref4.header;data = _ref4.data;
 
                 (0, _storage.setStorage)('sessionKey', this.session_key);
                 (0, _storage.setStorage)('tempToken', data.token);
                 (0, _storage.setStorage)('refreshToken', header.Authorization);
                 (0, _storage.setStorage)('userInfo', data.UserInfo);
                 (0, _storage.setStorage)('isLogin', true);
-                pages = getCurrentPages();
-                page = pages[pages.length - 1];
-                page.onLoad(this.options);
-                page.onShow();
+                // 微信登录
+                if (!(0, _storage.getStorage)('tempToken')) {
+                  this.getStorageData = false;
+                } else {
+                  this.getStorageData = true;
+                  this.changeNavDesign();
+                }
+
+                // let pages = getCurrentPages();
+                // let page = pages[pages.length - 1];
+                // page.onLoad(this.options)
+                // page.onShow()
                 // let pages = getCurrentPages();
                 // (pages.length === 0 || pages[pages.length - 1].route !== AUTH) && uni.reLaunch({ url: pages[pages.length - 1].route});
               case 23:case "end":return _context9.stop();}}}, _callee9, this);}));function getUserInfo(_x4) {return _getUserInfo.apply(this, arguments);}return getUserInfo;}(),

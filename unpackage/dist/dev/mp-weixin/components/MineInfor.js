@@ -110,7 +110,7 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _regenerator = _interopRequireDefault(__webpack_require__(/*! ./node_modules/@babel/runtime/regenerator */ 12));
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _regenerator = _interopRequireDefault(__webpack_require__(/*! ./node_modules/@babel/runtime/regenerator */ 12));
 
 
 
@@ -215,7 +215,6 @@ var regeneratorRuntime = __webpack_require__(/*! @/utils/regenerator-runtime/run
       phoneNum: '',
       value: '注册会员',
       codeNum: '',
-      logonVisible: true,
       // 微信登录
       gxgLogo: _image.AUTH_GXG_LOGO,
       gxgEnter: _image.AUTH_ENTER_IMG,
@@ -229,7 +228,6 @@ var regeneratorRuntime = __webpack_require__(/*! @/utils/regenerator-runtime/run
       this.avatar = _userInfo.avatarUrl;
       this.phoneNum = _userInfo.phone;
       this.value = _userInfo.phone ? _userInfo.nickName : '注册会员';
-      this.logonVisible == false;
     } },
 
   methods: {
@@ -288,8 +286,15 @@ var regeneratorRuntime = __webpack_require__(/*! @/utils/regenerator-runtime/run
                 this.session_key) {_context.next = 2;break;}return _context.abrupt("return",
                 wx.showToast({
                   title: '登录失败，重新授权试试',
-                  icon: 'none' }));case 2:_e$detail =
+                  icon: 'none' }));case 2:if (
 
+
+                e.detail.iv) {_context.next = 5;break;}
+                uni.showToast({
+                  title: "您取消了授权,登录失败",
+                  icon: "none" });return _context.abrupt("return",
+
+                false);case 5:_e$detail =
 
 
 
@@ -297,7 +302,7 @@ var regeneratorRuntime = __webpack_require__(/*! @/utils/regenerator-runtime/run
                 e.detail, encryptedData = _e$detail.encryptedData, iv = _e$detail.iv;
 
                 //获取用户的微信信息
-                _context.next = 5;return (
+                _context.next = 8;return (
 
 
 
@@ -313,7 +318,7 @@ var regeneratorRuntime = __webpack_require__(/*! @/utils/regenerator-runtime/run
                     needToken: false,
                     showLoadind: false,
                     hideLoading: false,
-                    errorText: '登录失败' }));case 5:_ref = _context.sent;openId = _ref.openId;avatarUrl = _ref.avatarUrl;nickName = _ref.nickName;_context.next = 11;return (
+                    errorText: '登录失败' }));case 8:_ref = _context.sent;openId = _ref.openId;avatarUrl = _ref.avatarUrl;nickName = _ref.nickName;_context.next = 14;return (
 
 
 
@@ -331,7 +336,7 @@ var regeneratorRuntime = __webpack_require__(/*! @/utils/regenerator-runtime/run
                     needToken: false,
                     loadingText: '正在登录',
                     returnHeader: true,
-                    errorText: '登录失败' }));case 11:_ref2 = _context.sent;header = _ref2.header;data = _ref2.data;
+                    errorText: '登录失败' }));case 14:_ref2 = _context.sent;header = _ref2.header;data = _ref2.data;
 
                 (0, _storage.setStorage)('sessionKey', this.session_key);
                 (0, _storage.setStorage)('tempToken', data.token);
@@ -344,7 +349,8 @@ var regeneratorRuntime = __webpack_require__(/*! @/utils/regenerator-runtime/run
                 page.onShow();
                 // let pages = getCurrentPages();
                 // (pages.length === 0 || pages[pages.length - 1].route !== AUTH) && uni.reLaunch({ url: pages[pages.length - 1].route});
-              case 23:case "end":return _context.stop();}}}, _callee, this);}));function getUserInfo(_x) {return _getUserInfo.apply(this, arguments);}return getUserInfo;}() } };exports.default = _default2;
+              case 26:case "end":return _context.stop();}}}, _callee, this);}));function getUserInfo(_x) {return _getUserInfo.apply(this, arguments);}return getUserInfo;}() } };exports.default = _default2;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
 

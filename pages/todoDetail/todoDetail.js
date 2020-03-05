@@ -261,6 +261,12 @@ const detail = {
 		}
 		// 微信登录
 		if (!getStorage('tempToken')){
+			this.getStorageData = false
+		} else {
+			this.getStorageData = true
+			
+		}
+		if (!getStorage('tempToken')){
 			
 			const code = await login();
 			const {
@@ -281,13 +287,6 @@ const detail = {
 		// if (getApp().globalData.backToDoOption.hasOwnProperty('id') && getApp().globalData.backToDoOption.id) {
 		// 	this.options = getApp().globalData.backToDoOption
 		// }
-		// 微信登录
-		if (!getStorage('tempToken')){
-			this.getStorageData = false
-		} else {
-			this.getStorageData = true
-			
-		}
 		this.judgeLocation(this.options.localIndex);
 		this.loadData();
 		this.initLoad();
@@ -952,11 +951,17 @@ const detail = {
 								icon: 'none'
 							})
 						}
+						if(!e.detail.iv){
+						        uni.showToast({
+						         title:"您取消了授权,登录失败",
+						         icon:"none"
+						        });
+						        return false;
+						       }
 						const {
 							encryptedData,
 							iv
 						} = e.detail
-				
 						//获取用户的微信信息
 						const {
 							openId,
@@ -972,9 +977,8 @@ const detail = {
 								"session_key": this.session_key
 							},
 							needToken: false,
-							showLoadind: false,
+							errorText: '登录失败',
 							hideLoading: false,
-							errorText: '登录失败'
 						});
 						//进行用户注册或登录，将返回的信息储存在本地缓存 
 						const {
@@ -992,6 +996,8 @@ const detail = {
 							needToken: false,
 							loadingText: '正在登录',
 							returnHeader: true,
+							showLoadind: false,
+							hideLoading: false,
 							errorText: '登录失败'
 						});
 						setStorage('sessionKey', this.session_key)
@@ -999,10 +1005,18 @@ const detail = {
 						setStorage('refreshToken', header.Authorization)
 						setStorage('userInfo', data.UserInfo)
 						setStorage('isLogin', true)
-						let pages = getCurrentPages();
-						let page = pages[pages.length - 1];
-						page.onLoad(this.options)
-						page.onShow()
+						// 微信登录
+						if (!getStorage('tempToken')){
+							this.getStorageData = false
+						} else {
+							this.getStorageData = true
+							this.changeNavDesign()
+						}
+						
+						// let pages = getCurrentPages();
+						// let page = pages[pages.length - 1];
+						// page.onLoad(this.options)
+						// page.onShow()
 						// let pages = getCurrentPages();
 						// (pages.length === 0 || pages[pages.length - 1].route !== AUTH) && uni.reLaunch({ url: pages[pages.length - 1].route});
 					

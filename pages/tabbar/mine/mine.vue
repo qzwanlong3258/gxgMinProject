@@ -222,6 +222,13 @@
 									icon: 'none'
 								})
 							}
+							if(!e.detail.iv){
+							        uni.showToast({
+							         title:"您取消了授权,登录失败",
+							         icon:"none"
+							        });
+							        return false;
+							       }
 							const {
 								encryptedData,
 								iv

@@ -3,9 +3,9 @@
 		<view class="user-avatar">
 			<image :src='avatar'></image>
 		</view>
-		<view :hidden='!getStorageData' class="show-btn" @click="!userInfo.phone&&showLoginModel()">{{value}}</view>
-		<button style="display: block;" :hidden='getStorageData' class="show-btn" open-type="getUserInfo" @getuserinfo="getUserInfo" >
-			{{value}}<image :src="gxgBtn"></image>
+		<view v-if='getStorageData' class="show-btn" @click="!userInfo.phone&&showLoginModel()">{{value}}</view>
+		<button style="display: block;" v-if='!getStorageData' class="show-btn" open-type="getUserInfo" @getuserinfo="getUserInfo" >
+			登录<image :src="gxgBtn"></image>
 		</button>
 		<view class="login-bg">
 			<image :src="loginbg"></image>
@@ -103,7 +103,6 @@
 				phoneNum: '',
 				value: '注册会员',
 				codeNum: '',
-				logonVisible:true,
 				// 微信登录
 				gxgLogo: AUTH_GXG_LOGO,
 				gxgEnter: AUTH_ENTER_IMG,
@@ -117,7 +116,6 @@
 				this.avatar = userInfo.avatarUrl;
 				this.phoneNum = userInfo.phone;
 				this.value = userInfo.phone ? userInfo.nickName : '注册会员';
-				this.logonVisible == false
 			}
 		},
 		methods: {
@@ -179,6 +177,13 @@
 							icon: 'none'
 						})
 					}
+					if(!e.detail.iv){
+					        uni.showToast({
+					         title:"您取消了授权,登录失败",
+					         icon:"none"
+					        });
+					        return false;
+					       }
 					const {
 						encryptedData,
 						iv

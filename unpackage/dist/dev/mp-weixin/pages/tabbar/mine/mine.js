@@ -343,8 +343,15 @@ var regeneratorRuntime = __webpack_require__(/*! @/utils/regenerator-runtime/run
                 this.session_key) {_context2.next = 2;break;}return _context2.abrupt("return",
                 wx.showToast({
                   title: '登录失败，重新授权试试',
-                  icon: 'none' }));case 2:_e$detail =
+                  icon: 'none' }));case 2:if (
 
+
+                e.detail.iv) {_context2.next = 5;break;}
+                uni.showToast({
+                  title: "您取消了授权,登录失败",
+                  icon: "none" });return _context2.abrupt("return",
+
+                false);case 5:_e$detail =
 
 
 
@@ -352,7 +359,7 @@ var regeneratorRuntime = __webpack_require__(/*! @/utils/regenerator-runtime/run
                 e.detail, encryptedData = _e$detail.encryptedData, iv = _e$detail.iv;
 
                 //获取用户的微信信息
-                _context2.next = 5;return (
+                _context2.next = 8;return (
 
 
 
@@ -368,7 +375,7 @@ var regeneratorRuntime = __webpack_require__(/*! @/utils/regenerator-runtime/run
                     needToken: false,
                     showLoadind: false,
                     hideLoading: false,
-                    errorText: '登录失败' }));case 5:_ref3 = _context2.sent;openId = _ref3.openId;avatarUrl = _ref3.avatarUrl;nickName = _ref3.nickName;_context2.next = 11;return (
+                    errorText: '登录失败' }));case 8:_ref3 = _context2.sent;openId = _ref3.openId;avatarUrl = _ref3.avatarUrl;nickName = _ref3.nickName;_context2.next = 14;return (
 
 
 
@@ -386,7 +393,7 @@ var regeneratorRuntime = __webpack_require__(/*! @/utils/regenerator-runtime/run
                     needToken: false,
                     loadingText: '正在登录',
                     returnHeader: true,
-                    errorText: '登录失败' }));case 11:_ref4 = _context2.sent;header = _ref4.header;data = _ref4.data;
+                    errorText: '登录失败' }));case 14:_ref4 = _context2.sent;header = _ref4.header;data = _ref4.data;
 
                 (0, _storage.setStorage)('sessionKey', this.session_key);
                 (0, _storage.setStorage)('tempToken', data.token);
@@ -399,7 +406,7 @@ var regeneratorRuntime = __webpack_require__(/*! @/utils/regenerator-runtime/run
                 page.onShow();
                 // let pages = getCurrentPages();
                 // (pages.length === 0 || pages[pages.length - 1].route !== AUTH) && uni.reLaunch({ url: pages[pages.length - 1].route});
-              case 23:case "end":return _context2.stop();}}}, _callee2, this);}));function getUserInfo(_x) {return _getUserInfo.apply(this, arguments);}return getUserInfo;}() }) };exports.default = _default;
+              case 26:case "end":return _context2.stop();}}}, _callee2, this);}));function getUserInfo(_x) {return _getUserInfo.apply(this, arguments);}return getUserInfo;}() }) };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),

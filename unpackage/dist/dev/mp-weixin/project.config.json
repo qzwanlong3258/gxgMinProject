@@ -24,8 +24,6 @@
 	"libVersion": "2.9.2",
 	"appid": "wx33e656ee020dc81d",
 	"projectname": "gxg",
-	"simulatorType": "wechat",
-	"simulatorPluginLibVersion": {},
 	"condition": {
 		"search": {
 			"current": -1,

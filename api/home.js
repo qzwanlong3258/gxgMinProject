@@ -14,6 +14,7 @@ export function getList(data) {
 			showLoading: false,
 			size: 999
 		},
+		
 	});
 	let p_style = request({
 		url: GET_STYLE_LIST,
@@ -21,6 +22,7 @@ export function getList(data) {
 			showLoading: false,
 			size: 999
 		},
+		needToken: false,
 	})
 	return Promise.all([p_theme, p_style]).then(res => {
 		let theme = res[0];

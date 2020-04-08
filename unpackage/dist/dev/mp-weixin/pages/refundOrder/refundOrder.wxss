@@ -24,7 +24,7 @@
 /* 垂直间距 */
 /* 透明度 */
 /* 文章场景相关 */
-.order-infor.data-v-3f125b21 {
+.order-infor.data-v-dc0cf25a {
   width: 100%;
   height: calc(100% - 360rpx);
   border-top: 4rpx solid #dcdcdc;
@@ -33,7 +33,7 @@
   box-shadow: 0 0 1rpx 1rpx rgba(0, 0, 0, 0.1);
   padding-top: 22rpx;
 }
-.order-infor .todo-clonum.data-v-3f125b21 {
+.order-infor .todo-clonum.data-v-dc0cf25a {
     width: 82%;
     margin-left: 9%;
     margin-top: 22rpx;
@@ -48,18 +48,18 @@
     -webkit-justify-content: space-between;
             justify-content: space-between;
 }
-.order-infor .todo-clonum .clonum-left.data-v-3f125b21 {
+.order-infor .todo-clonum .clonum-left.data-v-dc0cf25a {
       margin-left: 22rpx;
       color: #333;
 }
-.order-infor .todo-clonum .clonum-right.data-v-3f125b21 {
+.order-infor .todo-clonum .clonum-right.data-v-dc0cf25a {
       margin-right: 22rpx;
       color: #333;
 }
-.order-infor .todo-clonum .clonum-tip.data-v-3f125b21 {
+.order-infor .todo-clonum .clonum-tip.data-v-dc0cf25a {
       margin-right: 200rpx;
 }
-.photo-swiper.data-v-3f125b21 {
+.photo-swiper.data-v-dc0cf25a {
   height: 226rpx;
   width: 100%;
   display: -webkit-box;
@@ -68,14 +68,14 @@
   -webkit-flex-wrap: wrap;
           flex-wrap: wrap;
 }
-.photo-clonum.data-v-3f125b21 {
+.photo-clonum.data-v-dc0cf25a {
   width: 226rpx;
   height: 226rpx;
   background: #dcdcdc;
   margin-top: 22rpx;
   border-radius: 10rpx;
 }
-.photo-item.data-v-3f125b21 {
+.photo-item.data-v-dc0cf25a {
   height: 100%;
   width: 226rpx;
   margin-top: 12rpx;
@@ -83,7 +83,7 @@
   text-align: center;
   color: #333;
 }
-.photo-clonum ._i.data-v-3f125b21 {
+.photo-clonum ._i.data-v-dc0cf25a {
   color: #b9b9cf;
   font-size: 64rpx;
   line-height: 226rpx;

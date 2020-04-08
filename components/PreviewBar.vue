@@ -1,9 +1,9 @@
 <template>
 		<view :style="'width:'+width+'rpx;' + (height?'height:'+height+'rpx':'')" class="preview-bar">
-			<image class="back-img" :src="backUrl" mode="widthFix"></image>
+			<image class="back-img" :src="backUrl" mode="widthFix" :style="'width:'+imgwidth+'px;'"></image>
 			<view class="pattern-img">
 				<image
-					:style="'width:' + patternImgWidth + 'rpx;height:' + patternImgHeight + 'rpx;margin-top:' + (sex==3?'-12%':'-15%')"
+					:style="'width:' + patternImgWidth + 'px;height:' + patternImgHeight + 'px;margin-top:'  + patternImgTop+'px'"
 					:src="patternUrl"
 					mode="aspectFit"
 				></image>
@@ -13,7 +13,7 @@
 
 <script>
 const { setStorage, getStorage } = require('@/utils/storage.js');
-
+var _self;
 export default {
 	data() {
 		return {
@@ -21,7 +21,9 @@ export default {
 			moveViewWidth: Number(getApp().globalData.moveViewWidth),
 			moveViewHeight: Number(getApp().globalData.moveViewHeight),
 			moveViewTop: 110,
-			clotheMariginTop: 0
+			clotheMariginTop: 0,
+			imgidth:''
+			
 		};
 	},
 	props: {
@@ -46,23 +48,73 @@ export default {
 			default: 0
 		}
 	},
+	created(){
+		_self=this
+		if(this.width == 190){
+			_self.imgwidth=95
+		}
+		if(this.width == 280){
+			_self.imgwidth=140
+		}
+		if(this.width == 400){
+			_self.imgwidth=200
+		}
+	},
 	computed: {
 		ratio() {
 			return (this.windowWidth * 1.2 * this.getRpxToPxRatio()) / this.width;
 		},
 		patternImgWidth() {
-			let width = parseInt(this.moveViewWidth * this.getRpxToPxRatio() / this.ratio);
-			return this.sex == 3?width * 0.7:width;
+			if(this.width == 190){
+				return 42
+			}
+			if(this.width == 280){
+				return  62
+			}
+			if(this.width == 400){
+				return  88
+			}
+			
+			// let width = parseInt(this.moveViewWidth * this.getRpxToPxRatio() / (this.ratio*2));
+			// console.log(width)
+			// return this.sex == 3?wid * 0.7:wid;
 		},
 		patternImgHeight() {
-			let height = parseInt(this.moveViewHeight * this.getRpxToPxRatio() / this.ratio);
-			return  this.sex == 3?height * 0.7:height;
+			if(this.width == 190){
+				return  48
+			}
+			if(this.width == 280){
+				return  70
+			}
+			if(this.width == 400){
+				return 101
+			}
+			// let height = parseInt(this.moveViewHeight * this.getRpxToPxRatio() / (this.ratio*2));
+			// console.log(height)
+			// return  this.sex == 3?height * 0.7:height;
 		},
-		// patternImgTop() {
-		// 	this.getMoveViewTop();
-		// 	console.info(this.clotheMariginTop * this.getRpxToPxRatio())
-		// 	return parseInt(this.moveViewTop / this.ratio) - (this.clotheMariginTop / this.getRpxToPxRatio());
-		// },
+		patternImgTop() {
+			//  let info = uni.createSelectorQuery().select(".design-top");
+			// 　　　  　info.boundingClientRect(function(data) { //data - 各种参数
+			// // 　　　  　console.log(data.height)
+			//   setStorage('height',data.height)// 获取元素宽度
+			//   setStorage('width',data.width)// 获取元素宽度
+			// 　　    }).exec()
+			if(this.width == 190){
+				return 32
+			}
+			if(this.width == 280){
+				return 47
+			}
+			if(this.width == 400){
+				return 67
+			}
+			this.getMoveViewTop();
+			console.info(this.clotheMariginTop * this.getRpxToPxRatio())
+			console.log((this.clotheMariginTop / this.getRpxToPxRatio()))
+			return parseInt(this.moveViewTop  / this.ratio) - (this.clotheMariginTop / this.getRpxToPxRatio());
+			// return parseInt(this.moveViewTop / this.ratio) - (this.clotheMariginTop / this.getRpxToPxRatio());
+		},
 	},
 	methods: {
 		getMoveViewTop() {
@@ -84,12 +136,21 @@ export default {
 		},
 		getRpxToPxRatio() {
 			return 750 / this.windowWidth
-		}
+		},
+		// getDescBox() { 
+		//   uni.createSelectorQuery().in(this).select('.pattern-img').boundingClientRect(result => { 
+		//    if (result) { 
+		//      console.log('==========',result) 
+		//    }else { 
+		//      this.getDescBox(); 
+		//  } 
+		//   }).exec(); 
+		// },
 	}
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .preview-bar {
 	position: relative;
 	display: flex;
@@ -109,8 +170,14 @@ export default {
 	width: 100%;
 	height: 100%;
 	display: flex;
-	align-items: center;
+	// align-items: center;
 	justify-content: center;
 	z-index: 2;
+	
+	
+}
+.pattern-img image{
+	
+	
 }
 </style>

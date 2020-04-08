@@ -24,7 +24,7 @@
 /* 垂直间距 */
 /* 透明度 */
 /* 文章场景相关 */
-.container .top-box.data-v-56115e76 {
+.container .top-box.data-v-26d36312 {
   height: 30%;
   display: -webkit-box;
   display: -webkit-flex;
@@ -33,24 +33,24 @@
   -webkit-align-items: center;
           align-items: center;
 }
-.container .top-box .top-left.data-v-56115e76 {
+.container .top-box .top-left.data-v-26d36312 {
     width: 50%;
 }
-.container .top-box .top-left .preview-image.data-v-56115e76 {
+.container .top-box .top-left .preview-image.data-v-26d36312 {
       margin-left: 98rpx;
 }
-.container .top-box .top-right.data-v-56115e76 {
+.container .top-box .top-right.data-v-26d36312 {
     width: 50%;
     margin-bottom: 10rpx;
 }
-.container .top-box .top-right .clothe-infor-top.data-v-56115e76 {
+.container .top-box .top-right .clothe-infor-top.data-v-26d36312 {
       font-size: 34rpx;
       margin-bottom: 10rpx;
 }
-.container .top-box .top-right .clothe-infor-bottom.data-v-56115e76 {
+.container .top-box .top-right .clothe-infor-bottom.data-v-26d36312 {
       margin-bottom: 30rpx;
 }
-.container .top-box .top-right .sbumit-btn.data-v-56115e76 {
+.container .top-box .top-right .sbumit-btn.data-v-26d36312 {
       width: 160rpx;
       height: 50rpx;
       line-height: 50rpx;
@@ -60,14 +60,14 @@
       border-radius: 4rpx;
       font-size: 24rpx;
 }
-.container .bottom-box.data-v-56115e76 {
+.container .bottom-box.data-v-26d36312 {
   height: calc(70% - 4rpx);
   border-top: 4rpx solid #dcdcdc;
   border-top-left-radius: 150rpx;
   border-top-right-radius: 150rpx;
   box-shadow: 0 0 1rpx 1rpx rgba(0, 0, 0, 0.1);
 }
-.container .bottom-box .clothe-title.data-v-56115e76 {
+.container .bottom-box .clothe-title.data-v-26d36312 {
     margin: calc(25% - 151rpx) 0;
     text-align: center;
     font-size: 32rpx;

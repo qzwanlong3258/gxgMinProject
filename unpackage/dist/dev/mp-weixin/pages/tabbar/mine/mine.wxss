@@ -24,12 +24,12 @@
 /* 垂直间距 */
 /* 透明度 */
 /* 文章场景相关 */
-.user-order.data-v-b74389ec {
+.user-order.data-v-fec218d0 {
   width: 100%;
   position: absolute;
   margin-top: -100rpx;
 }
-.user-nav.data-v-b74389ec {
+.user-nav.data-v-fec218d0 {
   width: 100%;
   border-bottom: 4rpx solid #dcdcdc;
   border-bottom-left-radius: 120rpx;
@@ -40,13 +40,13 @@
   position: absolute;
   margin-top: 300rpx;
 }
-.user-nav .nav-list.data-v-b74389ec {
+.user-nav .nav-list.data-v-fec218d0 {
     width: 82%;
     margin: 0 9%;
     border: 1rpx solid #dcdcdc;
     border-radius: 10rpx;
 }
-.user-nav .nav-list .nav-clonum.data-v-b74389ec {
+.user-nav .nav-list .nav-clonum.data-v-fec218d0 {
       width: 90%;
       margin-left: 5%;
       display: -webkit-box;
@@ -61,17 +61,17 @@
               justify-content: space-between;
       border-bottom: 1rpx solid #dcdcdc;
 }
-.user-nav .nav-list .nav-clonum.nav-clonum.data-v-b74389ec:last-child {
+.user-nav .nav-list .nav-clonum.nav-clonum.data-v-fec218d0:last-child {
         border: none;
 }
-.user-nav .nav-list .nav-clonum .nav-icon.data-v-b74389ec {
+.user-nav .nav-list .nav-clonum .nav-icon.data-v-fec218d0 {
         font-size: 50rpx;
 }
-.user-nav .nav-list .nav-clonum .nav-name.data-v-b74389ec {
+.user-nav .nav-list .nav-clonum .nav-name.data-v-fec218d0 {
         text-align: left;
         font-size: 28rpx;
 }
-.user-creation.data-v-b74389ec {
+.user-creation.data-v-fec218d0 {
   position: absolute;
   width: 100%;
   margin-top: 700rpx;

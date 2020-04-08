@@ -1,7 +1,7 @@
 <template>
 	<view>
 		<view class='container box-bg-color'>
-			<view class='design-top'>
+			<view class='design-top' ref='photo'>
 				<view @click='changePnEvent' class="pn-change"><i v-if='isShowPnIcon' class="iconfont iconxunhuan"></i><text class="tip-font">{{localtionName}}</text></view>
 				<image :style="{marginTop: `${clotheMariginTop}px`}" class='clothe-bg' :src='clotheList[pnIndex].clotheImg' mode='widthFix'></image>
 				<view v-if='(todoIndex >= 0 || fontIndex >= 0)' class='rate-slider'>

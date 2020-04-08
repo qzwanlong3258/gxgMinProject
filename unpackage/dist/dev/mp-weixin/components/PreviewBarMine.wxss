@@ -24,42 +24,35 @@
 /* 垂直间距 */
 /* 透明度 */
 /* 文章场景相关 */
-.bottom-tip.data-v-82c49260 {
+.preview-bar {
+  position: relative;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+          justify-content: center;
+  margin: 0 auto;
+}
+.back-img {
   width: 100%;
-  height: 110rpx;
-  background: #dadada;
+  height: 100%;
+  display: block;
+  z-index: 1;
 }
-.bottom-tip .tip-content.data-v-82c49260 {
-    width: 100%;
-    height: 100%;
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: flex;
-    -webkit-box-align: center;
-    -webkit-align-items: center;
-            align-items: center;
-    -webkit-box-pack: center;
-    -webkit-justify-content: center;
-            justify-content: center;
-    font-size: 18rpx;
+.pattern-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
 }
-.bottom-tip .tip-content .content-column.data-v-82c49260 {
-      width: 180rpx;
-      height: 24rpx;
-      display: -webkit-box;
-      display: -webkit-flex;
-      display: flex;
-      line-height: 24rpx;
-      border-right: 3rpx solid  #000;
-      margin-left: 22rpx;
-      text-align: center;
-}
-.bottom-tip .tip-content .content-column.content-column.data-v-82c49260:last-child {
-        width: 240rpx;
-        border: none;
-}
-.bottom-tip .tip-content .content-column ._i.data-v-82c49260 {
-        font-size: 22rpx;
-        margin-right: 10rpx;
+.pattern-img image {
+  position: absolute;
+  width: 120rpx;
+  height: 120rpx;
+  left: 80rpx;
+  top: 90rpx;
 }
 

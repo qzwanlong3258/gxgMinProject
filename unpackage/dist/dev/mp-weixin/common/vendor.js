@@ -8,7 +8,7 @@
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.createApp = createApp;exports.createComponent = createComponent;exports.createPage = createPage;exports.default = void 0;var _vue = _interopRequireDefault(__webpack_require__(/*! vue */ 2));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _slicedToArray(arr, i) {return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest();}function _nonIterableRest() {throw new TypeError("Invalid attempt to destructure non-iterable instance");}function _iterableToArrayLimit(arr, i) {var _arr = [];var _n = true;var _d = false;var _e = undefined;try {for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) {_arr.push(_s.value);if (i && _arr.length === i) break;}} catch (err) {_d = true;_e = err;} finally {try {if (!_n && _i["return"] != null) _i["return"]();} finally {if (_d) throw _e;}}return _arr;}function _arrayWithHoles(arr) {if (Array.isArray(arr)) return arr;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}function _toConsumableArray(arr) {return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread();}function _nonIterableSpread() {throw new TypeError("Invalid attempt to spread non-iterable instance");}function _iterableToArray(iter) {if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter);}function _arrayWithoutHoles(arr) {if (Array.isArray(arr)) {for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) {arr2[i] = arr[i];}return arr2;}}
+Object.defineProperty(exports, "__esModule", { value: true });exports.createApp = createApp;exports.createComponent = createComponent;exports.createPage = createPage;exports.default = void 0;var _vue = _interopRequireDefault(__webpack_require__(/*! vue */ 2));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function ownKeys(object, enumerableOnly) {var keys = Object.keys(object);if (Object.getOwnPropertySymbols) {var symbols = Object.getOwnPropertySymbols(object);if (enumerableOnly) symbols = symbols.filter(function (sym) {return Object.getOwnPropertyDescriptor(object, sym).enumerable;});keys.push.apply(keys, symbols);}return keys;}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};if (i % 2) {ownKeys(Object(source), true).forEach(function (key) {_defineProperty(target, key, source[key]);});} else if (Object.getOwnPropertyDescriptors) {Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));} else {ownKeys(Object(source)).forEach(function (key) {Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));});}}return target;}function _slicedToArray(arr, i) {return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest();}function _nonIterableRest() {throw new TypeError("Invalid attempt to destructure non-iterable instance");}function _iterableToArrayLimit(arr, i) {if (!(Symbol.iterator in Object(arr) || Object.prototype.toString.call(arr) === "[object Arguments]")) {return;}var _arr = [];var _n = true;var _d = false;var _e = undefined;try {for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) {_arr.push(_s.value);if (i && _arr.length === i) break;}} catch (err) {_d = true;_e = err;} finally {try {if (!_n && _i["return"] != null) _i["return"]();} finally {if (_d) throw _e;}}return _arr;}function _arrayWithHoles(arr) {if (Array.isArray(arr)) return arr;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}function _toConsumableArray(arr) {return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread();}function _nonIterableSpread() {throw new TypeError("Invalid attempt to spread non-iterable instance");}function _iterableToArray(iter) {if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter);}function _arrayWithoutHoles(arr) {if (Array.isArray(arr)) {for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) {arr2[i] = arr[i];}return arr2;}}
 
 var _toString = Object.prototype.toString;
 var hasOwnProperty = Object.prototype.hasOwnProperty;
@@ -241,17 +241,19 @@ var promiseInterceptor = {
 
 
 var SYNC_API_RE =
-/^\$|restoreGlobal|getCurrentSubNVue|getMenuButtonBoundingClientRect|^report|interceptors|Interceptor$|getSubNVueById|requireNativePlugin|upx2px|hideKeyboard|canIUse|^create|Sync$|Manager$|base64ToArrayBuffer|arrayBufferToBase64/;
+/^\$|sendNativeEvent|restoreGlobal|getCurrentSubNVue|getMenuButtonBoundingClientRect|^report|interceptors|Interceptor$|getSubNVueById|requireNativePlugin|upx2px|hideKeyboard|canIUse|^create|Sync$|Manager$|base64ToArrayBuffer|arrayBufferToBase64/;
 
 var CONTEXT_API_RE = /^create|Manager$/;
 
-var CALLBACK_API_RE = /^on/;
+var ASYNC_API = ['createBLEConnection'];
+
+var CALLBACK_API_RE = /^on|^off/;
 
 function isContextApi(name) {
   return CONTEXT_API_RE.test(name);
 }
 function isSyncApi(name) {
-  return SYNC_API_RE.test(name);
+  return SYNC_API_RE.test(name) && ASYNC_API.indexOf(name) === -1;
 }
 
 function isCallbackApi(name) {
@@ -276,6 +278,19 @@ function shouldPromise(name) {
   return true;
 }
 
+/* eslint-disable no-extend-native */
+if (!Promise.prototype.finally) {
+  Promise.prototype.finally = function (callback) {
+    var promise = this.constructor;
+    return this.then(
+    function (value) {return promise.resolve(callback()).then(function () {return value;});},
+    function (reason) {return promise.resolve(callback()).then(function () {
+        throw reason;
+      });});
+
+  };
+}
+
 function promisify(name, api) {
   if (!shouldPromise(name)) {
     return api;
@@ -289,18 +304,6 @@ function promisify(name, api) {
         success: resolve,
         fail: reject })].concat(
       params));
-      /* eslint-disable no-extend-native */
-      if (!Promise.prototype.finally) {
-        Promise.prototype.finally = function (callback) {
-          var promise = this.constructor;
-          return this.then(
-          function (value) {return promise.resolve(callback()).then(function () {return value;});},
-          function (reason) {return promise.resolve(callback()).then(function () {
-              throw reason;
-            });});
-
-        };
-      }
     })));
   };
 }
@@ -354,6 +357,7 @@ var interceptors = {
 
 
 var baseApi = /*#__PURE__*/Object.freeze({
+  __proto__: null,
   upx2px: upx2px,
   interceptors: interceptors,
   addInterceptor: addInterceptor,
@@ -394,8 +398,25 @@ var previewImage = {
   } };
 
 
+function addSafeAreaInsets(result) {
+  if (result.safeArea) {
+    var safeArea = result.safeArea;
+    result.safeAreaInsets = {
+      top: safeArea.top,
+      left: safeArea.left,
+      right: result.windowWidth - safeArea.right,
+      bottom: result.windowHeight - safeArea.bottom };
+
+  }
+}
 var protocols = {
-  previewImage: previewImage };
+  previewImage: previewImage,
+  getSystemInfo: {
+    returnValue: addSafeAreaInsets },
+
+  getSystemInfoSync: {
+    returnValue: addSafeAreaInsets } };
+
 
 var todos = [
 'vibrate'];
@@ -540,6 +561,7 @@ function getProvider(_ref2)
 }
 
 var extraApi = /*#__PURE__*/Object.freeze({
+  __proto__: null,
   getProvider: getProvider });
 
 
@@ -575,6 +597,7 @@ function $emit() {
 }
 
 var eventApi = /*#__PURE__*/Object.freeze({
+  __proto__: null,
   $on: $on,
   $off: $off,
   $once: $once,
@@ -583,8 +606,8 @@ var eventApi = /*#__PURE__*/Object.freeze({
 
 
 
-var api = /*#__PURE__*/Object.freeze({});
-
+var api = /*#__PURE__*/Object.freeze({
+  __proto__: null });
 
 
 var MPPage = Page;
@@ -734,7 +757,7 @@ function initData(vueOptions, context) {
     try {
       data = data.call(context); // 支持 Vue.prototype 上挂的数据
     } catch (e) {
-      if (Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
+      if (Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
         console.warn('根据 Vue 的 data 函数初始化小程序 data 失败，请尽量确保 data 函数中不访问 vm 对象，否则可能影响首次数据渲染速度。', data);
       }
     }
@@ -1218,14 +1241,17 @@ var mocks = ['__route__', '__wxExparserNodeId__', '__wxWebviewId__'];
 
 function findVmByVueId(vm, vuePid) {
   var $children = vm.$children;
-  // 优先查找直属
-  var parentVm = $children.find(function (childVm) {return childVm.$scope._$vueId === vuePid;});
-  if (parentVm) {
-    return parentVm;
+  // 优先查找直属(反向查找:https://github.com/dcloudio/uni-app/issues/1200)
+  for (var i = $children.length - 1; i >= 0; i--) {
+    var childVm = $children[i];
+    if (childVm.$scope._$vueId === vuePid) {
+      return childVm;
+    }
   }
   // 反向递归查找
-  for (var i = $children.length - 1; i >= 0; i--) {
-    parentVm = findVmByVueId($children[i], vuePid);
+  var parentVm;
+  for (var _i = $children.length - 1; _i >= 0; _i--) {
+    parentVm = findVmByVueId($children[_i], vuePid);
     if (parentVm) {
       return parentVm;
     }
@@ -1304,9 +1330,10 @@ function parseBaseComponent(vueComponentOptions)
 {var _ref5 = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {},isPage = _ref5.isPage,initRelation = _ref5.initRelation;var _initVueComponent =
   initVueComponent(_vue.default, vueComponentOptions),_initVueComponent2 = _slicedToArray(_initVueComponent, 2),VueComponent = _initVueComponent2[0],vueOptions = _initVueComponent2[1];
 
-  var options = {
+  var options = _objectSpread({
     multipleSlots: true,
-    addGlobalClass: true };
+    addGlobalClass: true },
+  vueOptions.options || {});
 
 
   {
@@ -1358,7 +1385,7 @@ function parseBaseComponent(vueComponentOptions)
         }
       },
       detached: function detached() {
-        this.$vm.$destroy();
+        this.$vm && this.$vm.$destroy();
       } },
 
     pageLifetimes: {
@@ -1537,8 +1564,8 @@ uni$1;exports.default = _default;
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* WEBPACK VAR INJECTION */(function(global) {/*!
- * Vue.js v2.6.10
- * (c) 2014-2019 Evan You
+ * Vue.js v2.6.11
+ * (c) 2014-2020 Evan You
  * Released under the MIT License.
  */
 /*  */
@@ -2236,7 +2263,13 @@ var uid = 0;
  * directives subscribing to it.
  */
 var Dep = function Dep () {
-  this.id = uid++;
+  // fixed by xxxxxx (nvue vuex)
+  /* eslint-disable no-undef */
+  if(typeof SharedObject !== 'undefined'){
+    this.id = SharedObject.uid++;
+  } else {
+    this.id = uid++;
+  }
   this.subs = [];
 };
 
@@ -3500,7 +3533,7 @@ if (typeof Promise !== 'undefined' && isNative(Promise)) {
   };
 } else if (typeof setImmediate !== 'undefined' && isNative(setImmediate)) {
   // Fallback to setImmediate.
-  // Techinically it leverages the (macro) task queue,
+  // Technically it leverages the (macro) task queue,
   // but it is still a better choice than setTimeout.
   timerFunc = function () {
     setImmediate(flushCallbacks);
@@ -3566,7 +3599,7 @@ if (true) {
     warn(
       "Property \"" + key + "\" must be accessed with \"$data." + key + "\" because " +
       'properties starting with "$" or "_" are not proxied in the Vue instance to ' +
-      'prevent conflicts with Vue internals' +
+      'prevent conflicts with Vue internals. ' +
       'See: https://vuejs.org/v2/api/#data',
       target
     );
@@ -3766,17 +3799,48 @@ function updateListeners (
 
 /*  */
 
+// fixed by xxxxxx (mp properties)
+function extractPropertiesFromVNodeData(data, Ctor, res, context) {
+  var propOptions = Ctor.options.mpOptions && Ctor.options.mpOptions.properties;
+  if (isUndef(propOptions)) {
+    return res
+  }
+  var externalClasses = Ctor.options.mpOptions.externalClasses || [];
+  var attrs = data.attrs;
+  var props = data.props;
+  if (isDef(attrs) || isDef(props)) {
+    for (var key in propOptions) {
+      var altKey = hyphenate(key);
+      var result = checkProp(res, props, key, altKey, true) ||
+          checkProp(res, attrs, key, altKey, false);
+      // externalClass
+      if (
+        result &&
+        res[key] &&
+        externalClasses.indexOf(altKey) !== -1 &&
+        context[camelize(res[key])]
+      ) {
+        // 赋值 externalClass 真正的值(模板里 externalClass 的值可能是字符串)
+        res[key] = context[camelize(res[key])];
+      }
+    }
+  }
+  return res
+}
+
 function extractPropsFromVNodeData (
   data,
   Ctor,
-  tag
+  tag,
+  context// fixed by xxxxxx
 ) {
   // we are only extracting raw values here.
   // validation and default values are handled in the child
   // component itself.
   var propOptions = Ctor.options.props;
   if (isUndef(propOptions)) {
-    return
+    // fixed by xxxxxx
+    return extractPropertiesFromVNodeData(data, Ctor, {}, context)
   }
   var res = {};
   var attrs = data.attrs;
@@ -3804,7 +3868,8 @@ function extractPropsFromVNodeData (
       checkProp(res, attrs, key, altKey, false);
     }
   }
-  return res
+  // fixed by xxxxxx
+  return extractPropertiesFromVNodeData(data, Ctor, res, context)
 }
 
 function checkProp (
@@ -4137,12 +4202,12 @@ function renderList (
   if (Array.isArray(val) || typeof val === 'string') {
     ret = new Array(val.length);
     for (i = 0, l = val.length; i < l; i++) {
-      ret[i] = render(val[i], i);
+      ret[i] = render(val[i], i, i, i); // fixed by xxxxxx
     }
   } else if (typeof val === 'number') {
     ret = new Array(val);
     for (i = 0; i < val; i++) {
-      ret[i] = render(i + 1, i);
+      ret[i] = render(i + 1, i, i, i); // fixed by xxxxxx
     }
   } else if (isObject(val)) {
     if (hasSymbol && val[Symbol.iterator]) {
@@ -4150,7 +4215,7 @@ function renderList (
       var iterator = val[Symbol.iterator]();
       var result = iterator.next();
       while (!result.done) {
-        ret.push(render(result.value, ret.length));
+        ret.push(render(result.value, ret.length, i++, i)); // fixed by xxxxxx
         result = iterator.next();
       }
     } else {
@@ -4158,7 +4223,7 @@ function renderList (
       ret = new Array(keys.length);
       for (i = 0, l = keys.length; i < l; i++) {
         key = keys[i];
-        ret[i] = render(val[key], key, i);
+        ret[i] = render(val[key], key, i, i); // fixed by xxxxxx
       }
     }
   }
@@ -4193,7 +4258,8 @@ function renderSlot (
       }
       props = extend(extend({}, bindObject), props);
     }
-    nodes = scopedSlotFn(props) || fallback;
+    // fixed by xxxxxx app-plus scopedSlot
+    nodes = scopedSlotFn(props, this, props._i) || fallback;
   } else {
     nodes = this.$slots[name] || fallback;
   }
@@ -4421,7 +4487,7 @@ function bindDynamicKeys (baseObj, values) {
     if (typeof key === 'string' && key) {
       baseObj[values[i]] = values[i + 1];
     } else if ( true && key !== '' && key !== null) {
-      // null is a speical value for explicitly removing a binding
+      // null is a special value for explicitly removing a binding
       warn(
         ("Invalid value for dynamic directive argument (expected string or null): " + key),
         this
@@ -4645,6 +4711,8 @@ var componentVNodeHooks = {
     var context = vnode.context;
     var componentInstance = vnode.componentInstance;
     if (!componentInstance._isMounted) {
+      callHook(componentInstance, 'onServiceCreated');
+      callHook(componentInstance, 'onServiceAttached');
       componentInstance._isMounted = true;
       callHook(componentInstance, 'mounted');
     }
@@ -4734,7 +4802,7 @@ function createComponent (
   }
 
   // extract props
-  var propsData = extractPropsFromVNodeData(data, Ctor, tag);
+  var propsData = extractPropsFromVNodeData(data, Ctor, tag, context); // fixed by xxxxxx
 
   // functional component
   if (isTrue(Ctor.options.functional)) {
@@ -4917,6 +4985,12 @@ function _createElement (
     ns = (context.$vnode && context.$vnode.ns) || config.getTagNamespace(tag);
     if (config.isReservedTag(tag)) {
       // platform built-in elements
+      if ( true && isDef(data) && isDef(data.nativeOn)) {
+        warn(
+          ("The .native modifier for v-on is only valid on components but it was used on <" + tag + ">."),
+          context
+        );
+      }
       vnode = new VNode(
         config.parsePlatformTagName(tag), data, children,
         undefined, undefined, context
@@ -5042,7 +5116,7 @@ function renderMixin (Vue) {
     // render self
     var vnode;
     try {
-      // There's no need to maintain a stack becaues all render fns are called
+      // There's no need to maintain a stack because all render fns are called
       // separately from one another. Nested component's render fns are called
       // when parent component is patched.
       currentRenderingInstance = vm;
@@ -5577,7 +5651,10 @@ function updateChildComponent (
     // keep a copy of raw propsData
     vm.$options.propsData = propsData;
   }
-
+  
+  // fixed by xxxxxx update properties(mp runtime)
+  vm._$updateProperties && vm._$updateProperties(vm);
+  
   // update listeners
   listeners = listeners || emptyObject;
   var oldListeners = vm.$options._parentListeners;
@@ -6896,7 +6973,7 @@ Object.defineProperty(Vue, 'FunctionalRenderContext', {
   value: FunctionalRenderContext
 });
 
-Vue.version = '2.6.10';
+Vue.version = '2.6.11';
 
 /**
  * https://raw.githubusercontent.com/Tencent/westore/master/packages/westore/utils/diff.js
@@ -7009,7 +7086,7 @@ function type(obj) {
 
 function flushCallbacks$1(vm) {
     if (vm.__next_tick_callbacks && vm.__next_tick_callbacks.length) {
-        if (Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
+        if (Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
             var mpInstance = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + vm._uid +
                 ']:flushCallbacks[' + vm.__next_tick_callbacks.length + ']');
@@ -7030,14 +7107,14 @@ function nextTick$1(vm, cb) {
     //1.nextTick 之前 已 setData 且 setData 还未回调完成
     //2.nextTick 之前存在 render watcher
     if (!vm.__next_tick_pending && !hasRenderWatcher(vm)) {
-        if(Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG){
+        if(Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG){
             var mpInstance = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + vm._uid +
                 ']:nextVueTick');
         }
         return nextTick(cb, vm)
     }else{
-        if(Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG){
+        if(Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG){
             var mpInstance$1 = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance$1.is || mpInstance$1.route) + '][' + vm._uid +
                 ']:nextMPTick');
@@ -7111,9 +7188,9 @@ var patch = function(oldVnode, vnode) {
     Object.keys(data).forEach(function (key) { //仅同步 data 中有的数据
       mpData[key] = mpInstance.data[key];
     });
-    var diffData = diff(data, mpData);
+    var diffData = this.$shouldDiffData === false ? data : diff(data, mpData);
     if (Object.keys(diffData).length) {
-      if (Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
+      if (Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
         console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + this._uid +
           ']差量更新',
           JSON.stringify(diffData));
@@ -7287,6 +7364,11 @@ function internalMixin(Vue) {
 
   Vue.config.errorHandler = function(err) {
     console.error(err);
+    /* eslint-disable no-undef */
+    var app = getApp();
+    if (app && app.onError) {
+      app.onError(err);
+    }
   };
 
   var oldEmit = Vue.prototype.$emit;
@@ -7306,9 +7388,21 @@ function internalMixin(Vue) {
 
   MP_METHODS.forEach(function (method) {
     Vue.prototype[method] = function(args) {
-      if (this.$scope) {
+      if (this.$scope && this.$scope[method]) {
         return this.$scope[method](args)
       }
+      // mp-alipay
+      if (typeof my === 'undefined') {
+        return
+      }
+      if (method === 'createSelectorQuery') {
+        /* eslint-disable no-undef */
+        return my.createSelectorQuery(args)
+      } else if (method === 'createIntersectionObserver') {
+        /* eslint-disable no-undef */
+        return my.createIntersectionObserver(args)
+      }
+      // TODO mp-alipay 暂不支持 selectAllComponents,selectComponent
     };
   });
 
@@ -7329,7 +7423,7 @@ function internalMixin(Vue) {
       }
     }
     if (vm._hasHookEvent) {
-      vm.$emit('hook:' + hook);
+      vm.$emit('hook:' + hook, args);
     }
     popTarget();
     return ret
@@ -7520,9 +7614,9 @@ module.exports = g;
 
 /***/ }),
 /* 4 */
-/*!*******************************************!*\
-  !*** E:/Desktop/gxgMinProject/pages.json ***!
-  \*******************************************/
+/*!**********************************************************!*\
+  !*** D:/laragon/www/wl_project/gxgMinProject/pages.json ***!
+  \**********************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -8423,13 +8517,13 @@ main();
 /*! exports provided: _from, _id, _inBundle, _integrity, _location, _phantomChildren, _requested, _requiredBy, _resolved, _shasum, _spec, _where, author, bugs, bundleDependencies, deprecated, description, devDependencies, files, gitHead, homepage, license, main, name, repository, scripts, version, default */
 /***/ (function(module) {
 
-module.exports = {"_from":"@dcloudio/uni-stat@^2.0.0-alpha-24420191128001","_id":"@dcloudio/uni-stat@2.0.0-v3-24020191018001","_inBundle":false,"_integrity":"sha512-nYBm5pRrYzrj2dKMqucWSF2PwInUMnn3MLHM/ik3gnLUEKSW61rzcY1RPlUwaH7c+Snm6N+bAJzmj3GvlrlVXA==","_location":"/@dcloudio/uni-stat","_phantomChildren":{},"_requested":{"type":"range","registry":true,"raw":"@dcloudio/uni-stat@^2.0.0-alpha-24420191128001","name":"@dcloudio/uni-stat","escapedName":"@dcloudio%2funi-stat","scope":"@dcloudio","rawSpec":"^2.0.0-alpha-24420191128001","saveSpec":null,"fetchSpec":"^2.0.0-alpha-24420191128001"},"_requiredBy":["/","/@dcloudio/vue-cli-plugin-uni"],"_resolved":"https://registry.npmjs.org/@dcloudio/uni-stat/-/uni-stat-2.0.0-v3-24020191018001.tgz","_shasum":"6ef04326cc0b945726413eebe442ab8f47c7536c","_spec":"@dcloudio/uni-stat@^2.0.0-alpha-24420191128001","_where":"/Users/guoshengqiang/Documents/dcloud-plugins/alpha/uniapp-cli","author":"","bugs":{"url":"https://github.com/dcloudio/uni-app/issues"},"bundleDependencies":false,"deprecated":false,"description":"","devDependencies":{"@babel/core":"^7.5.5","@babel/preset-env":"^7.5.5","eslint":"^6.1.0","rollup":"^1.19.3","rollup-plugin-babel":"^4.3.3","rollup-plugin-clear":"^2.0.7","rollup-plugin-commonjs":"^10.0.2","rollup-plugin-copy":"^3.1.0","rollup-plugin-eslint":"^7.0.0","rollup-plugin-json":"^4.0.0","rollup-plugin-node-resolve":"^5.2.0","rollup-plugin-replace":"^2.2.0","rollup-plugin-uglify":"^6.0.2"},"files":["dist","package.json","LICENSE"],"gitHead":"197e8df53cc9d4c3f6eb722b918ccf51672b5cfe","homepage":"https://github.com/dcloudio/uni-app#readme","license":"Apache-2.0","main":"dist/index.js","name":"@dcloudio/uni-stat","repository":{"type":"git","url":"git+https://github.com/dcloudio/uni-app.git","directory":"packages/uni-stat"},"scripts":{"build":"NODE_ENV=production rollup -c rollup.config.js","dev":"NODE_ENV=development rollup -w -c rollup.config.js"},"version":"2.0.0-v3-24020191018001"};
+module.exports = {"_from":"@dcloudio/uni-stat@next","_id":"@dcloudio/uni-stat@2.0.0-26920200402001","_inBundle":false,"_integrity":"sha512-Mdhd/IRuUMHWPj3TtWrBb0kghRBA0YiO2L2THMFvhCTfQDSoSq1vwOdAx5n/8fIORAvG0uVQoYl73xeVFZML5A==","_location":"/@dcloudio/uni-stat","_phantomChildren":{},"_requested":{"type":"tag","registry":true,"raw":"@dcloudio/uni-stat@next","name":"@dcloudio/uni-stat","escapedName":"@dcloudio%2funi-stat","scope":"@dcloudio","rawSpec":"next","saveSpec":null,"fetchSpec":"next"},"_requiredBy":["#USER","/","/@dcloudio/vue-cli-plugin-uni"],"_resolved":"https://registry.npmjs.org/@dcloudio/uni-stat/-/uni-stat-2.0.0-26920200402001.tgz","_shasum":"5f66f5dc252ac00c6064857dee8251ee51aa2391","_spec":"@dcloudio/uni-stat@next","_where":"/Users/guoshengqiang/Documents/dcloud-plugins/release/uniapp-cli","author":"","bugs":{"url":"https://github.com/dcloudio/uni-app/issues"},"bundleDependencies":false,"deprecated":false,"description":"","devDependencies":{"@babel/core":"^7.5.5","@babel/preset-env":"^7.5.5","eslint":"^6.1.0","rollup":"^1.19.3","rollup-plugin-babel":"^4.3.3","rollup-plugin-clear":"^2.0.7","rollup-plugin-commonjs":"^10.0.2","rollup-plugin-copy":"^3.1.0","rollup-plugin-eslint":"^7.0.0","rollup-plugin-json":"^4.0.0","rollup-plugin-node-resolve":"^5.2.0","rollup-plugin-replace":"^2.2.0","rollup-plugin-uglify":"^6.0.2"},"files":["dist","package.json","LICENSE"],"gitHead":"bfdbb7b3000599679ef8cb29a969e6bd447b00c7","homepage":"https://github.com/dcloudio/uni-app#readme","license":"Apache-2.0","main":"dist/index.js","name":"@dcloudio/uni-stat","repository":{"type":"git","url":"git+https://github.com/dcloudio/uni-app.git","directory":"packages/uni-stat"},"scripts":{"build":"NODE_ENV=production rollup -c rollup.config.js","dev":"NODE_ENV=development rollup -w -c rollup.config.js"},"version":"2.0.0-26920200402001"};
 
 /***/ }),
 /* 7 */
-/*!************************************************************!*\
-  !*** E:/Desktop/gxgMinProject/pages.json?{"type":"style"} ***!
-  \************************************************************/
+/*!***************************************************************************!*\
+  !*** D:/laragon/www/wl_project/gxgMinProject/pages.json?{"type":"style"} ***!
+  \***************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -8438,9 +8532,9 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 /***/ }),
 /* 8 */
-/*!***********************************************************!*\
-  !*** E:/Desktop/gxgMinProject/pages.json?{"type":"stat"} ***!
-  \***********************************************************/
+/*!**************************************************************************!*\
+  !*** D:/laragon/www/wl_project/gxgMinProject/pages.json?{"type":"stat"} ***!
+  \**************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -9241,9 +9335,9 @@ if (hadRuntime) {
 
 /***/ }),
 /* 15 */
-/*!*********************************************************************!*\
-  !*** E:/Desktop/gxgMinProject/utils/regenerator-runtime/runtime.js ***!
-  \*********************************************************************/
+/*!************************************************************************************!*\
+  !*** D:/laragon/www/wl_project/gxgMinProject/utils/regenerator-runtime/runtime.js ***!
+  \************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -9971,9 +10065,9 @@ function () {
 
 /***/ }),
 /* 16 */
-/*!*************************************************!*\
-  !*** E:/Desktop/gxgMinProject/utils/storage.js ***!
-  \*************************************************/
+/*!****************************************************************!*\
+  !*** D:/laragon/www/wl_project/gxgMinProject/utils/storage.js ***!
+  \****************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -10108,9 +10202,9 @@ module.exports = {
 
 /***/ }),
 /* 17 */
-/*!*************************************************!*\
-  !*** E:/Desktop/gxgMinProject/config/router.js ***!
-  \*************************************************/
+/*!****************************************************************!*\
+  !*** D:/laragon/www/wl_project/gxgMinProject/config/router.js ***!
+  \****************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -10152,9 +10246,9 @@ module.exports = {
 
 /***/ }),
 /* 18 */
-/*!***********************************************!*\
-  !*** E:/Desktop/gxgMinProject/config/http.js ***!
-  \***********************************************/
+/*!**************************************************************!*\
+  !*** D:/laragon/www/wl_project/gxgMinProject/config/http.js ***!
+  \**************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -10333,7 +10427,7 @@ function request()
                       showCancel: false });
 
                     reject(_msg2);
-                  }case 19:case "end":return _context.stop();}}}, _callee, this);}));function success(_x) {return _success.apply(this, arguments);}return success;}(),
+                  }case 19:case "end":return _context.stop();}}}, _callee);}));function success(_x) {return _success.apply(this, arguments);}return success;}(),
 
 
       fail: function fail(res) {
@@ -10378,7 +10472,7 @@ var refreshToken = /*#__PURE__*/function () {var _ref2 = _asyncToGenerator( /*#_
                 errorText: 'refreshToken刷新失败' }).
               catch(function (err) {return console.log(err);}));case 9:res = _context2.sent;
             setStorage('tempToken', res.token);
-            inRefreshToken = false;case 12:case "end":return _context2.stop();}}}, _callee2, this);}));return function refreshToken() {return _ref2.apply(this, arguments);};}();
+            inRefreshToken = false;case 12:case "end":return _context2.stop();}}}, _callee2);}));return function refreshToken() {return _ref2.apply(this, arguments);};}();
 
 
 module.exports = {
@@ -10387,9 +10481,9 @@ module.exports = {
 
 /***/ }),
 /* 19 */
-/*!**********************************************!*\
-  !*** E:/Desktop/gxgMinProject/config/api.js ***!
-  \**********************************************/
+/*!*************************************************************!*\
+  !*** D:/laragon/www/wl_project/gxgMinProject/config/api.js ***!
+  \*************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -10518,9 +10612,9 @@ module.exports = {
 /* 20 */,
 /* 21 */,
 /* 22 */
-/*!********************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/runtime/componentNormalizer.js ***!
-  \********************************************************************/
+/*!**********************************************************************************************************!*\
+  !*** ./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib/runtime/componentNormalizer.js ***!
+  \**********************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -10541,12 +10635,34 @@ function normalizeComponent (
   injectStyles,
   scopeId,
   moduleIdentifier, /* server only */
-  shadowMode /* vue-cli only */
+  shadowMode, /* vue-cli only */
+  components, // fixed by xxxxxx auto components
+  renderjs // fixed by xxxxxx renderjs
 ) {
   // Vue.extend constructor export interop
   var options = typeof scriptExports === 'function'
     ? scriptExports.options
     : scriptExports
+
+  // fixed by xxxxxx auto components
+  if (components) {
+    if (!options.components) {
+      options.components = {}
+    }
+    var hasOwn = Object.prototype.hasOwnProperty
+    for (var name in components) {
+      if (hasOwn.call(components, name) && !hasOwn.call(options.components, name)) {
+        options.components[name] = components[name]
+      }
+    }
+  }
+  // fixed by xxxxxx renderjs
+  if (renderjs) {
+    (renderjs.beforeCreate || (renderjs.beforeCreate = [])).unshift(function() {
+      this[renderjs.__module] = this
+    });
+    (options.mixins || (options.mixins = [])).push(renderjs)
+  }
 
   // render functions
   if (render) {
@@ -10624,9 +10740,9 @@ function normalizeComponent (
 
 /***/ }),
 /* 23 */
-/*!***********************************************!*\
-  !*** E:/Desktop/gxgMinProject/store/index.js ***!
-  \***********************************************/
+/*!**************************************************************!*\
+  !*** D:/laragon/www/wl_project/gxgMinProject/store/index.js ***!
+  \**************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -11606,9 +11722,9 @@ var index_esm = {
 
 /***/ }),
 /* 25 */
-/*!*************************************************!*\
-  !*** E:/Desktop/gxgMinProject/store/getters.js ***!
-  \*************************************************/
+/*!****************************************************************!*\
+  !*** D:/laragon/www/wl_project/gxgMinProject/store/getters.js ***!
+  \****************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -11623,9 +11739,9 @@ getters;exports.default = _default;
 
 /***/ }),
 /* 26 */
-/*!******************************************************!*\
-  !*** E:/Desktop/gxgMinProject/store/modules/user.js ***!
-  \******************************************************/
+/*!*********************************************************************!*\
+  !*** D:/laragon/www/wl_project/gxgMinProject/store/modules/user.js ***!
+  \*********************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -11677,9 +11793,9 @@ user;exports.default = _default;
 
 /***/ }),
 /* 27 */
-/*!*******************************************************!*\
-  !*** E:/Desktop/gxgMinProject/store/mutationTypes.js ***!
-  \*******************************************************/
+/*!**********************************************************************!*\
+  !*** D:/laragon/www/wl_project/gxgMinProject/store/mutationTypes.js ***!
+  \**********************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -11700,9 +11816,9 @@ types;exports.default = _default;
 
 /***/ }),
 /* 28 */
-/*!**********************************************************!*\
-  !*** E:/Desktop/gxgMinProject/store/modules/category.js ***!
-  \**********************************************************/
+/*!*************************************************************************!*\
+  !*** D:/laragon/www/wl_project/gxgMinProject/store/modules/category.js ***!
+  \*************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -11711,7 +11827,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 var _http = __webpack_require__(/*! ../../config/http.js */ 18);
 
 
-var _api = __webpack_require__(/*! ../../config/api.js */ 19);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};var ownKeys = Object.keys(source);if (typeof Object.getOwnPropertySymbols === 'function') {ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) {return Object.getOwnPropertyDescriptor(source, sym).enumerable;}));}ownKeys.forEach(function (key) {_defineProperty(target, key, source[key]);});}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}var _default =
+var _api = __webpack_require__(/*! ../../config/api.js */ 19);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function ownKeys(object, enumerableOnly) {var keys = Object.keys(object);if (Object.getOwnPropertySymbols) {var symbols = Object.getOwnPropertySymbols(object);if (enumerableOnly) symbols = symbols.filter(function (sym) {return Object.getOwnPropertyDescriptor(object, sym).enumerable;});keys.push.apply(keys, symbols);}return keys;}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};if (i % 2) {ownKeys(Object(source), true).forEach(function (key) {_defineProperty(target, key, source[key]);});} else if (Object.getOwnPropertyDescriptors) {Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));} else {ownKeys(Object(source)).forEach(function (key) {Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));});}}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}var _default =
 
 
 
@@ -11753,9 +11869,9 @@ var _api = __webpack_require__(/*! ../../config/api.js */ 19);function _interopR
 
 /***/ }),
 /* 29 */
-/*!*******************************************************!*\
-  !*** E:/Desktop/gxgMinProject/store/modules/order.js ***!
-  \*******************************************************/
+/*!**********************************************************************!*\
+  !*** D:/laragon/www/wl_project/gxgMinProject/store/modules/order.js ***!
+  \**********************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -11825,13 +11941,13 @@ var _filter = __webpack_require__(/*! @/config/filter.js */ 31);var _mutations;f
                     icon: (0, _filter.formatOrderStateIcon)(item.state),
                     counts: item.count };
 
-                }).filter(function (item) {return item.id != 0;}));case 5:case "end":return _context.stop();}}}, _callee, this);}));function getOrderStatus(_x, _x2) {return _getOrderStatus.apply(this, arguments);}return getOrderStatus;}() } };exports.default = _default;
+                }).filter(function (item) {return item.id != 0;}));case 5:case "end":return _context.stop();}}}, _callee);}));function getOrderStatus(_x, _x2) {return _getOrderStatus.apply(this, arguments);}return getOrderStatus;}() } };exports.default = _default;
 
 /***/ }),
 /* 30 */
-/*!***************************************************!*\
-  !*** E:/Desktop/gxgMinProject/api/orderStatus.js ***!
-  \***************************************************/
+/*!******************************************************************!*\
+  !*** D:/laragon/www/wl_project/gxgMinProject/api/orderStatus.js ***!
+  \******************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -11896,7 +12012,7 @@ getOrderDetail(_x) {return _getOrderDetail.apply(this, arguments);}
 
 /**
                                                                      * 删除订单
-                                                                     */function _getOrderDetail() {_getOrderDetail = _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee(id) {var info, item, buttons;return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:_context.next = 2;return (0, _http.request)({ url: _api.GET_ORDER_DETAIL, data: { orderid: id } });case 2:info = _context.sent;item = info.list[0];_context.next = 6;return (0, _http.request)({ url: _api.GET_ORDER_BUTTON, data: { state: item.state } });case 6:buttons = _context.sent;return _context.abrupt("return", { id: item.orderid, name: item.modelName, modelMoney: item.modelMoney, userName: item.name, address: item.address, phone: item.phone, status: (0, _filter.formatOrderState)(item.state), showBtn: buttons.list.map(function (item) {return item.id;}), orderId: item.orderid, deliveryId: item.awb || '暂无', createTime: (0, _util.time)(item.lastdate), payTime: (0, _util.time)(item.lastdate), typeName: item.typeName, sexName: (0, _filter.formatGender)(item.sexName), sexValue: item.sexName, sizeName: item.sizeName, counts: 1, resultList: [{ url: item.zmodelurl, localtion: 'positive', patternUrl: item.thzurl }, { url: item.fimg, localtion: 'negative', patternUrl: item.thfurl }], canYouPay: item.cisdelete == 0 && item.misdelete == 0 && item.visdelete == 0 });case 8:case "end":return _context.stop();}}}, _callee, this);}));return _getOrderDetail.apply(this, arguments);}
+                                                                     */function _getOrderDetail() {_getOrderDetail = _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee(id) {var info, item, buttons;return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:_context.next = 2;return (0, _http.request)({ url: _api.GET_ORDER_DETAIL, data: { orderid: id } });case 2:info = _context.sent;item = info.list[0];_context.next = 6;return (0, _http.request)({ url: _api.GET_ORDER_BUTTON, data: { state: item.state } });case 6:buttons = _context.sent;return _context.abrupt("return", { id: item.orderid, name: item.modelName, modelMoney: item.modelMoney, userName: item.name, address: item.address, phone: item.phone, status: (0, _filter.formatOrderState)(item.state), showBtn: buttons.list.map(function (item) {return item.id;}), orderId: item.orderid, deliveryId: item.awb || '暂无', createTime: (0, _util.time)(item.lastdate), payTime: (0, _util.time)(item.lastdate), typeName: item.typeName, sexName: (0, _filter.formatGender)(item.sexName), sexValue: item.sexName, sizeName: item.sizeName, counts: 1, resultList: [{ url: item.zmodelurl, localtion: 'positive', patternUrl: item.thzurl }, { url: item.fimg, localtion: 'negative', patternUrl: item.thfurl }], canYouPay: item.cisdelete == 0 && item.misdelete == 0 && item.visdelete == 0 });case 8:case "end":return _context.stop();}}}, _callee);}));return _getOrderDetail.apply(this, arguments);}
 function deleteOrder(id, showLoading) {
   return (0, _http.request)({
     method: 'POST',
@@ -11918,9 +12034,9 @@ function orderDelivery(id) {
 
 /***/ }),
 /* 31 */
-/*!*************************************************!*\
-  !*** E:/Desktop/gxgMinProject/config/filter.js ***!
-  \*************************************************/
+/*!****************************************************************!*\
+  !*** D:/laragon/www/wl_project/gxgMinProject/config/filter.js ***!
+  \****************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -12024,9 +12140,9 @@ function formatOrderButtonState(state) {
 
 /***/ }),
 /* 32 */
-/*!**********************************************!*\
-  !*** E:/Desktop/gxgMinProject/utils/util.js ***!
-  \**********************************************/
+/*!*************************************************************!*\
+  !*** D:/laragon/www/wl_project/gxgMinProject/utils/util.js ***!
+  \*************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -12215,9 +12331,9 @@ module.exports = {
 /* 37 */,
 /* 38 */,
 /* 39 */
-/*!********************************************!*\
-  !*** E:/Desktop/gxgMinProject/api/home.js ***!
-  \********************************************/
+/*!***********************************************************!*\
+  !*** D:/laragon/www/wl_project/gxgMinProject/api/home.js ***!
+  \***********************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -12239,12 +12355,14 @@ function getList(data) {
       size: 999 } });
 
 
+
   var p_style = (0, _http.request)({
     url: _api.GET_STYLE_LIST,
     data: {
       showLoading: false,
-      size: 999 } });
+      size: 999 },
 
+    needToken: false });
 
   return Promise.all([p_theme, p_style]).then(function (res) {
     var theme = res[0];
@@ -12285,23 +12403,23 @@ function getList(data) {
 
 /***/ }),
 /* 40 */
-/*!**************************************************!*\
-  !*** E:/Desktop/gxgMinProject/config/package.js ***!
-  \**************************************************/
+/*!*****************************************************************!*\
+  !*** D:/laragon/www/wl_project/gxgMinProject/config/package.js ***!
+  \*****************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 /* WEBPACK VAR INJECTION */(function(uni) {var _regenerator = _interopRequireDefault(__webpack_require__(/*! ./node_modules/@babel/runtime/regenerator */ 12));
-var _common = __webpack_require__(/*! ./common.js */ 41);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};var ownKeys = Object.keys(source);if (typeof Object.getOwnPropertySymbols === 'function') {ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) {return Object.getOwnPropertyDescriptor(source, sym).enumerable;}));}ownKeys.forEach(function (key) {_defineProperty(target, key, source[key]);});}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};}var duration = 2000;
+var _common = __webpack_require__(/*! ./common.js */ 41);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function ownKeys(object, enumerableOnly) {var keys = Object.keys(object);if (Object.getOwnPropertySymbols) {var symbols = Object.getOwnPropertySymbols(object);if (enumerableOnly) symbols = symbols.filter(function (sym) {return Object.getOwnPropertyDescriptor(object, sym).enumerable;});keys.push.apply(keys, symbols);}return keys;}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};if (i % 2) {ownKeys(Object(source), true).forEach(function (key) {_defineProperty(target, key, source[key]);});} else if (Object.getOwnPropertyDescriptors) {Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));} else {ownKeys(Object(source)).forEach(function (key) {Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));});}}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};}var duration = 2000;
 /**
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       * 对uni-app的api的二次封装
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       */
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     * 对uni-app的api的二次封装
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     */
 
 /**
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           * 拨打电话，对uni.uni.makePhoneCall进行封装
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           * @param {string} phone - 电话号码
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           */
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         * 拨打电话，对uni.uni.makePhoneCall进行封装
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         * @param {string} phone - 电话号码
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         */
 function makePhoneCall()
 
 {var _ref = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},_ref$phone = _ref.phone,phone = _ref$phone === void 0 ? '' : _ref$phone;
@@ -12475,7 +12593,7 @@ function muchImages()
                           content: res.msg,
                           showCancel: false });
 
-                      } }));case 2:case "end":return _context.stop();}}}, _callee, this);}));return function (_x) {return _ref5.apply(this, arguments);};}());
+                      } }));case 2:case "end":return _context.stop();}}}, _callee);}));return function (_x) {return _ref5.apply(this, arguments);};}());
 
 
     } });
@@ -12614,9 +12732,9 @@ module.exports = {
 
 /***/ }),
 /* 41 */
-/*!*************************************************!*\
-  !*** E:/Desktop/gxgMinProject/config/common.js ***!
-  \*************************************************/
+/*!****************************************************************!*\
+  !*** D:/laragon/www/wl_project/gxgMinProject/config/common.js ***!
+  \****************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -12644,9 +12762,9 @@ module.exports = {
 /* 48 */,
 /* 49 */,
 /* 50 */
-/*!*****************************************************!*\
-  !*** E:/Desktop/gxgMinProject/pages/auth/wxAuth.js ***!
-  \*****************************************************/
+/*!********************************************************************!*\
+  !*** D:/laragon/www/wl_project/gxgMinProject/pages/auth/wxAuth.js ***!
+  \********************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -12810,9 +12928,9 @@ wxAuth;exports.default = _default;
 
 /***/ }),
 /* 51 */
-/*!***************************************************!*\
-  !*** E:/Desktop/gxgMinProject/utils/openLogin.js ***!
-  \***************************************************/
+/*!******************************************************************!*\
+  !*** D:/laragon/www/wl_project/gxgMinProject/utils/openLogin.js ***!
+  \******************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -12841,9 +12959,9 @@ module.exports = {
 
 /***/ }),
 /* 52 */
-/*!************************************************!*\
-  !*** E:/Desktop/gxgMinProject/config/image.js ***!
-  \************************************************/
+/*!***************************************************************!*\
+  !*** D:/laragon/www/wl_project/gxgMinProject/config/image.js ***!
+  \***************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -12883,9 +13001,9 @@ module.exports = {
 /* 59 */,
 /* 60 */,
 /* 61 */
-/*!***************************************************************!*\
-  !*** E:/Desktop/gxgMinProject/pages/todoDetail/todoDetail.js ***!
-  \***************************************************************/
+/*!******************************************************************************!*\
+  !*** D:/laragon/www/wl_project/gxgMinProject/pages/todoDetail/todoDetail.js ***!
+  \******************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -12934,15 +13052,14 @@ var _mutationTypes = _interopRequireDefault(__webpack_require__(/*! @/store/muta
 
 
 
+
 var _common = __webpack_require__(/*! @/config/common.js */ 41);
 
 
 var _openLogin = __webpack_require__(/*! @/utils/openLogin.js */ 51);
 
 
-var _api = __webpack_require__(/*! @/config/api.js */ 19);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};var ownKeys = Object.keys(source);if (typeof Object.getOwnPropertySymbols === 'function') {ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) {return Object.getOwnPropertyDescriptor(source, sym).enumerable;}));}ownKeys.forEach(function (key) {_defineProperty(target, key, source[key]);});}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};}var app = getApp();var moveViewWidth = app.globalData.moveViewWidth;var moveViewHeight = app.globalData.moveViewHeight; // 微信登录
-
-
+var _api = __webpack_require__(/*! @/config/api.js */ 19);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function ownKeys(object, enumerableOnly) {var keys = Object.keys(object);if (Object.getOwnPropertySymbols) {var symbols = Object.getOwnPropertySymbols(object);if (enumerableOnly) symbols = symbols.filter(function (sym) {return Object.getOwnPropertyDescriptor(object, sym).enumerable;});keys.push.apply(keys, symbols);}return keys;}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};if (i % 2) {ownKeys(Object(source), true).forEach(function (key) {_defineProperty(target, key, source[key]);});} else if (Object.getOwnPropertyDescriptors) {Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));} else {ownKeys(Object(source)).forEach(function (key) {Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));});}}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};}var app = getApp();var moveViewWidth = app.globalData.moveViewWidth;var moveViewHeight = app.globalData.moveViewHeight; // 微信登录
 
 
 
@@ -13133,6 +13250,12 @@ var detail = {
   },
   onLoad: function () {var _onLoad = _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee(options) {var phoneHeight, code, _ref, session_key;return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:
               this.options = options;
+              //  let info = uni.createSelectorQuery().select(".design-top");
+              // 　　　  　info.boundingClientRect(function(data) { //data - 各种参数
+              // // 　　　  　console.log(data.height)
+              //   setStorage('height',data.height)// 获取元素宽度
+              //   setStorage('width',data.width)// 获取元素宽度
+              // 　　    }).exec()
               phoneHeight = (0, _storage.getStorage)('sysInfo').windowHeight - 624;
               if ((0, _storage.getStorage)('sysInfo').windowWidth <= 700) {
                 if (phoneHeight < 0) {
@@ -13212,9 +13335,9 @@ var detail = {
     // this.clearData();
     getApp().globalData.backToDoOption = {
       id: '',
-      type: ''
-      //清除从预览返回过来的参数
-    };},
+      type: '' };
+    //清除从预览返回过来的参数
+  },
   methods: _objectSpread({},
   (0, _vuex.mapMutations)('order', [_mutationTypes.default.SET_ORDER_ITEM]), {
 
@@ -13316,7 +13439,7 @@ var detail = {
                     clotheImg: res.zimg },
                   {
                     localtion: 'negative',
-                    clotheImg: res.fimg }];case 5:case "end":return _context6.stop();}}}, _callee6, this);}));return function (_x2) {return _ref2.apply(this, arguments);};}());
+                    clotheImg: res.fimg }];case 5:case "end":return _context6.stop();}}}, _callee6);}));return function (_x2) {return _ref2.apply(this, arguments);};}());
 
 
     },
@@ -13381,9 +13504,9 @@ var detail = {
       this.options = {}; // 清除传参
       getApp().globalData.backToDoOption = {
         id: '',
-        type: ''
-        //清除从预览返回过来的参数
-      };},
+        type: '' };
+      //清除从预览返回过来的参数
+    },
 
     /*正反切换*/
     changePnEvent: function changePnEvent() {
@@ -14116,9 +14239,9 @@ detail;exports.default = _default;
 
 /***/ }),
 /* 62 */
-/*!**************************************************!*\
-  !*** E:/Desktop/gxgMinProject/api/todoDetail.js ***!
-  \**************************************************/
+/*!*****************************************************************!*\
+  !*** D:/laragon/www/wl_project/gxgMinProject/api/todoDetail.js ***!
+  \*****************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -14140,7 +14263,7 @@ var _api = __webpack_require__(/*! @/config/api.js */ 19);
 var _filter = __webpack_require__(/*! @/config/filter.js */ 31);
 
 
-var _runtime = _interopRequireDefault(__webpack_require__(/*! @/utils/regenerator-runtime/runtime.js */ 15));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};var ownKeys = Object.keys(source);if (typeof Object.getOwnPropertySymbols === 'function') {ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) {return Object.getOwnPropertyDescriptor(source, sym).enumerable;}));}ownKeys.forEach(function (key) {_defineProperty(target, key, source[key]);});}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}
+var _runtime = _interopRequireDefault(__webpack_require__(/*! @/utils/regenerator-runtime/runtime.js */ 15));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function ownKeys(object, enumerableOnly) {var keys = Object.keys(object);if (Object.getOwnPropertySymbols) {var symbols = Object.getOwnPropertySymbols(object);if (enumerableOnly) symbols = symbols.filter(function (sym) {return Object.getOwnPropertyDescriptor(object, sym).enumerable;});keys.push.apply(keys, symbols);}return keys;}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};if (i % 2) {ownKeys(Object(source), true).forEach(function (key) {_defineProperty(target, key, source[key]);});} else if (Object.getOwnPropertyDescriptors) {Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));} else {ownKeys(Object(source)).forEach(function (key) {Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));});}}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}
 var app = getApp();
 var moveViewWidth = app.globalData.moveViewWidth;
 var moveViewHeight = app.globalData.moveViewHeight;
@@ -14478,9 +14601,9 @@ function saveDesign(data) {
 /* 69 */,
 /* 70 */,
 /* 71 */
-/*!**************************************************!*\
-  !*** E:/Desktop/gxgMinProject/api/writeOrder.js ***!
-  \**************************************************/
+/*!*****************************************************************!*\
+  !*** D:/laragon/www/wl_project/gxgMinProject/api/writeOrder.js ***!
+  \*****************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -14573,9 +14696,9 @@ function unifiedOrder(data) {
 /* 78 */,
 /* 79 */,
 /* 80 */
-/*!***********************************************!*\
-  !*** E:/Desktop/gxgMinProject/api/preview.js ***!
-  \***********************************************/
+/*!**************************************************************!*\
+  !*** D:/laragon/www/wl_project/gxgMinProject/api/preview.js ***!
+  \**************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -14605,9 +14728,9 @@ function createOrder(data) {
 /* 87 */,
 /* 88 */,
 /* 89 */
-/*!********************************************!*\
-  !*** E:/Desktop/gxgMinProject/api/todo.js ***!
-  \********************************************/
+/*!***********************************************************!*\
+  !*** D:/laragon/www/wl_project/gxgMinProject/api/todo.js ***!
+  \***********************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -14652,9 +14775,9 @@ function getColtheInfo(id) {
 /* 96 */,
 /* 97 */,
 /* 98 */
-/*!*****************************************************!*\
-  !*** E:/Desktop/gxgMinProject/api/addressDetail.js ***!
-  \*****************************************************/
+/*!********************************************************************!*\
+  !*** D:/laragon/www/wl_project/gxgMinProject/api/addressDetail.js ***!
+  \********************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -14713,9 +14836,9 @@ function updateReceiveAddress(data) {
 /* 105 */,
 /* 106 */,
 /* 107 */
-/*!***************************************************!*\
-  !*** E:/Desktop/gxgMinProject/api/refundOrder.js ***!
-  \***************************************************/
+/*!******************************************************************!*\
+  !*** D:/laragon/www/wl_project/gxgMinProject/api/refundOrder.js ***!
+  \******************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -14745,9 +14868,9 @@ function getAlterSale(data) {
 /* 114 */,
 /* 115 */,
 /* 116 */
-/*!*************************************************!*\
-  !*** E:/Desktop/gxgMinProject/api/orderList.js ***!
-  \*************************************************/
+/*!****************************************************************!*\
+  !*** D:/laragon/www/wl_project/gxgMinProject/api/orderList.js ***!
+  \****************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -14832,9 +14955,9 @@ function getOrderList(data, showLoading) {
 /* 123 */,
 /* 124 */,
 /* 125 */
-/*!********************************************!*\
-  !*** E:/Desktop/gxgMinProject/api/mine.js ***!
-  \********************************************/
+/*!***********************************************************!*\
+  !*** D:/laragon/www/wl_project/gxgMinProject/api/mine.js ***!
+  \***********************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -14842,7 +14965,7 @@ function getOrderList(data, showLoading) {
 Object.defineProperty(exports, "__esModule", { value: true });exports.getCreationList = getCreationList;exports.sendVerificationCode = sendVerificationCode;exports.deleteWorks = deleteWorks;exports.bindPhone = bindPhone;var _http = __webpack_require__(/*! @/config/http.js */ 18);
 
 
-var _api = __webpack_require__(/*! @/config/api.js */ 19);function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};var ownKeys = Object.keys(source);if (typeof Object.getOwnPropertySymbols === 'function') {ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) {return Object.getOwnPropertyDescriptor(source, sym).enumerable;}));}ownKeys.forEach(function (key) {_defineProperty(target, key, source[key]);});}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}
+var _api = __webpack_require__(/*! @/config/api.js */ 19);function ownKeys(object, enumerableOnly) {var keys = Object.keys(object);if (Object.getOwnPropertySymbols) {var symbols = Object.getOwnPropertySymbols(object);if (enumerableOnly) symbols = symbols.filter(function (sym) {return Object.getOwnPropertyDescriptor(object, sym).enumerable;});keys.push.apply(keys, symbols);}return keys;}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};if (i % 2) {ownKeys(Object(source), true).forEach(function (key) {_defineProperty(target, key, source[key]);});} else if (Object.getOwnPropertyDescriptors) {Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));} else {ownKeys(Object(source)).forEach(function (key) {Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));});}}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}
 
 
 
@@ -14857,7 +14980,7 @@ function getCreationList(data, showLoading) {
     data: _objectSpread({},
     {
       page: 1,
-      size: 6 },
+      size: 6 }, {},
 
     data) }).
 
@@ -14919,9 +15042,9 @@ function bindPhone(data) {
 /* 132 */,
 /* 133 */,
 /* 134 */
-/*!****************************************************!*\
-  !*** E:/Desktop/gxgMinProject/api/addressIndex.js ***!
-  \****************************************************/
+/*!*******************************************************************!*\
+  !*** D:/laragon/www/wl_project/gxgMinProject/api/addressIndex.js ***!
+  \*******************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -14977,9 +15100,9 @@ function updateOrderAddress(data) {
 /* 149 */,
 /* 150 */,
 /* 151 */
-/*!**************************************************!*\
-  !*** E:/Desktop/gxgMinProject/api/selectType.js ***!
-  \**************************************************/
+/*!*****************************************************************!*\
+  !*** D:/laragon/www/wl_project/gxgMinProject/api/selectType.js ***!
+  \*****************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 

@@ -315,96 +315,96 @@ radio .wx-radio-input.wx-radio-input-checked::before {
   -moz-osx-font-smoothing: grayscale;
 }
 .iconweixin:before {
-  content: "\E7E5";
+  content: "\e7e5";
 }
 .iconxinxi:before {
-  content: "\E62D";
+  content: "\e62d";
 }
 .icondianhua:before {
-  content: "\E67B";
+  content: "\e67b";
 }
 .iconright:before {
-  content: "\E7EB";
+  content: "\e7eb";
 }
 .icon-fenceng:before {
-  content: "\E62C";
+  content: "\e62c";
 }
 .iconshanchu:before {
-  content: "\E657";
+  content: "\e657";
 }
 .iconsuoxiao_:before {
-  content: "\E638";
+  content: "\e638";
 }
 .iconfangda_:before {
-  content: "\E637";
+  content: "\e637";
 }
 .iconicon_rotate:before {
-  content: "\E61D";
+  content: "\e61d";
 }
 .iconbelow-s:before {
-  content: "\E627";
+  content: "\e627";
 }
 .iconqueding:before {
-  content: "\E681";
+  content: "\e681";
 }
 .iconziti:before {
-  content: "\E7B1";
+  content: "\e7b1";
 }
 .iconzihao:before {
-  content: "\E623";
+  content: "\e623";
 }
 .iconhengshuqiehuanshu:before {
-  content: "\E643";
+  content: "\e643";
 }
 .iconziti1:before {
-  content: "\E61E";
+  content: "\e61e";
 }
 .iconyanse:before {
-  content: "\E669";
+  content: "\e669";
 }
 .iconxunhuan:before {
-  content: "\E636";
+  content: "\e636";
 }
 .iconcha:before {
-  content: "\E61A";
+  content: "\e61a";
 }
 .iconweizhi-tianchong:before {
-  content: "\E656";
+  content: "\e656";
 }
 .iconright:before {
-  content: "\E7EB";
+  content: "\e7eb";
 }
 .icondaifukuan1:before {
-  content: "\E706";
+  content: "\e706";
 }
 .icondaifahuo:before {
-  content: "\E62E";
+  content: "\e62e";
 }
 .icondaishouhuo:before {
-  content: "\E607";
+  content: "\e607";
 }
 .iconyiwanchengdingdan:before {
-  content: "\E625";
+  content: "\e625";
 }
 .iconkefu:before {
-  content: "\E63C";
+  content: "\e63c";
 }
 .iconmore:before {
-  content: "\E639";
+  content: "\e639";
 }
 .iconpaizhao:before {
-  content: "\E690";
+  content: "\e690";
 }
 .iconjiantou_zuoxia:before {
-  content: "\EB0F";
+  content: "\eb0f";
 }
 .iconjiantou_youxia:before {
-  content: "\EB0D";
+  content: "\eb0d";
 }
 .iconjiantou_zuoshang:before {
-  content: "\EB0C";
+  content: "\eb0c";
 }
 .iconjiantou_youshang:before {
-  content: "\EB0B";
+  content: "\eb0b";
 }
 

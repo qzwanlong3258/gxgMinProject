@@ -24,24 +24,24 @@
 /* 垂直间距 */
 /* 透明度 */
 /* 文章场景相关 */
-.content.data-v-1616caea {
+.content.data-v-1b50f910 {
   text-align: center;
   height: 400rpx;
   margin-top: 200rpx;
 }
-.null-clothe-tip.data-v-1616caea {
+.null-clothe-tip.data-v-1b50f910 {
   font-size: 30rpx;
 }
-.swiper.data-v-1616caea {
+.swiper.data-v-1b50f910 {
   width: 100%;
   height: calc(100% - 150rpx);
   background: #dcdcdc;
 }
-.swiper .swiper-item.data-v-1616caea {
+.swiper .swiper-item.data-v-1b50f910 {
     width: 100%;
     height: 100%;
 }
-.swiper .swiper-item .nav-list.data-v-1616caea {
+.swiper .swiper-item .nav-list.data-v-1b50f910 {
       width: 96%;
       margin-left: 2%;
       height: calc(50% - 345rpx);
@@ -57,7 +57,7 @@
       -webkit-flex-wrap: nowrap;
               flex-wrap: nowrap;
 }
-.swiper .swiper-item .nav-list .nav-column.data-v-1616caea {
+.swiper .swiper-item .nav-list .nav-column.data-v-1b50f910 {
         width: 160rpx;
         height: 50rpx;
         line-height: 50rpx;
@@ -67,14 +67,14 @@
         color: #000;
         border-radius: 24rpx;
 }
-.swiper .swiper-item .nav-list .nav-column.nav-column.data-v-1616caea:not(:first-child) {
+.swiper .swiper-item .nav-list .nav-column.nav-column.data-v-1b50f910:not(:first-child) {
           margin-left: 22rpx;
 }
-.swiper .swiper-item .nav-list .nav-active.data-v-1616caea {
+.swiper .swiper-item .nav-list .nav-active.data-v-1b50f910 {
         background: #000;
         color: #fff;
 }
-.swiper .swiper-item .show-clothe.data-v-1616caea {
+.swiper .swiper-item .show-clothe.data-v-1b50f910 {
       display: -webkit-box;
       display: -webkit-flex;
       display: flex;
@@ -94,12 +94,12 @@
       top: 0;
       bottom: 0;
 }
-.swiper .swiper-item .show-clothe image.data-v-1616caea {
+.swiper .swiper-item .show-clothe image.data-v-1b50f910 {
         width: 100%;
         height: 100%;
         border-radius: 12rpx;
 }
-.show-swiper.data-v-1616caea {
+.show-swiper.data-v-1b50f910 {
   position: absolute;
   z-index: 3;
   width: 100%;
@@ -112,16 +112,16 @@
   -webkit-justify-content: center;
           justify-content: center;
 }
-.show-swiper .swiper-dot.data-v-1616caea {
+.show-swiper .swiper-dot.data-v-1b50f910 {
     width: 70rpx;
     height: 14rpx;
     border-radius: 20rpx;
     background: #fff;
 }
-.show-swiper .swiper-dot.swiper-dot.data-v-1616caea:not(:first-child) {
+.show-swiper .swiper-dot.swiper-dot.data-v-1b50f910:not(:first-child) {
       margin-left: 8rpx;
 }
-.show-swiper .swiper-dot-active.data-v-1616caea {
+.show-swiper .swiper-dot-active.data-v-1b50f910 {
     background: #000;
     color: #fff;
 }

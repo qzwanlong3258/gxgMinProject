@@ -1,6 +1,6 @@
 {
+  "component": true,
   "usingComponents": {
     "preview-bar": "/components/PreviewBar"
-  },
-  "component": true
+  }
 }

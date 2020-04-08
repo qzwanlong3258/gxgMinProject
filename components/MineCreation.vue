@@ -4,6 +4,7 @@
 		<view class="creation-list">
 			<view v-for='(item,index) in creationList' :key='index' class="creation-clonum">
 				<view class="creation-img">
+					
 					<preview-bar :patternUrl='item.url' :width="280" :height="390" :backUrl="item.clothesUrl" />
 					<view class="delete-icon" @click="deleteCreation" :data-id='item.id'>
 						<i class="iconfont iconcha"></i>
@@ -21,7 +22,7 @@
 	import {
 		gxgConfirm
 	} from '@/config/package.js';
-	import PreviewBar from '@/components/PreviewBar';
+	import PreviewBar from '@/components/PreviewBar.vue';
 	import {
 		TODO_DETAIL,
 		WRITE_ORDER

@@ -17,7 +17,7 @@ import {
 	getBLen
 } from '@/utils/util.js';
 import {
-	getStorage
+	getStorage ,setStorage
 } from '@/utils/storage.js';
 import regeneratorRuntime from '@/utils/regenerator-runtime/runtime.js';
 import {
@@ -41,6 +41,7 @@ import {
 const app = getApp();
 const moveViewWidth = app.globalData.moveViewWidth
 const moveViewHeight = app.globalData.moveViewHeight
+
 // 微信登录
 	import {
 		APP_ID
@@ -53,9 +54,7 @@ const moveViewHeight = app.globalData.moveViewHeight
 		LOGIN_WECHAT_GET_USERINFO,
 		LOGIN_APP_REGISTER_LOGIN
 	} from '@/config/api.js';
-	import {
-		setStorage
-	} from '@/utils/storage.js'
+	
 	
 	import {
 		AUTH_GXG_LOGO,
@@ -241,6 +240,12 @@ const detail = {
 	},
 	async onLoad(options) {
 		this.options = options;
+		 //  let info = uni.createSelectorQuery().select(".design-top");
+		 // 　　　  　info.boundingClientRect(function(data) { //data - 各种参数
+		 // // 　　　  　console.log(data.height)
+		 //   setStorage('height',data.height)// 获取元素宽度
+		 //   setStorage('width',data.width)// 获取元素宽度
+		 // 　　    }).exec()
 		const phoneHeight = getStorage('sysInfo').windowHeight - 624
 		if (getStorage('sysInfo').windowWidth <= 700) {
 			if (phoneHeight < 0) {

@@ -1,1 +1,0 @@
-<view class="preview-bar" style="{{('width:'+width+'rpx;'+(height?'height:'+height+'rpx':''))}}"><image class="back-img" src="{{backUrl}}" mode="widthFix"></image><view class="pattern-img"><image src="{{patternUrl}}" mode="aspectFit"></image></view></view>

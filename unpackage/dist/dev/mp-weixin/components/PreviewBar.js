@@ -166,6 +166,9 @@ var _self;var _default =
 
   created: function created() {
     _self = this;
+    if (this.width == 170) {
+      _self.imgwidth = 85;
+    }
     if (this.width == 190) {
       _self.imgwidth = 95;
     }
@@ -181,6 +184,9 @@ var _self;var _default =
       return this.windowWidth * 1.2 * this.getRpxToPxRatio() / this.width;
     },
     patternImgWidth: function patternImgWidth() {
+      if (this.width == 170) {
+        return 39;
+      }
       if (this.width == 190) {
         return 42;
       }
@@ -191,11 +197,14 @@ var _self;var _default =
         return 88;
       }
 
-      // let width = parseInt(this.moveViewWidth * this.getRpxToPxRatio() / (this.ratio*2));
-      // console.log(width)
-      // return this.sex == 3?wid * 0.7:wid;
+      var width = parseInt(this.moveViewWidth * this.getRpxToPxRatio() / (this.ratio * 2));
+      console.log(width);
+      return this.sex == 3 ? width * 0.7 : width;
     },
     patternImgHeight: function patternImgHeight() {
+      if (this.width == 170) {
+        return 44;
+      }
       if (this.width == 190) {
         return 48;
       }
@@ -205,9 +214,9 @@ var _self;var _default =
       if (this.width == 400) {
         return 101;
       }
-      // let height = parseInt(this.moveViewHeight * this.getRpxToPxRatio() / (this.ratio*2));
-      // console.log(height)
-      // return  this.sex == 3?height * 0.7:height;
+      var height = parseInt(this.moveViewHeight * this.getRpxToPxRatio() / (this.ratio * 2));
+      console.log(height);
+      return this.sex == 3 ? height * 0.7 : height;
     },
     patternImgTop: function patternImgTop() {
       //  let info = uni.createSelectorQuery().select(".design-top");
@@ -216,6 +225,9 @@ var _self;var _default =
       //   setStorage('height',data.height)// 获取元素宽度
       //   setStorage('width',data.width)// 获取元素宽度
       // 　　    }).exec()
+      if (this.width == 170) {
+        return 26;
+      }
       if (this.width == 190) {
         return 32;
       }

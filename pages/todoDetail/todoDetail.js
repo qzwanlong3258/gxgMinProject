@@ -1052,9 +1052,9 @@ const detail = {
 			this.choosedDesign.font.push({
 				id: fontFailmy.length ? fontFailmy[0].id : null,
 				content: '',
-				familyid: fontFailmy.length ? fontFailmy[0].id : null,
-				family: fontFailmy.length ? fontFailmy[0].name : null,
-				familyUrl: fontFailmy.length ? fontFailmy[0].url : null,
+				// familyid: fontFailmy.length ? fontFailmy[0].id : null,
+				// family: fontFailmy.length ? fontFailmy[0].name : null,
+				// familyUrl: fontFailmy.length ? fontFailmy[0].url : null,
 				size: '30',
 				color: '#fff',
 				angle: '0',
@@ -1156,6 +1156,7 @@ const detail = {
 							this.choosedDesign.font[pindex].familyid = familyid
 							this.choosedDesign.font[pindex].family = name
 							this.choosedDesign.font[pindex].familyUrl = url
+							this.$forceUpdate();
 							uni.hideLoading()
 						},
 						fail: (res) => {

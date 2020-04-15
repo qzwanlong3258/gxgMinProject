@@ -13439,9 +13439,12 @@ var detail = {
                     clotheImg: res.zimg },
                   {
                     localtion: 'negative',
-                    clotheImg: res.fimg }];case 5:case "end":return _context6.stop();}}}, _callee6);}));return function (_x2) {return _ref2.apply(this, arguments);};}());
+                    clotheImg: res.fimg }];
 
-
+                  // console.log(this.clotheList)
+                  // console.log(this.options)
+                  // console.log(this.res)
+                case 5:case "end":return _context6.stop();}}}, _callee6);}));return function (_x2) {return _ref2.apply(this, arguments);};}());
     },
 
     /**
@@ -14166,6 +14169,7 @@ var detail = {
               _this3.choosedDesign.font[pindex].familyid = familyid;
               _this3.choosedDesign.font[pindex].family = name;
               _this3.choosedDesign.font[pindex].familyUrl = url;
+
               _this3.$forceUpdate();
               uni.hideLoading();
             },

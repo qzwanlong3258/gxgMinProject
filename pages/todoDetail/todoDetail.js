@@ -431,6 +431,9 @@ const detail = {
 					localtion: 'negative',
 					clotheImg: res.fimg
 				}];
+				// console.log(this.clotheList)
+				// console.log(this.options)
+				// console.log(this.res)
 			})
 		},
 
@@ -1156,6 +1159,7 @@ const detail = {
 							this.choosedDesign.font[pindex].familyid = familyid
 							this.choosedDesign.font[pindex].family = name
 							this.choosedDesign.font[pindex].familyUrl = url
+							
 							this.$forceUpdate();
 							uni.hideLoading()
 						},

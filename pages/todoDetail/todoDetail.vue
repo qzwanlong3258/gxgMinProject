@@ -52,11 +52,11 @@
 								<view v-if='fontIndex===index' class='font-border font-border3'></view>
 								<view v-if='fontIndex===index' class='font-border font-border4'></view>
 								<text class="customize-font" v-if="(isShowText || fontIndex!==index)" @click='clickTextEvent' :data-index='index' :style='[{fontFamily:`${item.family}`,width:`${item.width}px`,
-								height:`${item.height}px`,fontSize:`${item.size}px`,color:`${item.color}`,writingMode:item.isHorizontal?"lr-tb":"",lineHeight:`${(item.isHorizontal === true || item.isHorizontal === "true")?(item.size*1.1):item.height}px`,textAlign:"center",display:"block"}]'>
+								height:`${item.height}px`,fontSize:`${item.size}px`,color:`${item.color}`,writingMode:item.isHorizontal?"lr-tb":"",lineHeight:`${(item.isHorizontal === true || item.isHorizontal === "true")?(item.size*1.1):item.height}px`,textAlign:"left",display:"block"}]'>
 									{{item.content}}
 								</text>
 								<input v-if="!isShowText && fontIndex===index" placeholder='输入文字' :data-index='index' maxlength="8" :placeholder-style='[{color:item.color,fontSize:`${item.size}px`}]'
-								 :style='[{width:`${item.width}px`,height:`${item.height}px`,fontFamily:`${item.family}`,fontSize:`${item.size}px`,color:`${item.color}`,textAlign:"center"}]'
+								 :style='[{width:`${item.width}px`,height:`${item.height}px`,fontFamily:`${item.family}`,fontSize:`${item.size}px`,color:`${item.color}`,textAlign:"left"}]'
 								 v-model="item.content" @input="changeFontWidth($event)"></input>
 							</view>
 							<view v-if='fontIndex===index' class="h-line"></view>
